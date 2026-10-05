@@ -48,6 +48,9 @@ a:hover {
 	touch-action: none;
 	-webkit-tap-highlight-color: transparent;
 	image-rendering: pixelated;
+	/* level art is painted as a CSS background by game.js (inline style);
+	   contain + !important keeps it scaled to the canvas at any size */
+	background-size: contain !important;
 }
 .mirror {
 	-webkit-transform: rotateY(180deg);
