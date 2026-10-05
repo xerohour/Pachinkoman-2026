@@ -52,7 +52,10 @@ function setupTouchControls(input, canvas) {
     function toGame(e) {
         var t = e.changedTouches[0],
             r = canvas.getBoundingClientRect();
-        return { x: t.clientX - r.left, y: t.clientY - r.top };
+        return {
+            x: (t.clientX - r.left) * (canvas.width / r.width),
+            y: (t.clientY - r.top) * (canvas.height / r.height)
+        };
     }
     canvas.addEventListener("touchstart", function(e) {
         e.preventDefault();
@@ -298,8 +301,10 @@ function InputObj(e, a) {
     });
     document.addEventListener("mousemove", function(e) {
         if (!s.canvas) return;
-        var rect = s.canvas.getBoundingClientRect();
-        s.mouseX = e.clientX - rect.left, s.mouseY = e.clientY - rect.top;
+        var rect = s.canvas.getBoundingClientRect(),
+            sx = s.canvas.width / rect.width,
+            sy = s.canvas.height / rect.height;
+        s.mouseX = (e.clientX - rect.left) * sx, s.mouseY = (e.clientY - rect.top) * sy;
         (s.mouseX < 0 || s.mouseY < 0 || s.mouseX > s.canvas.width || s.mouseY > s.canvas.height) && (s.mouseX = s.mouseY = -1);
         s.req.PlayerManager.data.mirror && -1 !== s.mouseX && (s.mouseX = CANVAS_WIDTH - s.mouseX)
     });
