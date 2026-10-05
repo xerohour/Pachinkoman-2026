@@ -39,21 +39,9 @@ a:hover {
 	color: #df4848;
 }
 
-html, body {
-	max-width: 100%;
-	overflow-x: hidden;
-}
-
 #canvas {
     margin: 20px auto 0px auto;
 	display: block;
-	width: 100%;
-	max-width: 600px;
-	height: auto;
-	touch-action: none;
-	-webkit-tap-highlight-color: transparent;
-	image-rendering: pixelated;
-	image-rendering: crisp-edges;
 }
 .mirror {
 	-webkit-transform: rotateY(180deg);

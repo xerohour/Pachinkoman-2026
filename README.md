@@ -64,9 +64,9 @@ This repo starts from a full clone of the original game
   as lifting an arrow key.
 - **OK action button** (bottom-right, touch devices only) acts as the
   spacebar: advances dialogue and confirms menu choices.
-- **Canvas scales to the screen** (`width: 100%`, aspect preserved, crisp
-  `pixelated` rendering) and all pointer math is resolution-independent via
-  `getBoundingClientRect`, so taps and hovers land correctly at any size.
+- **Canvas is the original fixed 600x400** — no scaling or reflowing, exactly
+  like the original game (on narrow phone screens it scrolls horizontally,
+  also like the original).
 - `touch-action: none` + `preventDefault` stop pull-to-refresh, double-tap
   zoom, and synthetic mouse events from interfering; multi-touch works
   (joystick + canvas tap simultaneously).
