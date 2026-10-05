@@ -39,6 +39,11 @@ a:hover {
 	color: #df4848;
 }
 
+html, body {
+	max-width: 100%;
+	overflow-x: hidden;
+}
+
 #canvas {
     margin: 20px auto 0px auto;
 	display: block;
@@ -245,6 +250,30 @@ body.touch #touch-controls { display: block; }
 	background: rgba(255,255,255,0.32);
 	border: 2px solid rgba(255,255,255,0.5);
 	pointer-events: none;
+}
+#action-btn {
+	position: fixed;
+	right: 18px;
+	bottom: 18px;
+	width: 84px;
+	height: 84px;
+	border-radius: 50%;
+	background: rgba(255,255,255,0.07);
+	border: 2px solid rgba(255,255,255,0.28);
+	z-index: 50;
+	touch-action: none;
+	user-select: none;
+	-webkit-user-select: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: rgba(255,255,255,0.65);
+	font-size: 15px;
+	font-family: 'pixelmix', monospace;
+}
+#action-btn.active {
+	background: rgba(255,255,255,0.28);
+	color: #fff;
 }
 .touch-only { display: none; }
 body.touch .touch-only { display: list-item; }

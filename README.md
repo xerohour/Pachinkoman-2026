@@ -62,6 +62,8 @@ This repo starts from a full clone of the original game
   arrow-key button states as the keyboard, so all movement and menu logic
   works unchanged; releasing the stick generates the same `released` events
   as lifting an arrow key.
+- **OK action button** (bottom-right, touch devices only) acts as the
+  spacebar: advances dialogue and confirms menu choices.
 - **Canvas scales to the screen** (`width: 100%`, aspect preserved, crisp
   `pixelated` rendering) and all pointer math is resolution-independent via
   `getBoundingClientRect`, so taps and hovers land correctly at any size.

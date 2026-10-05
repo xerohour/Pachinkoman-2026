@@ -121,6 +121,31 @@ function setupTouchControls(input, canvas) {
     }
     joy.addEventListener("touchend", joyEnd, { passive: !1 });
     joy.addEventListener("touchcancel", joyEnd, { passive: !1 });
+
+    /* Action button: drives the "ok" button (spacebar) — advances dialogue,
+     * confirms menu choices. */
+    var abtn = document.getElementById("action-btn");
+    if (abtn) {
+        var abtnId = null;
+        abtn.addEventListener("touchstart", function(e) {
+            e.preventDefault(); e.stopPropagation();
+            abtnId = e.changedTouches[0].identifier;
+            input.touchOk = !0; input.touchOkRel = !1;
+            abtn.classList.add("active");
+        }, { passive: !1 });
+        function abtnEnd(e) {
+            e.preventDefault();
+            for (var i = 0; i < e.changedTouches.length; i++)
+                if (e.changedTouches[i].identifier === abtnId) {
+                    abtnId = null;
+                    if (input.touchOk) input.touchOkRel = !0;
+                    input.touchOk = !1;
+                    abtn.classList.remove("active");
+                }
+        }
+        abtn.addEventListener("touchend", abtnEnd, { passive: !1 });
+        abtn.addEventListener("touchcancel", abtnEnd, { passive: !1 });
+    }
 }
 
 function Dimmer() {
@@ -262,7 +287,7 @@ function InputObj(e, a) {
     }
     this.needs = ["PlayerManager"];
     var s = this;
-    this.buttons = [], this.canvas = a, this.mouseclicked = !1, this.mousereleased = !1, this.rmouseclicked = !1, this.rmousereleased = !1, this.wasd = !1, this.touchLeft = !1, this.touchRight = !1, this.touchUp = !1, this.touchDown = !1, this.touchLeftRel = !1, this.touchRightRel = !1, this.touchUpRel = !1, this.touchDownRel = !1;
+    this.buttons = [], this.canvas = a, this.mouseclicked = !1, this.mousereleased = !1, this.rmouseclicked = !1, this.rmousereleased = !1, this.wasd = !1, this.touchLeft = !1, this.touchRight = !1, this.touchUp = !1, this.touchDown = !1, this.touchLeftRel = !1, this.touchRightRel = !1, this.touchUpRel = !1, this.touchDownRel = !1, this.touchOk = !1, this.touchOkRel = !1;
     var s = this;
     this.useWasd = function(e) {
         this.wasd = e, this.setKeys(e ? [32, 65, 68, 87, 83] : [32, 37, 39, 38, 40])
@@ -308,10 +333,12 @@ function InputObj(e, a) {
         this.touchRight && (this.get("right").pressed = !0);
         this.touchUp && (this.get("up").pressed = !0);
         this.touchDown && (this.get("down").pressed = !0);
+        this.touchOk && (this.get("ok").pressed = !0);
         this.touchLeftRel && (this.get("left").released = !0, this.touchLeftRel = !1);
         this.touchRightRel && (this.get("right").released = !0, this.touchRightRel = !1);
         this.touchUpRel && (this.get("up").released = !0, this.touchUpRel = !1);
-        this.touchDownRel && (this.get("down").released = !0, this.touchDownRel = !1)
+        this.touchDownRel && (this.get("down").released = !0, this.touchDownRel = !1);
+        this.touchOkRel && (this.get("ok").released = !0, this.touchOkRel = !1)
     }
 }
 
