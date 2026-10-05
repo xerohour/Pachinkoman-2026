@@ -222,32 +222,41 @@ a sup {
 /* ---- Touch controls (phones/tablets) ---- */
 #touch-controls { display: none; }
 body.touch #touch-controls { display: block; }
-#joystick {
+#dpad {
 	position: fixed;
-	left: 18px;
-	bottom: 18px;
-	width: 124px;
-	height: 124px;
-	border-radius: 50%;
-	background: rgba(255,255,255,0.07);
-	border: 2px solid rgba(255,255,255,0.28);
+	left: 14px;
+	bottom: 14px;
+	display: grid;
+	grid-template-areas:
+		". up ."
+		"left . right"
+		". down .";
+	gap: 6px;
 	z-index: 50;
 	touch-action: none;
 	user-select: none;
 	-webkit-user-select: none;
 }
-#stick {
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	width: 54px;
-	height: 54px;
-	margin: -27px 0 0 -27px;
-	border-radius: 50%;
-	background: rgba(255,255,255,0.32);
-	border: 2px solid rgba(255,255,255,0.5);
-	pointer-events: none;
+.dbtn {
+	width: 62px;
+	height: 62px;
+	border-radius: 14px;
+	background: rgba(255,255,255,0.07);
+	border: 2px solid rgba(255,255,255,0.28);
+	color: rgba(255,255,255,0.65);
+	font-size: 22px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
+.dbtn.active {
+	background: rgba(255,255,255,0.28);
+	color: #fff;
+}
+#dbtn-up { grid-area: up; }
+#dbtn-left { grid-area: left; }
+#dbtn-right { grid-area: right; }
+#dbtn-down { grid-area: down; }
 #action-btn {
 	position: fixed;
 	right: 18px;
@@ -283,5 +292,5 @@ body.touch .no-touch-only { display: none; }
 	.main { width: 100%; padding-right: 0; }
 	.credits { width: 100%; }
 	.credits li { text-align: left; }
-	body { padding-bottom: 170px; } /* room for the joystick */
+	body { padding-bottom: 170px; } /* room for the d-pad */
 }

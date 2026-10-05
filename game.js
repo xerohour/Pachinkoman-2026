@@ -39,10 +39,13 @@ function dcopy(e) {
 /* ---------------------------------------------------------------------------
  * Touch controls (phones/tablets).
  *  - Tap the canvas = left-click (interact / talk / select / advance dialogue)
- *  - Virtual joystick (bottom-left, touch devices only) = movement, replacing
- *    "hold right-click to move", which phones don't have.
- * The joystick drives the same "left"/"right"/"up"/"down" button states as the
- * arrow keys, so all existing movement/menu logic works unchanged.
+ *  - D-pad (bottom-left, touch devices only) = four discrete direction buttons,
+ *    replacing "hold right-click to move", which phones don't have. A tap is
+ *    exactly one press frame (one menu step, like a quick arrow-key tap on
+ *    desktop); holding a button walks until release. Menus never auto-repeat,
+ *    so the cursor can't run away.
+ *  - OK button (bottom-right, touch devices only) = spacebar: advances
+ *    dialogue, confirms menu choices.
  * ------------------------------------------------------------------------- */
 function setupTouchControls(input, canvas) {
     var isTouch = "ontouchstart" in window || (navigator.maxTouchPoints || 0) > 0;
@@ -75,52 +78,34 @@ function setupTouchControls(input, canvas) {
     canvas.addEventListener("touchend", endTouch, { passive: !1 });
     canvas.addEventListener("touchcancel", endTouch, { passive: !1 });
 
-    var joy = document.getElementById("joystick"),
-        stick = document.getElementById("stick");
-    if (!joy || !stick) return;
-    var joyId = null, cx = 0, cy = 0;
-    var RADIUS = 44, DEAD = 10;
-
-    function setDir(dx, dy) {
-        var left = dx < -DEAD, right = dx > DEAD,
-            up = dy < -DEAD, down = dy > DEAD;
-        if (input.touchLeft && !left) input.touchLeftRel = !0;
-        if (input.touchRight && !right) input.touchRightRel = !0;
-        if (input.touchUp && !up) input.touchUpRel = !0;
-        if (input.touchDown && !down) input.touchDownRel = !0;
-        input.touchLeft = left; input.touchRight = right;
-        input.touchUp = up; input.touchDown = down;
-        var dist = Math.min(RADIUS, Math.sqrt(dx * dx + dy * dy)),
-            ang = Math.atan2(dy, dx);
-        stick.style.transform = "translate(" + (Math.cos(ang) * dist).toFixed(1) + "px," + (Math.sin(ang) * dist).toFixed(1) + "px)";
-    }
-    function clearJoy() {
-        joyId = null;
-        setDir(0, 0);
-        stick.style.transform = "translate(0px,0px)";
-    }
-    joy.addEventListener("touchstart", function(e) {
-        e.preventDefault(); e.stopPropagation();
-        var t = e.changedTouches[0],
-            r = joy.getBoundingClientRect();
-        joyId = t.identifier;
-        cx = r.left + r.width / 2; cy = r.top + r.height / 2;
-        setDir(t.clientX - cx, t.clientY - cy);
-    }, { passive: !1 });
-    joy.addEventListener("touchmove", function(e) {
-        e.preventDefault(); e.stopPropagation();
-        for (var i = 0; i < e.changedTouches.length; i++) {
-            var t = e.changedTouches[i];
-            if (t.identifier === joyId) setDir(t.clientX - cx, t.clientY - cy);
+    /* D-pad: four discrete direction buttons. A tap sets pressed directly on
+     * the button state; the next frame consumes it exactly once (one menu
+     * step), then Input.clear() resets it. No per-frame re-assert, so holding
+     * can never spray presses at 50 Hz. Holding still walks: movement latches
+     * on pressed and stops on released, like a held arrow key. */
+    ["up", "down", "left", "right"].forEach(function(dir) {
+        var btn = document.getElementById("dbtn-" + dir);
+        if (!btn) return;
+        var touchId = null;
+        btn.addEventListener("touchstart", function(e) {
+            e.preventDefault(); e.stopPropagation();
+            if (touchId !== null) return; // one finger per button
+            touchId = e.changedTouches[0].identifier;
+            input.get(dir).pressed = !0; // consumed by the next frame, exactly once
+            btn.classList.add("active");
+        }, { passive: !1 });
+        function release(e) {
+            e.preventDefault();
+            for (var i = 0; i < e.changedTouches.length; i++)
+                if (e.changedTouches[i].identifier === touchId) {
+                    touchId = null;
+                    input.get(dir).released = !0;
+                    btn.classList.remove("active");
+                }
         }
-    }, { passive: !1 });
-    function joyEnd(e) {
-        e.preventDefault();
-        for (var i = 0; i < e.changedTouches.length; i++)
-            if (e.changedTouches[i].identifier === joyId) clearJoy();
-    }
-    joy.addEventListener("touchend", joyEnd, { passive: !1 });
-    joy.addEventListener("touchcancel", joyEnd, { passive: !1 });
+        btn.addEventListener("touchend", release, { passive: !1 });
+        btn.addEventListener("touchcancel", release, { passive: !1 });
+    });
 
     /* Action button: drives the "ok" button (spacebar) — advances dialogue,
      * confirms menu choices. */
@@ -287,7 +272,7 @@ function InputObj(e, a) {
     }
     this.needs = ["PlayerManager"];
     var s = this;
-    this.buttons = [], this.canvas = a, this.mouseclicked = !1, this.mousereleased = !1, this.rmouseclicked = !1, this.rmousereleased = !1, this.wasd = !1, this.touchLeft = !1, this.touchRight = !1, this.touchUp = !1, this.touchDown = !1, this.touchLeftRel = !1, this.touchRightRel = !1, this.touchUpRel = !1, this.touchDownRel = !1, this.touchOk = !1, this.touchOkRel = !1;
+    this.buttons = [], this.canvas = a, this.mouseclicked = !1, this.mousereleased = !1, this.rmouseclicked = !1, this.rmousereleased = !1, this.wasd = !1, this.touchOk = !1, this.touchOkRel = !1;
     var s = this;
     this.useWasd = function(e) {
         this.wasd = e, this.setKeys(e ? [32, 65, 68, 87, 83] : [32, 37, 39, 38, 40])
@@ -328,16 +313,8 @@ function InputObj(e, a) {
     }, this.clear = function() {
         for (var e = 0; e < this.buttons.length; e++) this.buttons[e].pressed = !1, this.buttons[e].released = !1;
         this.mouseclicked = !1, this.mousereleased = !1, this.rmouseclicked = !1, this.rmousereleased = !1;
-        // virtual joystick: re-assert held directions every frame (arrow-key equivalent)
-        this.touchLeft && (this.get("left").pressed = !0);
-        this.touchRight && (this.get("right").pressed = !0);
-        this.touchUp && (this.get("up").pressed = !0);
-        this.touchDown && (this.get("down").pressed = !0);
+        // action button: re-assert "ok" while held (D-pad drives directions directly)
         this.touchOk && (this.get("ok").pressed = !0);
-        this.touchLeftRel && (this.get("left").released = !0, this.touchLeftRel = !1);
-        this.touchRightRel && (this.get("right").released = !0, this.touchRightRel = !1);
-        this.touchUpRel && (this.get("up").released = !0, this.touchUpRel = !1);
-        this.touchDownRel && (this.get("down").released = !0, this.touchDownRel = !1);
         this.touchOkRel && (this.get("ok").released = !0, this.touchOkRel = !1)
     }
 }
