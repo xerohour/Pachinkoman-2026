@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <title>PACHINKO MAN</title>
 <link rel="stylesheet" href="style.css" />
 
@@ -32,9 +32,13 @@ Consider downloading <a href="https://www.google.com/intl/en/chrome/browser/">Ch
 						<span class="icon left-click"></span>
 						<span class="use">Interact / Talk / Use Item / Select Option</span>
 					</li>
-					<li>
+					<li class="no-touch-only">
 						<span class="icon right-click"></span>
 						<span class="use">Hold down to move</span>
+					</li>
+					<li class="touch-only">
+						<span class="icon horizontal-keys"></span>
+						<span class="use">Joystick to move &middot; tap to interact</span>
 					</li>
 					<li>
 						<span class="icon horizontal-keys"></span>
@@ -76,6 +80,10 @@ Consider downloading <a href="https://www.google.com/intl/en/chrome/browser/">Ch
 		</ul>
 	</div>
 </section>
+
+<div id="touch-controls" aria-hidden="true">
+	<div id="joystick"><div id="stick"></div></div>
+</div>
 
 </body>
 

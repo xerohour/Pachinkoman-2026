@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Droid+Sans);
+@import url(https://fonts.googleapis.com/css?family=Droid+Sans);
 @font-face {
   font-family: 'pixelmix';
   src: url('pixelmix.ttf');
@@ -42,6 +42,13 @@ a:hover {
 #canvas {
     margin: 20px auto 0px auto;
 	display: block;
+	width: 100%;
+	max-width: 600px;
+	height: auto;
+	touch-action: none;
+	-webkit-tap-highlight-color: transparent;
+	image-rendering: pixelated;
+	image-rendering: crisp-edges;
 }
 .mirror {
 	-webkit-transform: rotateY(180deg);
@@ -67,6 +74,7 @@ a:hover {
 #gameInfo {
 	font-family: Droid Sans;
 	width: 580px;
+	max-width: calc(100% - 20px);
 	margin: 10px auto;
 	background: #111;
 	padding: 10px;
@@ -207,4 +215,47 @@ a sup {
 	font-family: monospace;
 	font-size: 14px;
 	text-align: center;
+}
+
+/* ---- Touch controls (phones/tablets) ---- */
+#touch-controls { display: none; }
+body.touch #touch-controls { display: block; }
+#joystick {
+	position: fixed;
+	left: 18px;
+	bottom: 18px;
+	width: 124px;
+	height: 124px;
+	border-radius: 50%;
+	background: rgba(255,255,255,0.07);
+	border: 2px solid rgba(255,255,255,0.28);
+	z-index: 50;
+	touch-action: none;
+	user-select: none;
+	-webkit-user-select: none;
+}
+#stick {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 54px;
+	height: 54px;
+	margin: -27px 0 0 -27px;
+	border-radius: 50%;
+	background: rgba(255,255,255,0.32);
+	border: 2px solid rgba(255,255,255,0.5);
+	pointer-events: none;
+}
+.touch-only { display: none; }
+body.touch .touch-only { display: list-item; }
+body.touch .no-touch-only { display: none; }
+
+/* narrow screens: stack the about panel */
+@media (max-width: 620px) {
+	.row { white-space: normal; }
+	.row > * { display: block; }
+	.main { width: 100%; padding-right: 0; }
+	.credits { width: 100%; }
+	.credits li { text-align: left; }
+	body { padding-bottom: 170px; } /* room for the joystick */
 }

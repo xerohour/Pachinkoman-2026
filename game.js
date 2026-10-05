@@ -35,6 +35,94 @@ function dcopy(e) {
     return typeof structuredClone === "function" ? structuredClone(e) : JSON.parse(JSON.stringify(e))
 }
 
+
+/* ---------------------------------------------------------------------------
+ * Touch controls (phones/tablets).
+ *  - Tap the canvas = left-click (interact / talk / select / advance dialogue)
+ *  - Virtual joystick (bottom-left, touch devices only) = movement, replacing
+ *    "hold right-click to move", which phones don't have.
+ * The joystick drives the same "left"/"right"/"up"/"down" button states as the
+ * arrow keys, so all existing movement/menu logic works unchanged.
+ * ------------------------------------------------------------------------- */
+function setupTouchControls(input, canvas) {
+    var isTouch = "ontouchstart" in window || (navigator.maxTouchPoints || 0) > 0;
+    if (!isTouch || !canvas || !input) return;
+    document.body.classList.add("touch");
+
+    function toGame(e) {
+        var t = e.changedTouches[0],
+            r = canvas.getBoundingClientRect();
+        return {
+            x: (t.clientX - r.left) * (canvas.width / r.width),
+            y: (t.clientY - r.top) * (canvas.height / r.height)
+        };
+    }
+    canvas.addEventListener("touchstart", function(e) {
+        e.preventDefault();
+        var p = toGame(e);
+        input.mouseX = p.x; input.mouseY = p.y;
+        input.mouseclicked = !0; input.mousereleased = !1;
+    }, { passive: !1 });
+    canvas.addEventListener("touchmove", function(e) {
+        e.preventDefault();
+        var p = toGame(e);
+        input.mouseX = p.x; input.mouseY = p.y;
+    }, { passive: !1 });
+    function endTouch(e) {
+        e.preventDefault();
+        input.mouseclicked = !1; input.mousereleased = !0;
+    }
+    canvas.addEventListener("touchend", endTouch, { passive: !1 });
+    canvas.addEventListener("touchcancel", endTouch, { passive: !1 });
+
+    var joy = document.getElementById("joystick"),
+        stick = document.getElementById("stick");
+    if (!joy || !stick) return;
+    var joyId = null, cx = 0, cy = 0;
+    var RADIUS = 44, DEAD = 10;
+
+    function setDir(dx, dy) {
+        var left = dx < -DEAD, right = dx > DEAD,
+            up = dy < -DEAD, down = dy > DEAD;
+        if (input.touchLeft && !left) input.touchLeftRel = !0;
+        if (input.touchRight && !right) input.touchRightRel = !0;
+        if (input.touchUp && !up) input.touchUpRel = !0;
+        if (input.touchDown && !down) input.touchDownRel = !0;
+        input.touchLeft = left; input.touchRight = right;
+        input.touchUp = up; input.touchDown = down;
+        var dist = Math.min(RADIUS, Math.sqrt(dx * dx + dy * dy)),
+            ang = Math.atan2(dy, dx);
+        stick.style.transform = "translate(" + (Math.cos(ang) * dist).toFixed(1) + "px," + (Math.sin(ang) * dist).toFixed(1) + "px)";
+    }
+    function clearJoy() {
+        joyId = null;
+        setDir(0, 0);
+        stick.style.transform = "translate(0px,0px)";
+    }
+    joy.addEventListener("touchstart", function(e) {
+        e.preventDefault(); e.stopPropagation();
+        var t = e.changedTouches[0],
+            r = joy.getBoundingClientRect();
+        joyId = t.identifier;
+        cx = r.left + r.width / 2; cy = r.top + r.height / 2;
+        setDir(t.clientX - cx, t.clientY - cy);
+    }, { passive: !1 });
+    joy.addEventListener("touchmove", function(e) {
+        e.preventDefault(); e.stopPropagation();
+        for (var i = 0; i < e.changedTouches.length; i++) {
+            var t = e.changedTouches[i];
+            if (t.identifier === joyId) setDir(t.clientX - cx, t.clientY - cy);
+        }
+    }, { passive: !1 });
+    function joyEnd(e) {
+        e.preventDefault();
+        for (var i = 0; i < e.changedTouches.length; i++)
+            if (e.changedTouches[i].identifier === joyId) clearJoy();
+    }
+    joy.addEventListener("touchend", joyEnd, { passive: !1 });
+    joy.addEventListener("touchcancel", joyEnd, { passive: !1 });
+}
+
 function Dimmer() {
     this.alpha = 255;
     var e = -5,
@@ -174,7 +262,7 @@ function InputObj(e, a) {
     }
     this.needs = ["PlayerManager"];
     var s = this;
-    this.buttons = [], this.canvas = a, this.mouseclicked = !1, this.mousereleased = !1, this.rmouseclicked = !1, this.rmousereleased = !1, this.wasd = !1;
+    this.buttons = [], this.canvas = a, this.mouseclicked = !1, this.mousereleased = !1, this.rmouseclicked = !1, this.rmousereleased = !1, this.wasd = !1, this.touchLeft = !1, this.touchRight = !1, this.touchUp = !1, this.touchDown = !1, this.touchLeftRel = !1, this.touchRightRel = !1, this.touchUpRel = !1, this.touchDownRel = !1;
     var s = this;
     this.useWasd = function(e) {
         this.wasd = e, this.setKeys(e ? [32, 65, 68, 87, 83] : [32, 37, 39, 38, 40])
@@ -188,8 +276,10 @@ function InputObj(e, a) {
     });
     document.addEventListener("mousemove", function(e) {
         if (!s.canvas) return;
-        var rect = s.canvas.getBoundingClientRect();
-        s.mouseX = e.clientX - rect.left, s.mouseY = e.clientY - rect.top;
+        var rect = s.canvas.getBoundingClientRect(),
+            sx = s.canvas.width / rect.width,
+            sy = s.canvas.height / rect.height;
+        s.mouseX = (e.clientX - rect.left) * sx, s.mouseY = (e.clientY - rect.top) * sy;
         (s.mouseX < 0 || s.mouseY < 0 || s.mouseX > s.canvas.width || s.mouseY > s.canvas.height) && (s.mouseX = s.mouseY = -1);
         s.req.PlayerManager.data.mirror && -1 !== s.mouseX && (s.mouseX = CANVAS_WIDTH - s.mouseX)
     });
@@ -212,7 +302,16 @@ function InputObj(e, a) {
         return -1 == a ? new t(null) : this.buttons[a]
     }, this.clear = function() {
         for (var e = 0; e < this.buttons.length; e++) this.buttons[e].pressed = !1, this.buttons[e].released = !1;
-        this.mouseclicked = !1, this.mousereleased = !1, this.rmouseclicked = !1, this.rmousereleased = !1
+        this.mouseclicked = !1, this.mousereleased = !1, this.rmouseclicked = !1, this.rmousereleased = !1;
+        // virtual joystick: re-assert held directions every frame (arrow-key equivalent)
+        this.touchLeft && (this.get("left").pressed = !0);
+        this.touchRight && (this.get("right").pressed = !0);
+        this.touchUp && (this.get("up").pressed = !0);
+        this.touchDown && (this.get("down").pressed = !0);
+        this.touchLeftRel && (this.get("left").released = !0, this.touchLeftRel = !1);
+        this.touchRightRel && (this.get("right").released = !0, this.touchRightRel = !1);
+        this.touchUpRel && (this.get("up").released = !0, this.touchUpRel = !1);
+        this.touchDownRel && (this.get("down").released = !0, this.touchDownRel = !1)
     }
 }
 
@@ -1857,6 +1956,7 @@ document.addEventListener("DOMContentLoaded", function() {
             console.error("ERROR!"), e.message && console.error(e.message), e.stack && console.error(e.stack), o.Error.stop = !0
         }
     };
+    setupTouchControls(o.Input, n);
     var lastTick = 0,
         tickAcc = 0,
         tickStep = 1e3 / FPS;
