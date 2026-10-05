@@ -1,29 +1,41 @@
 {
     "bg": "options",
     "mode": "MENU",
-	"return": true,
+    "return": true,
     "buttons": [
         {
             "text": "Movement: Arrow Keys",
-            "top": 40,
+            "top": 10,
             "press": "controls",
             "selected": false
         },
         {
+            "text": "Remap Keys",
+            "top": 75,
+            "press": "remap",
+            "selected": false
+        },
+        {
+            "text": "High Contrast: Off",
+            "top": 140,
+            "press": "contrast",
+            "selected": false
+        },
+        {
             "text": "Text Speed: Normal",
-            "top": 130,
+            "top": 205,
             "press": "textspeed",
             "selected": false
         },
         {
             "text": "Volume: Normal",
-            "top": 220,
+            "top": 270,
             "press": "volume",
             "selected": false
         },
         {
             "text": "Return",
-            "top": 310,
+            "top": 335,
             "press": "return",
             "selected": false
         }

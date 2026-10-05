@@ -18,9 +18,18 @@ This repo starts from a full clone of the original game
 ## What was improved
 
 ### P0 — Readability & dependencies
-- **De-minified the engine.** `game.js` is the full beautified source (~3,200 lines,
-  readable formatting) instead of a 79 KB single-line blob. No separate source map
-  needed — the shipped file *is* the source.
+- **De-minified the engine, then split it into ES modules.** The original
+  79 KB single-line blob is now 13 readable modules under `js/` (`input`,
+  `dialogue`, `level`, `save`, `audio`, `graphics`, `logic`, `action`,
+  `resources`, `player`, `dimmer`, `util`, `main`) — no separate source map
+  needed, the shipped files *are* the source. `index.html` loads
+  `js/main.js` as a module.
+- **`var` → `const`/`let` modernization pass.** A conservative scope-aware
+  transform converted ~200 declarations to `const`/`let` (the remaining
+  ~90 stay `var` where hoisting, capture, or TDZ semantics made conversion
+  unsafe). Verified by a differential boot test: pre- and post-transform
+  builds driven through logo → title → menu → new game → intro dialogue
+  produced byte-identical render traces over 806 frames.
 - **jQuery removed.** The 2014-era jQuery 1.11.1 bundle (~96 KB) is gone. All
   `$(...)`, `$.each`, `$.extend`, `$.getJSON` uses were replaced with vanilla
   DOM, `addEventListener`, `fetch`, `forEach`/`Object.keys`, and
@@ -52,36 +61,44 @@ This repo starts from a full clone of the original game
 ### P3 — Accessibility & markup
 - Canvas has `role="application"`, an `aria-label` describing the controls, and
   `tabindex="0"`.
+- **High-contrast mode** (Options → High Contrast): dialogue panels render as
+  black with white/yellow text. Persists in settings.
+- **Remappable keys** (Options → Remap Keys): rebind Up/Down/Left/Right/OK to
+  any keys, sequentially captured (Esc cancels). Persists in settings; the
+  movement option label reports `Arrow Keys`, `WASD`, or `Custom`.
 - `index.html` modernized: doctype, `charset`, `viewport`, `lang`, dead press-kit
   link removed, fatal-error `role="alert"` region.
 
 ### Phones & touch
 - **Tap = left-click**: tap the canvas to interact, talk, advance dialogue.
-- **Virtual joystick** (bottom-left, touch devices only) replaces
-  "hold right-click to move", which phones don't have. It drives the same
-  arrow-key button states as the keyboard, so all movement and menu logic
-  works unchanged; releasing the stick generates the same `released` events
-  as lifting an arrow key.
+- **D-pad** (bottom-left, touch devices only): four discrete direction buttons
+  replacing the old analog stick. Each tap drives exactly one press frame
+  (one menu step, no auto-repeat); holding a direction still walks until
+  release, like a held arrow key. It drives the same arrow-key button states
+  as the keyboard, so all movement and menu logic works unchanged.
 - **OK action button** (bottom-right, touch devices only) acts as the
   spacebar: advances dialogue and confirms menu choices.
+- **Haptic feedback**: light vibration on D-pad and OK presses (Android).
+- **Screen stays awake** while playing via Wake Lock (re-acquired when the
+  tab becomes visible again).
 - **Canvas fits your screen** — scales down to the phone's width (aspect
   preserved, crisp pixelated rendering) instead of the original fixed
   600px, which was cut off on phones. All pointer math scales with it, so
   taps land correctly at any size.
-- `touch-action: none` + `preventDefault` stop pull-to-refresh, double-tap
-  zoom, and synthetic mouse events from interfering; multi-touch works
-  (joystick + canvas tap simultaneously).
+- `touch-action: none` + `overscroll-behavior: none` + `preventDefault` stop
+  pull-to-refresh, double-tap zoom, and synthetic mouse events from
+  interfering; multi-touch works (D-pad + canvas tap simultaneously).
+- Mobile web-app metadata (`mobile-web-app-capable`, black theme color) for
+  a cleaner add-to-homescreen experience.
 - The about panel stacks vertically under 620 px, and the bundled
   `pixelmix.ttf` font is now served locally (the original hot-linked it over
   plain `http`, which modern browsers block).
 
 ## Still on the roadmap
 
-- Split the engine into ES modules (`input`, `dialogue`, `level`, `save`, `audio`…)
-  instead of one 3,200-line file
-- Full `var` → `const`/`let` and arrow-function modernization pass
 - Build pipeline (Vite), ESLint + Prettier, `npm run dev` with hot reload
-- High-contrast / text-only mode, remappable keys
+- Arrow-function modernization pass (remaining `function` expressions)
+- Text-only mode
 
 ## Run locally
 

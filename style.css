@@ -219,6 +219,8 @@ a sup {
 	text-align: center;
 }
 
+html, body { overscroll-behavior: none; } /* no pull-to-refresh while playing */
+
 /* ---- Touch controls (phones/tablets) ---- */
 #touch-controls { display: none; }
 body.touch #touch-controls { display: block; }
