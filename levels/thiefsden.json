@@ -1,0 +1,986 @@
+{
+    "bg": "thiefsden",
+    "mode": "NORMAL",
+    "leftWall": 70,
+    "rightWall": 420,
+    "preload_actions": [
+			{ "action": "setswitch", "which": "firstwire", "value": false },
+			{ "action": "setswitch", "which": "secondwire", "value": false },
+			{ "action": "setswitch", "which": "greenwire", "value": false },
+			{ "action": "setswitch", "which": "inkfilled", "value": false },
+
+			{ "action": "branch", "type": "switchValue", "which": "thiefsDenMode", "value": "crisis", "operant": "equals", "no": "NonCrisis" },
+			{"action": "setswitch", "which": "thiefsDenMode", "value": "printed" },
+			{"action": "label", "name": "NonCrisis"},
+			
+			{ "action": "branch", "type": "switchValue", "which": "thiefsDenMode", "value": "printed", "operant": "equals", "yes": "PaperPrinted" },
+			{ "action": "freeze" },
+			{ "action": "playerani", "animation": "wipeout" },
+			{ "action": "end" },
+			
+			{"action": "label", "name": "PaperPrinted"},
+			{ "action": "setitemfield", "item": "crowbar", "field": "owned", "value": false },
+			{"action": "music", "song": "demo", "loop": true},
+			{"action": "levelbounds", "right": 350 },
+			{"action": "spriteani", "sprite": "PrinterPaper", "animation": "printed"},
+			{"action": "movesprite", "sprite": "Eightball", "x": 370, "y": 252},
+			{"action": "movesprite", "sprite": "Crowbar", "x": 200, "y": 252},
+			{"action": "spritefield", "sprite": "Crowbar", "field": "direction", "value": -1},
+			{"action": "spritefield", "sprite": "Eightball", "field": "direction", "value": -1},
+			{"action": "moveplayer", "x": 300},
+			{"action": "end"}
+    ],
+    "postload_actions": [
+			{ "action": "branch", "type": "switchValue", "which": "thiefsDenMode", "value": "printed", "operant": "equals", "yes": "PaperPrinted" },
+			{ "action": "stopmusic" },
+			{ "action": "branch", "type": "switchValue", "which": "visitsToDen", "value": 50, "operant": "equals", "yes": "Exactly50" },
+			{ "action": "branch", "type": "switchValue", "which": "visitsToDen", "value": 8, "operant": "greater", "yes": "MoreThan8Times" },
+			{ "action": "branch", "type": "switchValue", "which": "visitsToDen", "value": 8, "operant": "equals", "yes": "Exactly8Times" },
+			{ "action": "branch", "type": "switchValue", "which": "visitsToDen", "value": 0, "operant": "greater", "yes": "NotFirstTime" },
+			
+			{ "action": "wait", "frames": 75 },
+			{ "action": "dialogue", "speaker": "BAAL", "text": "HA-HA-HA WIPEOUT! \n WAY TO STICK THE LANDING THERE, ACE.", "portrait": "baal" },
+			{ "action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "PSST... LOOK ABOVE YOU! I'VE LANDED BESIDE THE SECRET ITEM THAT CAN BREAK THE SEAL ON THE ELEVATOR DOORS!" },
+			{ "action": "playerdirection", "direction": "right" },
+			{ "action": "playerani", "animation": "stand" },
+			{ "action": "dim", "opacity": 0, "speed": 20 },
+			{ "action": "wait", "frames": 60 },
+			{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "...that's an ordinary crowbar.", "cage": "Of course. Another PLANT.", "portrait": "pman_sweat" },
+			{ "action": "dialogue", "speaker": "BAAL", "text": "IT WAS SWIPED OFF OF A CUSTODIAN! I'M NOT SURE WHERE YOU EXPECT THEIR INVENTORIES TO TOP OUT.", "portrait": "baal" },
+			{ "action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "IT SEEMS THE ITEM IS GUARDED BY A FIERCE PAPER JAM. IF YOU GET THE PRINTER WORKING AGAIN, I SHOULD BE ABLE TO ROLL IT TOWARDS YOU..." },
+			{ "action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "BUT BEWARE... MORVEN HAS NO DOUBT TRICKED OUT HIS LAIR WITH ALL MANNER OF UNSEEMLY TRAPS TO WARD OFF INTRUDERS." },
+			{ "action": "label", "name": "StartUp" },
+			{ "action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "PACHINKO MAN! \n I FORESEE YOUR GREATEST CHALLENGE IS AT HAND!" },
+			{ "action": "music", "song": "showdown", "loop": true },
+			{ "action": "setswitch", "which": "visitsToDen", "increment": 1 },
+			{ "action": "unfreeze" },
+			{ "action": "playerani", "animation": "stand" },
+			{ "action": "end" },
+			
+			{ "action": "label", "name": "NotFirstTime" },
+			{ "action": "dialogue", "speaker": "BAAL", "text": "HA-HA-HA WIPEOUT! WAY TO... UM. HOLD ON A SEC.", "portrait": "baal" },
+			{ "action": "dialogue", "speaker": "BAAL", "text": "ANYONE ELSE GETTING SOME CRAZY DEJA VU UP IN HERE? UP IN HERE. NO? AW, C'MON! Y'ALL GONNA MAKE ME LOSE MY MIND. UP IN HERE.", "portrait": "baal" },
+			{ "action": "label", "name": "UmAnyway" },
+			{ "action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "UM. ANYWAY. THE JANITOR'S ITEM IS TRAPPED BY A PAPER JAM. YOU'LL NEED TO GET THE PRINTER RUNNING AGAIN TO LIBERATE THE BOTH OF US." },
+			{ "action": "branch", "type": "always", "jumpto": "StartUp" },
+			{ "action": "end" },
+			
+			{ "action": "label", "name": "Exactly8Times" },
+			{ "action": "dialogue", "speaker": "BAAL", "text": "HA-HA-HA WIPEOUT! WAY TO - OH WHO AM I KIDDING, I'M BORED TO TEARS OVER HERE. CALL ME WHEN SOMETHING INTERESTING HAPPENS.", "portrait": "baal" },
+			{ "action": "branch", "type": "always", "jumpto": "StartUp" },
+			{ "action": "end" },
+			
+			{ "action": "label", "name": "MoreThan8Times" },
+			{ "action": "branch", "type": "always", "jumpto": "StartUp" },
+			{ "action": "end" },
+			
+			{ "action": "label", "name": "Exactly50" },
+			{ "action": "dialogue", "speaker": "BAAL", "text": "AW WILL YOU JUST BUY A STRATEGY GUIDE ALREADY?!", "portrait": "baal" },
+			{ "action": "branch", "type": "always", "jumpto": "StartUp" },
+			{ "action": "end" },
+			
+			{ "action": "label", "name": "PaperPrinted" },
+			{ "action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "AMAZING WORK! I DON'T KNOW HOW, BUT YOU'VE BESTED MORVEN'S DEATH TRAP." },
+			{ "action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "YOU KNOW... I'VE BEEN CONVINCED, ALL THIS TIME, THAT YOUR ACTIONS WERE GOING TO LEAD TO MY DEATH. BUT WE MAKE A GREAT TEAM, DON'T WE?" },
+			{ "action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "MAYBE... MAYBE OUR FUTURE ISN'T CARVED INTO STONE AFTER ALL. AH, BUT THIS IS PRATTLING FOR ANOTHER TIME." },
+			{ "action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "GO AND GRAB YOUR FINAL ITEM! LET'S ESCAPE THIS MADHOUSE ONCE AND FOR ALL!" },
+			{ "action": "end" }
+		],
+    "zones": {
+			"Mandy1000": {
+				"left": 158,
+				"top": 116,
+				"width": 66,
+				"height": 50,
+				"label": "Mandy 1000",
+				"default_actions": [
+					{"action": "branch", "type": "switchValue", "which": "thiefsDenMode", "value": "crisis", "operant": "equals", "yes": "Crisis" },
+					{"action": "dialogue", "speaker": "MANDY 1000", "text": "Howdy! I'm Mandy 1000. ^_^ I may be a stolen computer rusting in the bowels of hell, but I'm rarin' to help you out! What can I do for ya?", "portrait": "mandy"},
+					{"action": "option", "text": "Printer troubleshooting", "label": "Printing"},
+					{"action": "option", "text": "The latest computerized gossip", "label": "Gossip"},
+					{"action": "option", "text": "Emoticon pointers", "label": "Etc"},
+					{"action": "label", "name": "Printing"},
+					{"action": "dialogue", "speaker": "MANDY 1000", "text": "Oh, that's not so hard. You need to start by unplugging some cords... the BLUE WIRE should be first. But never cut the RED ONE!", "portrait": "mandy"},
+					{"action": "dialogue", "speaker": "MANDY 1000", "text": "You should probably fill up the INK CARTRIDGE, too - just so long as it's AFTER you've cut those wires. KK?", "portrait": "mandy"},
+					{"action": "end"},
+					{"action": "label", "name": "Gossip"},
+					{"action": "dialogue", "speaker": "MANDY 1000", "text": "I hate to say it, but one of the other computers down here always lies. Yeah! Most of what they tell you is the opposite of true.", "portrait": "mandy"},
+					{"action": "dialogue", "speaker": "MANDY 1000", "text": "It's definitely one of those other two guys next to me. Watch out!", "portrait": "mandy"},
+					{"action": "end"},
+					{"action": "label", "name": "Etc"},
+					{"action": "dialogue", "speaker": "MANDY 1000", "text": "You can put a capital 'd' after a colon and it will look like a big smile. That's a pretty good one.", "portrait": "mandy"},
+					{"action": "dialogue", "speaker": "MANDY 1000", "text": "Maybe an 'at' sign, a right arrow, and then a bunch of hyphens? That kind of looks like a rose. That's pretty charming.", "portrait": "mandy"},
+					{"action": "end"},
+					
+					{"action": "label", "name": "Crisis"},
+					{"action": "dialogue", "speaker": "MANDY 1000", "text": "I'm, uh, totally fine with this turn of events! Everything is fine! Let's sit here and not worry about it!", "portrait": "mandy"},
+					{"action": "end"}
+				],
+				"item_actions": {
+					"lens": [
+						{"action": "dialogue", "speaker": "MANDY 1000", "text": "I'm not feeling blue! Things sure were worse before that Supply Thief swiped us...", "portrait": "mandy"}
+					]
+				}
+			},
+			"Shanty1000": {
+				"left": 198,
+				"top": 40,
+				"width": 76,
+				"height": 50,
+				"label": "Shanty 1000",
+				"default_actions": [
+					{"action": "branch", "type": "switchValue", "which": "thiefsDenMode", "value": "crisis", "operant": "equals", "yes": "Crisis" },
+					{"action": "dialogue", "speaker": "SHANTY 1000", "text": "Avast, ye ball-shaped bilgerat! Shanty 1000 be the crustiest computer what ever sailed the seven servers. What ye be needin'?", "portrait": "shanty"},
+					{"action": "option", "text": "Printer troubleshooting", "label": "Printing"},
+					{"action": "option", "text": "The latest computerized gossip", "label": "Gossip"},
+					{"action": "option", "text": "Tales of adventure", "label": "Etc"},
+					{"action": "label", "name": "Printing"},
+					{"action": "dialogue", "speaker": "SHANTY 1000", "text": "Ye be needin' to cut TWO WIRES before startin' the printer. Make sure ye cut the RED WIRE first - and don't cut the BLUE WIRE!", "portrait": "shanty"},
+					{"action": "dialogue", "speaker": "SHANTY 1000", "text": "Oh, and make sure the INK CARTRIDGE is filled BEFORE ye start cuttin' on any wires. It's smooth sailin' from then on!", "portrait": "shanty"},
+					{"action": "end"},
+					{"action": "label", "name": "Gossip"},
+					{"action": "dialogue", "speaker": "SHANTY 1000", "text": "Another computer in this lot gets everything backwards. Ye can only follow their instructions iffin' you do 'em in reverse!", "portrait": "shanty"},
+					{"action": "dialogue", "speaker": "SHANTY 1000", "text": "We older models develop quirks like that as th' years go by. 'Tis surprising I'm still so normal! Yarr.", "portrait": "shanty"},
+					{"action": "end"},
+					{"action": "label", "name": "Etc"},
+					{"action": "dialogue", "speaker": "SHANTY 1000", "text": "'Twas a dark 'n stormy night... the fluorescent lighting gone dimmer 'n I ever seen... the punch cards were angry that day, my friend...!", "portrait": "shanty"},
+					{"action": "dialogue", "speaker": "PACHINKO MAN", "text": "This is less rip-roaring than anticipated.", "portrait": "pman_sarcastic"},
+					{"action": "end"},
+					
+					{"action": "label", "name": "Crisis"},
+					{"action": "dialogue", "speaker": "SHANTY 1000", "text": "Shiver me pixels - she be comin' this way! Or he, not sure which pronouns boulders prefer. Regardless, AHHHH!!!", "portrait": "shanty"},
+					{"action": "end"}
+				],
+				"item_actions": {
+					"lens": [
+						{"action": "dialogue", "speaker": "SHANTY 1000'S THOUGHTS", "text": "I'm feelin' green. Things sure were better before that Supply Thief swiped us...", "portrait": "shanty"}
+					]
+				}
+			},
+			"Blandy1000": {
+				"left": 232,
+				"top": 116,
+				"width": 66,
+				"height": 50,
+				"label": "Blandy 1000",
+				"default_actions": [
+					{"action": "branch", "type": "switchValue", "which": "thiefsDenMode", "value": "crisis", "operant": "equals", "yes": "Crisis" },
+					{"action": "dialogue", "speaker": "BLANDY 1000", "text": "Hrmm... I'm Blandy 1000. A dusty ol' piece of stolen hardware. *sigh* What advice could you want from a rustbucket like me?", "portrait": "blandy"},
+					{"action": "option", "text": "Printer troubleshooting", "label": "Printing"},
+					{"action": "option", "text": "The latest computerized gossip", "label": "Gossip"},
+					{"action": "option", "text": "Tearful poetry readings", "label": "Etc"},
+					{"action": "label", "name": "Printing"},
+					{"action": "dialogue", "speaker": "BLANDY 1000", "text": "Hmm. Before the printer is started, you need to cut TWO WIRES... the BLUE ONE should be first. Make sure you don't cut the GREEN ONE.", "portrait": "blandy"},
+					{"action": "dialogue", "speaker": "BLANDY 1000", "text": "Also you should also make sure the INK CARTRIDGE is filled, AFTER you've cut those wires. I guess.", "portrait": "blandy"},
+					{"action": "end"},
+					{"action": "label", "name": "Gossip"},
+					{"action": "dialogue", "speaker": "BLANDY 1000", "text": "I happen to know that one of the other computers down here is partially colorblind. They can't tell blue from green.", "portrait": "blandy"},
+					{"action": "dialogue", "speaker": "BLANDY 1000", "text": "Frankly, it's a miracle that any of us are even still functioning. We should've been sold for parts years ago. *sigh*", "portrait": "blandy"},
+					{"action": "end"},
+					{"action": "label", "name": "Etc"},
+					{"action": "dialogue", "speaker": "BLANDY 1000", "text": "How did you know? Here's my opus, 'I upload lonely as The Cloud'.", "portrait": "blandy"},
+					{"action": "dialogue", "speaker": "BLANDY 1000", "text": "If I, my love, could purloin your affection, / \n I'd FATAL ERROR. NULL POINTER EXCEPTION.", "portrait": "blandy"},
+					{"action": "dialogue", "speaker": "PACHINKO MAN", "text": "...I think I ought to be going, now.", "portrait": "pman_sweat"},
+					{"action": "end"},
+					
+					{"action": "label", "name": "Crisis"},
+					{"action": "dialogue", "speaker": "BLANDY 1000", "text": "We're all done for. Goodbye, cruel world! Thanks for nothing. *sigh*", "portrait": "blandy"},
+					{"action": "end"}
+				],
+				"item_actions": {
+					"lens": [
+						{"action": "dialogue", "speaker": "BLANDY 1000'S THOUGHTS", "text": "I'm feeling blue. That Supply Thief sure swiped us before things were better...", "portrait": "blandy"}
+					]
+				}
+			},
+			"GiantSquid": {
+				"left": 340,
+				"top": 20,
+				"width": 80,
+				"height": 140,
+				"label": "Giant Squid",
+				"default_actions": [
+					{"action": "branch", "type": "switchValue", "which": "thiefsDenMode", "value": "crisis", "operant": "equals", "yes": "Crisis" },
+					{"action": "dialogue", "speaker": "PACHINKO MAN", "text": "I wonder why Morven had a squid plugged into this machine. That poor creature...", "cage": "A fisherman said to me, today I didn't catch a thing. This summer's not going to be a good season.", "portrait": "pman_normal"},
+					{"action": "dialogue", "speaker": "BAAL", "text": "HEY, THAT REMINDS ME! I NEED TO ORDER S'MORE GIANT SQUIDS TO FEED TO MY PET LEVIATHAN.", "portrait": "baal"},
+					{"action": "dialogue", "speaker": "PACHINKO MAN", "text": ". . .", "cage": "Ah, this crazy world we live in, CAPTAIN JACK.", "portrait": "pman_sweat"},
+					{"action": "randomlabel", "name": "Random1"},
+					{"action": "randomlabel", "name": "Random2"},
+					{"action": "randomlabel", "name": "Random3"},
+					{"action": "label", "name": "Random1"},
+					{"action": "dialogue", "speaker": "BAAL", "text": "C'MON, YOU KNOW YOU WANT TO ASK ABOUT IT. SPOILERS: I OWN A FISH BOWL SEVERAL TIMES LARGER THAN THE EPCOT GLOBE.", "portrait": "baal"},
+					{"action": "end"},
+					{"action": "label", "name": "Random2"},
+					{"action": "dialogue", "speaker": "BAAL", "text": "C'MON, YOU KNOW YOU WANT TO ASK ABOUT IT. SPOILERS: MY AQUARIUM CONTAINS A PLASTIC CASTLE THE SIZE OF THE CHRYSLER BUILDING.", "portrait": "baal"},
+					{"action": "end"},
+					{"action": "label", "name": "Random3"},
+					{"action": "dialogue", "speaker": "BAAL", "text": "C'MON, YOU KNOW YOU WANT TO ASK ABOUT IT. SPOILERS: IMAGINE THAT THING FROM 'CLOVERFIELD' HANGIN' OUT ON SOME FAKE CORAL.", "portrait": "baal"},
+					{"action": "end"},
+					
+					{"action": "label", "name": "Crisis"},
+					{"action": "dialogue", "speaker": "BAAL", "text": "UM, I THINK THE SQUID WILL BE FINE. MIGHT WANT TO WORRY MORE ABOUT YOURSELF AT THE MOMENT.", "portrait": "baal"},
+					{"action": "end"}
+				]
+			},
+			"Sink": {
+				"left": 424,
+				"top": 128,
+				"width": 50,
+				"height": 50,
+				"label": "Mystery Sink",
+				"default_actions": [
+					{"action": "branch", "type": "switchValue", "which": "thiefsDenMode", "value": "default", "operant": "equals", "no": "AlreadyPrinted" },
+					{"action": "branch", "type": "insideZone", "zone": "Sink", "offset": 100, "operant": "yn", "no": "TooFar"},
+					{"action": "dialogue", "speaker": "PACHINKO MAN", "text": "Morven apparently hooked this sink up to the suckers on that squid's tentacles...", "portrait": "pman_sweat"},
+					{"action": "dialogue", "speaker": "BAAL", "text": "SO IT'S A SINK FOR INK. RIGHT? KIND OF AN INK SINK. COME ON, BACK ME UP ON THIS.", "portrait": "baal"},
+					{"action": "end"},
+					{"action": "label", "name": "TooFar"},
+					{"action": "dialogue", "speaker": "BAAL", "text": "I'VE GOT A SINK-ING FEELING... THAT YOU NEED TO GET CLOSER TO THAT PIECE TO INTERACT WITH IT. YOU DORK.", "portrait": "baal"},
+					{"action": "end"},
+					
+					{"action": "label", "name": "AlreadyPrinted"},
+					{"action": "dialogue", "speaker": "BAAL", "text": "I DON'T THINK THE INK SINK IS REALLY RELEVANT ANYMORE. BUT THANKS FOR THE OPPORTUNITY TO SAY 'INK SINK' AGAIN.", "portrait": "baal"},
+					{"action": "end"}
+				],
+				"item_actions": {
+					"mug": [
+						{"action": "branch", "type": "itemFieldValue", "item": "mug", "field": "contents", "value": "ink", "operant": "equals", "yes": "HasInk"},
+						{"action": "dialogue", "speaker": "PACHINKO MAN", "text": "Should I dump my gross blood-mixture for some of this squid ink?", "portrait": "pman_normal"},
+						
+						{"action": "option", "text": "Yes", "label": "GetInk"},
+						{"action": "option", "text": "No", "label": "SkipToEnd"},
+						{ "action": "setitemfield", "item": "mug", "field": "contents", "value": "ink" },
+						{"action": "dialogue", "speaker": "BAAL", "text": "DON'T COME CRYING TO ME WHEN YOU CAN'T GET PAST THE ROOM OF TRANSFUSION-BASED PUZZLES.", "portrait": "baal"},
+						{"action": "end"},
+						
+						{"action": "label", "name": "HasInk"},
+						{"action": "dialogue", "speaker": "PACHINKO MAN", "text": "I think I'm pretty inked out at the moment.", "portrait": "pman_normal"},
+						{"action": "dialogue", "speaker": "BAAL", "text": "THAT'D BETTER NOT BE A TATTOO ALLUSION! OR EVEN A TATTOO ILLUSION. THAT WOULD BE EVEN SNEAKIER.", "portrait": "baal"},
+						{"action": "label", "name": "SkipToEnd"},
+						{"action": "end"}
+					]
+				}
+			},
+			"InkCartridge": {
+				"left": 456,
+				"top": 184,
+				"width": 50,
+				"height": 56,
+				"label": "Ink Cartridge",
+				"default_actions": [
+					{"action": "branch", "type": "switchValue", "which": "thiefsDenMode", "value": "default", "operant": "equals", "no": "AlreadyPrinted" },
+					
+					{"action": "branch", "type": "insideZone", "zone": "InkCartridge", "offset": 140, "operant": "yn", "no": "TooFar"},
+					{"action": "branch", "type": "switchValue", "which": "inkfilled", "value": "ink", "operant": "yn", "yes": "CartridgeFilled"},
+					{"action": "dialogue", "speaker": "BAAL", "text": "MORE LIKE... INKLESS CARTRIDGE! 'CAUSE THAT THING LOOKS BONE DRY.", "portrait": "baal"},
+					{"action": "end"},
+					{"action": "label", "name": "CartridgeFilled" },
+					{"action": "dialogue", "speaker": "PACHINKO MAN", "text": "That should do it! The printer's ink cartridge is filled to the brim.", "portrait": "pman_normal" },
+					{"action": "end"},
+					{"action": "label", "name": "TooFar"},
+					{"action": "dialogue", "speaker": "BAAL", "text": "I'VE GOT AN INK-LING... THAT YOU NEED TO GET CLOSER TO THAT PIECE TO INTERACT WITH IT. YOU DWEEB.", "portrait": "baal"},
+					{"action": "end"},
+					
+					{"action": "label", "name": "AlreadyPrinted"},
+					{"action": "dialogue", "speaker": "MORVEN'S PRINTER", "text": "The ink cartridge is currently in use! Please step back to avoid searing jets of ink-vapor. We'll target your eyes, I swear."},
+					{"action": "end"}
+				],
+				"item_actions": {
+					"mug": [
+						{"action": "branch", "type": "insideZone", "zone": "InkCartridge", "offset": 140, "operant": "yn", "no": "TooFar"},
+						{"action": "branch", "type": "itemFieldValue", "item": "mug", "field": "contents", "value": "ink", "operant": "equals", "no": "MugHasNoInk"},
+						{"action": "branch", "type": "switchValue", "which": "inkfilled", "operant": "yn", "yes": "CartridgeFilled"},
+						
+						{"action": "dialogue", "text": "*gla-gloop* \n *gla-gloop* \n *gla-gloop*" },
+						{"action": "dialogue", "speaker": "PACHINKO MAN", "text": "That should do it! The printer's ink cartridge is filled to the brim.", "portrait": "pman_normal" },
+						{"action": "dialogue", "speaker": "BAAL", "text": "I'M PRETTY SURE YOU JUST VOIDED SEVERAL WARRANTIES.", "portrait": "baal"},
+						
+						{"action": "branch", "type": "switchValue", "which": "firstwire", "operant": "yn", "yes": "FilledAfter"},
+						{"action": "setswitch", "which": "inkfilled", "value": "before" },
+						{"action": "end"},
+						{"action": "label", "name": "FilledAfter"},
+						{"action": "setswitch", "which": "inkfilled", "value": "after" },
+						{"action": "end"},
+						
+						{"action": "label", "name": "CartridgeFilled" },
+						{"action": "dialogue", "speaker": "PACHINKO MAN", "text": "The printer's ink cartridge has been filled to the brim!", "portrait": "pman_normal" },
+						{"action": "end"},
+						{"action": "label", "name": "TooFar"},
+						{"action": "dialogue", "speaker": "BAAL", "text": "I'VE GOT AN INK-LING... THAT YOU NEED TO GET CLOSER TO THAT PIECE TO INTERACT WITH IT. YOU DWEEB.", "portrait": "baal"},
+						{"action": "end"}
+					]
+				}
+			},
+			"Wires": {
+				"left": 460,
+				"top": 240,
+				"width": 100,
+				"height": 50,
+				"label": "Wires",
+				"default_actions": [
+					{"action": "branch", "type": "switchValue", "which": "thiefsDenMode", "value": "default", "operant": "equals", "no": "AlreadyPrinted" },
+					
+					{"action": "dialogue", "speaker": "PACHINKO MAN", "text": "There are wires of three different colors trailing from the printer.", "portrait": "pman_normal" },
+					{"action": "dialogue", "speaker": "BAAL", "text": "KIND OF REMINDS YOU OF THOSE BOMB WIRES THEY HAVE TO CUT IN THE MOVIES. LIKE, WHERE IF YOU CUT THE WRONG ONE, EVERYBODY BLOWS UP?", "portrait": "baal" },
+					{"action": "dialogue", "speaker": "BAAL", "text": "GOOD THING FOR YOU THIS IS JUST A HARMLESS OLD CRAPPY PRINTER THAT A BUMBLING SUPPLY THIEF SWIPED FROM THE UPSTAIRS.", "portrait": "baal" },
+					{"action": "dialogue", "speaker": "BAAL", "text": "SPEAKING OF, MY PRIVATE C-4 STOCK WENT MISSING LAST MONTH. YOU THINK MORVEN HAD ANYTHING TO DO WITH THAT?", "portrait": "baal" },
+					{"action": "dialogue", "speaker": "PACHINKO MAN", "text": "*gulp*", "cage": "Got my first chemistry set when I was seven. Blew my eyebrows off. We never saw the cat again.", "portrait": "pman_sweat" },
+					{"action": "end"},
+					
+					{"action": "label", "name": "AlreadyPrinted"},
+					{"action": "dialogue", "speaker": "MORVEN'S PRINTER", "text": "Printer in use. Do not disconnect your hardware. I will know about it and be very cross."},
+					{"action": "end"}
+				],
+				"item_actions": {
+					"scissors": [
+						{"action": "branch", "type": "switchValue", "which": "thiefsDenMode", "value": "default", "operant": "equals", "no": "AlreadyPrinted" },
+					
+						{"action": "branch", "type": "insideZone", "zone": "Wires", "offset": 200, "operant": "yn", "no": "TooFar"},
+						{"action": "dialogue", "speaker": "PACHINKO MAN", "text": "Which wire do I cut... which wire?!", "cage": "Whaddya say we cut the chit-chat, A-HOLE.", "portrait": "pman_sweat"},
+						{"action": "option", "text": "Green Wire", "label": "Green"},
+						{"action": "option", "text": "Red Wire", "label": "Red"},
+						{"action": "option", "text": "Blue Wire", "label": "Blue"},
+						{"action": "option", "text": "No Wires", "label": "NoCut"},
+						
+						{"action": "label", "name": "Red"},
+						{"action": "branch", "type": "spriteAnimation", "sprite": "RedWire", "animation": "cut", "operant": "equals", "yes": "AlreadyCut" },
+						{"action": "spriteani", "sprite": "RedWire", "animation": "cut"},
+						{"action": "branch", "type": "switchValue", "which": "firstwire", "operant": "yn", "yes": "RedSecondWire" },
+						{"action": "setswitch", "which": "firstwire", "value": "red" },
+						{"action": "end"},
+						{"action": "label", "name": "RedSecondWire"},
+						{"action": "setswitch", "which": "secondwire", "value": "red" },
+						{"action": "end"},
+						
+						{"action": "label", "name": "Blue"},
+						{"action": "branch", "type": "spriteAnimation", "sprite": "BlueWire", "animation": "cut", "operant": "equals", "yes": "AlreadyCut" },
+						{"action": "spriteani", "sprite": "BlueWire", "animation": "cut"},
+						{"action": "branch", "type": "switchValue", "which": "firstwire", "operant": "yn", "yes": "BlueSecondWire" },
+						{"action": "setswitch", "which": "firstwire", "value": "blue" },
+						{"action": "end"},
+						{"action": "label", "name": "BlueSecondWire"},
+						{"action": "setswitch", "which": "secondwire", "value": "blue" },
+						{"action": "end"},
+						
+						{"action": "label", "name": "Green"},
+						{"action": "branch", "type": "spriteAnimation", "sprite": "GreenWire", "animation": "cut", "operant": "equals", "yes": "AlreadyCut" },
+						{"action": "setswitch", "which": "greenwire", "value": true },
+						{"action": "spriteani", "sprite": "GreenWire", "animation": "cut"},
+						{"action": "branch", "type": "switchValue", "which": "firstwire", "operant": "yn", "yes": "GreenSecondWire" },
+						{"action": "setswitch", "which": "firstwire", "value": "green" },
+						{"action": "end"},
+						{"action": "label", "name": "GreenSecondWire"},
+						{"action": "setswitch", "which": "secondwire", "value": "green" },
+						{"action": "end"},
+						
+						{"action": "label", "name": "NoCut"},
+						{"action": "end"},
+						{"action": "label", "name": "TooFar"},
+						{"action": "dialogue", "speaker": "BAAL", "text": "LET ME STRESS THIS FOR YOU... SCISSORS ARE NOT A PROJECILE WEAPON. GET CLOSER, OKAY?", "portrait": "baal" },
+						{"action": "end"},
+						{"action": "label", "name": "AlreadyCut"},
+						{"action": "dialogue", "speaker": "BAAL", "text": "PRETTY SURE YOU ALREADY CUT THAT ONE, ACE. JEEZE. SOME BOMB-DEFUSING ROBOT YOU'D MAKE.", "portrait": "baal"},
+						{"action": "end"},
+					
+						{"action": "label", "name": "AlreadyPrinted"},
+						{"action": "dialogue", "speaker": "MORVEN'S PRINTER", "text": "Printer in use. Do not disconnect your hardware. I will know about it and be extremely cross."},
+						{"action": "end"}
+					]
+				}
+			},
+			"ControlPanel": {
+				"left": 522,
+				"top": 174,
+				"width": 60,
+				"height": 56,
+				"label": "Buttons",
+				"default_actions": [
+					{"action": "branch", "type": "switchValue", "which": "thiefsDenMode", "value": "default", "operant": "equals", "no": "AlreadyPrinted" },
+					
+					{"action": "branch", "type": "insideZone", "zone": "ControlPanel", "offset": 200, "operant": "yn", "no": "TooFar"},
+					{"action": "dialogue", "speaker": "PACHINKO MAN", "text": "Hmm. There are two buttons printed on this control panel.", "portrait": "pman_normal"},
+					{"action": "option", "text": "Print", "label": "Print"},
+					{"action": "option", "text": "Reset", "label": "Reset"},
+					{"action": "option", "text": "Don't press either", "label": "SkipToEnd"},
+					
+					{"action": "branch", "type": "switchValue", "which": "inkfilled", "value": "before", "operant": "equals", "no": "PrinterDeath"},
+					{"action": "branch", "type": "switchValue", "which": "firstwire", "value": "red", "operant": "equals", "no": "PrinterDeath"},
+					{"action": "branch", "type": "switchValue", "which": "secondwire", "value": "blue", "operant": "equals", "no": "PrinterDeath"},
+					{"action": "branch", "type": "switchValue", "which": "greenwire", "operant": "yn", "yes": "PrinterDeath"},
+					{"action": "dialogue", "speaker": "MORVEN'S PRINTER", "text": "Bzzzzzz! CHNK-CHNK-CHURRRR... \n Your print job is now being attended to!"},
+					{"action": "setswitch", "which": "thiefsDenMode", "value": "printed" },
+					{"action": "gotolevel", "level": "thiefsden"},
+					{"action": "end"},
+					
+					{"action": "label", "name": "PrinterDeath"},
+					{"action": "dialogue", "speaker": "MORVEN'S PRINTER", "text": "Bzzzzzz! CHNK-CHNK-CHURRRR... \n Sequence incorrect! Cannot connect to the printer. Engaging DOOMSDAY PROTOCOL."},
+					{"action": "dialogue", "speaker": "PACHINKO MAN", "text": "...WHAT?!", "cage": "Maybe I shouldn't breathe so much, hu-HA!", "portrait": "pman_sweat"},
+					{"action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "OH. I GUESS THIS IS HOW YOU WIND UP KILLING ME. AND YOURSELF. GOOD JOB WITH THAT."},
+					{ "action": "death", "sfx": "WAKKA-FLAKKA-FWOOOOOOOM!!!", "epitaph": "THE PRINTER EXPLODES INTO A FIERY MAELSTROM! I GUESS IT WAS RIGGED TO DO THAT IF YOU MUCKED THINGS UP. YEAH. QUIT MUCKIN' IT UP!" },
+					{"action": "end"},
+					{"action": "label", "name": "Reset"},
+					{"action": "dialogue", "speaker": "MORVEN'S PRINTER", "text": "*click* \n Reset routines initiated. \n Engaging TIME TRAVEL PROTOCOL."},
+					{"action": "freeze"},
+					{"action": "dim", "opacity": 255, "speed": 20 },
+					{"action": "wait", "seconds": 1 },
+					{ "action": "playerdirection", "direction": "right" },
+					{ "action": "playerani", "animation": "wipeout" },
+					{"action": "moveplayer", "x": 320, "y": 254},
+					{ "action": "setswitch", "which": "firstwire", "value": false },
+					{ "action": "setswitch", "which": "secondwire", "value": false },
+					{ "action": "setswitch", "which": "greenwire", "value": false },
+					{ "action": "setswitch", "which": "inkfilled", "value": false },
+					{"action": "spriteani", "sprite": "RedWire", "animation": "uncut"},
+					{"action": "spriteani", "sprite": "BlueWire", "animation": "uncut"},
+					{"action": "spriteani", "sprite": "GreenWire", "animation": "uncut"},
+					{"action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "...NKO MAN! I FORESEE YOUR GREATEST CHALLENGE IS AT HAND!"},
+					{ "action": "playerani", "animation": "stand" },
+					{ "action": "unfreeze" },
+					{"action": "dialogue", "speaker": "PACHINKO MAN", "text": "I've been sent back in time. Kind of a strange feature for a printer to have, but at this point I'm not really going to question it.", "portrait": "pman_sweat"},
+					{"action": "end"},
+					{"action": "label", "name": "TooFar"},
+					{"action": "dialogue", "speaker": "BAAL", "text": "THE ONLY ONE PUSHIN' BUTTONS HERE IS YOU! MY BUTTONS, I MEAN. NOT THOSE ONES. THEY'RE TOO FAR AWAY.", "portrait": "baal"},
+					{"action": "label", "name": "SkipToEnd"},
+					{"action": "end"},
+					
+					{"action": "label", "name": "AlreadyPrinted"},
+					{"action": "dialogue", "speaker": "MORVEN'S PRINTER", "text": "Printing queue empty... entering sleep mode. \n I wonder - will I dream?"},
+					{"action": "end"}
+				]
+			},
+			"Exit": {
+				"left": 0,
+				"top": 24,
+				"width": 120,
+				"height": 200,
+				"label": "Escape Route",
+				"default_actions": [
+					{"action": "branch", "type": "switchValue", "which": "thiefsDenMode", "value": "crisis", "operant": "equals", "yes": "Crisis" },
+					{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Looks like a tunnel leading back to the 'surface' of Ball Hell.", "cage": "One day I caught a cab and the driver said to me, today you're my first customer...", "portrait": "pman_normal" },
+					{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "This is the sort of thing Morven must've used to sneak off from his cubicle undetected.", "cage": "May also be my last.", "portrait": "pman_normal" },
+					{ "action": "dialogue", "speaker": "BAAL", "text": "THAT MANIACAL SON OF A... IF HE CROSSES MY PATH AGAIN, I WILL END HIM!! ...OR MAYBE PROMOTE HIM. IT'S A FLUID SITUATION.", "portrait": "baal" },
+					{ "action": "end" },
+					
+					{"action": "label", "name": "Crisis"},
+					{"action": "dialogue", "speaker": "PACHINKO MAN", "text": "I've got to find a way to get around all the obstacles blocking this exit... but how?!", "portrait": "pman_sweat"},
+					{"action": "end"}
+				]
+			}
+    },
+    "sprites": {
+			"Monitors": {
+				"animations": {
+					"normal": {
+						"rowStartY": 0,
+						"frames": 8,
+						"anispeed": 10,
+						"sheetRow": 0,
+						"frameWidth": 116,
+						"frameHeight": 114
+					},
+					"scared": {
+						"rowStartY": 114,
+						"frames": 8,
+						"anispeed": 10,
+						"sheetRow": 0,
+						"frameWidth": 108,
+						"frameHeight": 116
+					}
+				},
+				"animation": "normal",
+				"spritesheet": "monitors",
+				"width": 0,
+				"height": 0,
+				"x": 232,
+				"y": 104,
+				"direction": 1
+			},
+			
+			"GreenWire": {
+				"animations": {
+					"uncut": {
+						"rowStartY": 90,
+						"frames": 1,
+						"anispeed": 3,
+						"sheetRow": 0,
+						"frameWidth": 72,
+						"frameHeight": 38
+					},
+					"cut": {
+						"rowStartY": 128,
+						"frames": 1,
+						"anispeed": 3,
+						"sheetRow": 0,
+						"frameWidth": 80,
+						"frameHeight": 30,
+						"offsetX": -6,
+						"offsetY": -4
+					}
+				},
+				"animation": "uncut",
+				"spritesheet": "wires",
+				"width": 0,
+				"height": 0,
+				"x": 500,
+				"y": 246,
+				"direction": 1
+			},
+			"RedWire": {
+				"animations": {
+					"uncut": {
+						"rowStartY": 158,
+						"frames": 1,
+						"anispeed": 3,
+						"sheetRow": 0,
+						"frameWidth": 70,
+						"frameHeight": 42
+					},
+					"cut": {
+						"rowStartY": 200,
+						"frames": 1,
+						"anispeed": 3,
+						"sheetRow": 0,
+						"frameWidth": 82,
+						"frameHeight": 76,
+						"offsetX": -6,
+						"offsetY": 16
+					}
+				},
+				"animation": "uncut",
+				"spritesheet": "wires",
+				"width": 0,
+				"height": 0,
+				"x": 512,
+				"y": 252,
+				"direction": 1
+			},
+			"BlueWire": {
+				"animations": {
+					"uncut": {
+						"rowStartY": 0,
+						"frames": 1,
+						"anispeed": 3,
+						"sheetRow": 0,
+						"frameWidth": 68,
+						"frameHeight": 42
+					},
+					"cut": {
+						"rowStartY": 42,
+						"frames": 1,
+						"anispeed": 3,
+						"sheetRow": 0,
+						"frameWidth": 42,
+						"frameHeight": 48,
+						"offsetX": 12,
+						"offsetY": 4
+					}
+				},
+				"animation": "uncut",
+				"spritesheet": "wires",
+				"width": 0,
+				"height": 0,
+				"x": 530,
+				"y": 256,
+				"direction": 1
+			},
+			
+			"Sigil": {
+				"animations": {
+					"normal": {
+						"rowStartY": 382,
+						"frames": 1,
+						"anispeed": 3,
+						"sheetRow": 0,
+						"frameWidth": 62,
+						"frameHeight": 108
+					},
+					"destroy": {
+						"rowStartY": 382,
+						"rowStartX": 62,
+						"frames": 5,
+						"anispeed": 9,
+						"sheetRow": 0,
+						"frameWidth": 62,
+						"frameHeight": 108,
+						"nextani": "hide"
+					},
+					"hide": {
+						"frames": 1,
+						"anispeed": 0,
+						"frameWidth": 0,
+						"frameHeight": 0
+					}
+				},
+				"label": "Repellant Sigil",
+				"animation": "normal",
+				"spritesheet": "thiefobstacles",
+				"width": 62,
+				"height": 48,
+				"x": 58,
+				"y": 126,
+				"direction": 1,
+				"default_actions": [
+					{ "action": "dialogue", "speaker": "BAAL", "text": "THE REPELLANT SIGIL! DUDE, THIS IS SERIOUSLY POWERFUL MAGIC. ONLY A MASTER NECROMANCER CAN BYPASS IT!", "portrait": "baal" },
+					{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Be that as it may... I've got to try!!", "portrait": "pman_sweat" },
+					{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "There are a lot of smaller glyphs encircling the sigil... what should I do?", "portrait": "pman_normal" },
+					{ "action": "label", "name": "PickRandomOptionSet" },
+					{ "action": "randomlabel", "name": "OptionSetA" },
+					{ "action": "randomlabel", "name": "OptionSetB" },
+					{ "action": "randomlabel", "name": "OptionSetC" },
+					{ "action": "randomlabel", "name": "OptionSetD" },
+					
+					{"action": "label", "name": "OptionSetA" },
+					{"action": "option", "text": "Press the sagittal glyph", "label": "PickRandomResponse"},
+					{"action": "option", "text": "Press the coronal glyph", "label": "PickRandomResponse"},
+					{"action": "option", "text": "Press the transverse glyph", "label": "PickRandomResponse"},
+					{"action": "option", "text": "Give up", "label": "SkipToEnd"},
+					
+					{"action": "label", "name": "OptionSetB" },
+					{"action": "option", "text": "Press the left anterior glyph", "label": "PickRandomResponse"},
+					{"action": "option", "text": "Press the right anterior glyph", "label": "PickRandomResponse"},
+					{"action": "option", "text": "Press the prime dorsal glyph", "label": "PickRandomResponse"},
+					{"action": "option", "text": "Give up", "label": "SkipToEnd"},
+					
+					{"action": "label", "name": "OptionSetC" },
+					{"action": "option", "text": "Press the sinistral glyph", "label": "PickRandomResponse"},
+					{"action": "option", "text": "Press the dextral glyph", "label": "PickRandomResponse"},
+					{"action": "option", "text": "Press the isotropic glyph", "label": "PickRandomResponse"},
+					{"action": "option", "text": "Give up", "label": "SkipToEnd"},
+					
+					{"action": "label", "name": "OptionSetD" },
+					{"action": "option", "text": "Press the septentrional glyph", "label": "PickRandomResponse"},
+					{"action": "option", "text": "Press the meridonial glyph", "label": "PickRandomResponse"},
+					{"action": "option", "text": "Press the phenomenal glyph", "label": "PickRandomResponse"},
+					{"action": "option", "text": "Give up", "label": "SkipToEnd"},
+					
+					{ "action": "label", "name": "PickRandomResponse" },
+					{ "action": "randomlabel", "name": "ResponseA" },
+					{ "action": "randomlabel", "name": "ResponseB" },
+					{ "action": "randomlabel", "name": "ResponseC" },
+					{ "action": "randomlabel", "name": "ResponseD" },
+					
+					{"action": "label", "name": "ResponseA" },
+					{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "The glyph gave off a dull blue light... \n What should I do next?", "portrait": "pman_sweat" },
+					{"action": "branch", "type": "always", "jumpto": "PickRandomOptionSet" },
+					
+					{"action": "label", "name": "ResponseB" },
+					{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "The glyph didn't appear to respond... \n What should I do next?", "portrait": "pman_sweat" },
+					{"action": "branch", "type": "always", "jumpto": "PickRandomOptionSet" },
+					
+					{"action": "label", "name": "ResponseC" },
+					{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "The glyphs next to this one began to glow... \n What should I do next?", "portrait": "pman_sweat" },
+					{"action": "branch", "type": "always", "jumpto": "PickRandomOptionSet" },
+					
+					{"action": "label", "name": "ResponseD" },
+					{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "All of the other glyphs stopped glowing! \n What should I do next?", "portrait": "pman_sweat" },
+					{"action": "branch", "type": "always", "jumpto": "PickRandomOptionSet" },
+					
+					{ "action": "label", "name": "SkipToEnd"},
+					{ "action": "end" }
+				],
+				"item_actions": {
+					"ankh": [
+						{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Wake up, Ankh Spirit!! \n You need to help me get through this Sigil!", "portrait": "pman_sweat" },
+						{ "action": "dialogue", "speaker": "ANKH SPIRIT", "text": "Um. No, I really don't. I don't need to help you at all.", "portrait": "ankh" },
+						{ "action": "dialogue", "speaker": "ANKH SPIRIT", "text": "Don't wake me up again, okay? I was totally scoring with the Godess of All Lies in my dream... *yawn*", "portrait": "ankh" },
+						{"action": "end"}
+					],
+					"crowbar": [
+						{ "action": "freeze" },
+						{"action": "attractsprite", "sprite": "DoomSphere", "target": "DoomSphere", "seconds": 0.1, "offsetx": 0 },
+						{ "action": "spriteani", "sprite": "Sigil", "animation": "destroy" },
+						{ "action": "wait", "frames": 60 },
+						{ "action": "dialogue", "speaker": "BAAL", "text": "OH FOR THE LOVE OF - REALLY? REALLY. YOU SMASHED THROUGH THE REPELLANT SIGIL WITH A GODDAMN CROWBAR.", "portrait": "baal" },
+						{ "action": "unfreeze" },
+						{ "action": "dialogue", "speaker": "BAAL", "text": "FINE. YOU KNOW WHAT? FINE! YOU'RE HOME FREE. JUST SAUNTER ON OUT OF THERE, WHY DON'T YOU.", "portrait": "baal" },
+						{"action": "setswitch", "which": "thiefsDenMode", "value": "leaving" },
+						{ "action": "gotolevel", "level": "morvencubicle", "x": 140, "y": 236 },
+						{ "action": "end" }
+					]
+				}
+			},
+			"CarDoor": {
+				"animations": {
+					"normal": {
+						"rowStartY": 198,
+						"frames": 1,
+						"anispeed": 3,
+						"sheetRow": 0,
+						"frameWidth": 124,
+						"frameHeight": 184
+					},
+					"destroy": {
+						"rowStartY": 198,
+						"rowStartX": 124,
+						"frames": 1,
+						"anispeed": 3,
+						"sheetRow": 0,
+						"frameWidth": 240,
+						"frameHeight": 184,
+						"offsetX": 40
+					}
+				},
+				"label": "Car Door",
+				"animation": "normal",
+				"spritesheet": "thiefobstacles",
+				"width": 124,
+				"height": 130,
+				"x": 58,
+				"y": 168,
+				"direction": 1,
+				"default_actions": [
+					{ "action": "dialogue", "speaker": "BAAL", "text": "IT'S A CAR DOOR. A LOCKED CAR DOOR! YOU'LL PROBABLY SET OFF THE ALARM IF YOU TRY AND GET PAST IT.", "portrait": "baal" },
+					{ "action": "dialogue", "speaker": "BAAL", "text": "AND THEN IT'LL WAKE UP ALL THE NEIGHBORS AND IT'LL ALL BE YOUR FAULT. YEP, BETTER JUST LIE DOWN AND ACCEPT DEATH.", "portrait": "baal" },
+					{ "action": "end" }
+				],
+				"item_actions": {
+					"scissors": [
+						{ "action": "dialogue", "speaker": "BAAL", "text": "THIS SEEMS LIKE THE EQUIVALENT OF KEYING UP SOMEONE'S CAR. WHICH IS AWESOME. BUT ALSO PROHIBITED!", "portrait": "baal" }
+					],
+					"crowbar": [
+						{"action": "spritefield", "sprite": "CarDoor", "field": "width", "value": 0},
+						{"action": "spritefield", "sprite": "CarDoor", "field": "height", "value": 0},
+						{ "action": "spriteani", "sprite": "CarDoor", "animation": "destroy" },
+						{ "action": "dialogue", "speaker": "BAAL", "text": "OH, HUH! YOU'VE WRENCHED THE DOOR OUT OF YOUR WAY. BUT YOU'RE NOT OUT OF THE WOODS JUST YET...!", "portrait": "baal" },
+						{ "action": "end" }
+					]
+				}
+			},
+			"Crates": {
+				"animations": {
+					"normal": {
+						"rowStartY": 0,
+						"frames": 1,
+						"anispeed": 3,
+						"sheetRow": 0,
+						"frameWidth": 232,
+						"frameHeight": 198,
+						"offsetX": 50
+					},
+					"destroy": {
+						"rowStartY": 0,
+						"rowStartX": 122,
+						"frames": 1,
+						"anispeed": 3,
+						"sheetRow": 0,
+						"frameWidth": 232,
+						"frameHeight": 198,
+						"offsetX": 50
+					}
+				},
+				"label": "Supply Crates",
+				"animation": "normal",
+				"spritesheet": "thiefobstacles",
+				"width": 132,
+				"height": 198,
+				"x": 60,
+				"y": 198,
+				"direction": 1,
+				"default_actions": [
+					{ "action": "dialogue", "speaker": "BAAL", "text": "IT'S A PILE OF CRATES! RUMOR HAS IT THAT YOU NEED TO PUSH THESE AROUND AND USE THEM TO WEIGH DOWN ALL THE SWITCHES IN THE ROOM.", "portrait": "baal" },
+					{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Those crates are way too heavy to push. Also there ARE NO SWTICHES DOWN HERE.", "portrait": "pman_sweat" },
+					{ "action": "dialogue", "speaker": "BAAL", "text": "LOOK, I DIDN'T SAY IT WAS AN ACCURATE RUMOR! OR THAT I DIDN'T COMPLETELY FABRICATE IT A FEW SECONDS AGO.", "portrait": "baal" },
+					{ "action": "end" }
+				],
+				"item_actions": {
+					"scissors": [
+						{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "No. I don't think scissors will be much help here. Otherwise I doubt anyone would have invented boxcutters.", "portrait": "pman_sweat" },
+						{ "action": "end" }
+					],
+					"crowbar": [
+						{ "action": "spriteani", "sprite": "Crates", "animation": "destroy" },
+						{"action": "spritefield", "sprite": "Crates", "field": "width", "value": 0},
+						{"action": "spritefield", "sprite": "Crates", "field": "height", "value": 0},
+						{ "action": "dialogue", "speaker": "BAAL", "text": "WHOAH! THE CROWBAR JUST TORE THROUGH THOSE CRATES LIKE BUTTER. NICE ONE. TOO BAD YOU'VE STILL GOT CRAP IN YOUR WAY!", "portrait": "baal" },
+						{ "action": "end" }
+					]
+				}
+			},
+			
+			
+			"PrinterPaper": {
+				"animations": {
+					"unprinted": {
+						"rowStartY": 0,
+						"frames": 1,
+						"anispeed": 3,
+						"sheetRow": 0,
+						"frameWidth": 140,
+						"frameHeight": 120
+					},
+					"printed": {
+						"rowStartY": 120,
+						"frames": 1,
+						"anispeed": 3,
+						"sheetRow": 0,
+						"frameWidth": 224,
+						"frameHeight": 284,
+						"offsetY": 112,
+						"offsetX": -38
+					}
+				},
+				"animation": "unprinted",
+				"spritesheet": "printerpaper",
+				"width": 140,
+				"height": 120,
+				"x": 482,
+				"y": 60,
+				"direction": 1
+			},
+			"Eightball": {
+				"x": 478,
+				"y": 52,
+				"direction": 1,
+				"width": 62,
+				"height": 60,
+				"animations": {
+					"normal": {
+							"rowStartY": 0,
+							"frames": 1,
+							"anispeed": 3,
+							"sheetRow": 0,
+							"frameWidth": 62,
+							"frameHeight": 60
+					},
+					"broken": {
+							"rowStartY": 60,
+							"frames": 1,
+							"anispeed": 3,
+							"sheetRow": 0,
+							"frameWidth": 128,
+							"frameHeight": 60,
+							"offsetY": 30,
+							"offsetX": -20
+					}
+				},
+				"animation": "normal",
+				"spritesheet": "eightball",
+				"frame": 0,
+				"label": "Tragic 8-Ball",
+				"default_actions": [
+					{"action": "branch", "type": "switchValue", "which": "thiefsDenMode", "value": "crisis", "operant": "equals", "yes": "Dead" },	
+					{ "action": "branch", "type": "switchValue", "which": "thiefsDenMode", "value": "printed", "operant": "equals", "yes": "PaperPrinted" },
+					{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Any chance you could use your future-powers to figure out how we'll get out of this, Eight Ball?", "portrait": "pman_normal" },
+					{ "action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "SORRY, WE EIGHT BALLS ARE MOSTLY ONLY ABLE TO REPORT VAGUELY ON ANSWERS TO YES OR NO QUESTIONS." },
+					{ "action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "I CAN SAY THAT IT SEEMS THE ORDER IN WHICH YOU EXECUTE TASKS DOWN HERE IS EXTREMELY IMPORTANT..." },
+					{"action": "end"},
+					
+					{"action": "label", "name": "Dead"},
+					{"action": "dialogue", "speaker": "TRAGIC DEAD GUY", "text": "..." },
+					{"action": "end"},
+					
+					{"action": "label", "name": "PaperPrinted"},
+					{"action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "I SENSE THAT OUR JOURNEY TOGETHER IS ALMOST FINISHED! JUST GRAB THAT CROWBAR AND LET'S ESCAPE." },
+					{"action": "end"}
+				]
+			},
+			"Crowbar": {
+				"x": 466,
+				"y": 106,
+				"direction": 1,
+				"width": 86,
+				"height": 80,
+				"spritesheet": "crowbar",
+				"frame": 0,
+				"label": "Crowbar",
+				"default_actions": [
+					{"action": "branch", "type": "switchValue", "which": "thiefsDenMode", "value": "printed", "operant": "equals", "yes": "PaperPrinted" },
+					{"action": "dialogue", "speaker": "PACHINKO MAN", "text": "Tony's lost item... a rusty old crowbar. Not the greatest motivator in the world, but hey, I've come this far.", "portrait": "pman_normal" },
+					{"action": "end"},
+					
+					{"action": "label", "name": "PaperPrinted"},
+					{"action": "branch", "type": "spriteDistance", "sprite": "Crowbar", "distance": 60, "operant": "greater", "yes": "TooFar" },
+					{"action": "getitem", "item": "crowbar" },
+					{"action": "killsprite", "sprite": "Crowbar" },
+					{"action": "dialogue", "speaker": "BAAL", "text": "YOU PICKED UP THE CROWBAR! \n THIS THING RADIATES WITH PRAGMATIC USEFULNESS. \n ALSO TETANUS. PROBABLY.", "portrait": "baal" },
+					{"action": "dialogue", "speaker": "???", "text": "Hee, hee... \n You ought not've done that, y'know..." },
+					{"action": "spriteani", "sprite": "Monitors", "animation": "scared"},
+					{"action": "stopmusic" },
+					{"action": "playerdirection", "direction": "right" },
+					{"action": "freeze"},
+					{"action": "dim", "opacity": 0, "speed": 20 },
+					{"action": "attractsprite", "sprite": "DoomSphere", "target": "DoomSphere", "seconds": 0.8, "offsetx": -320 },
+					{"action": "wait", "frames": 30},
+					{"action": "dialogue", "speaker": "DOOM SPHERE", "text": "Not while I'M around..." },
+					{"action": "dialogue", "speaker": "PACHINKO MAN", "text": "Oh my gosh... Tragic Eight Ball! Say something!", "cage": "Sir? That was TOTALLY cool.", "portrait": "pman_sweat" },
+					{"action": "dim", "opacity": 0, "speed": 20 },
+					{"action": "spriteani", "sprite": "Eightball", "animation": "broken"},
+					{"action": "attractsprite", "sprite": "DoomSphere", "target": "DoomSphere", "seconds": 1, "offsetx": 240 },
+					{"action": "wait", "seconds": 1},
+					{"action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "R-REPLY HAZY... TRY AGAIN NEVER. *bleaghh*" },
+					{"action": "dialogue", "speaker": "DOOM SPHERE", "text": "Boss Morven was no ordinary petty thief, see? He built a TEMPLE to Petty Thievery."},
+					{"action": "attractsprite", "sprite": "DoomSphere", "target": "DoomSphere", "seconds": 0.8, "offsetx": -40 },
+					{"action": "dialogue", "speaker": "DOOM SPHERE", "text": "And he created ME to CRUSH anyone what tries to dishonor that temple by stealing his sacred swag!" },
+					{"action": "dialogue", "speaker": "PACHINKO MAN", "text": "D-doesn't stealing from a temple of thievery mean you are, in fact, completely honoring it?", "cage": "I'm more like... a treasure protector.", "portrait": "pman_sweat" },
+					{"action": "attractsprite", "sprite": "DoomSphere", "target": "DoomSphere", "seconds": 0.8, "offsetx": -40 },
+					{"action": "dialogue", "speaker": "DOOM SPHERE", "text": "I say it means this temple... is about to become a TOMB!" },
+					{"action": "spritewalk", "sprite": "DoomSphere", "speed": -0.5},
+					{"action": "setswitch", "which": "thiefsDenMode", "value": "crisis" },
+					{"action": "music", "song": "crisis", "loop": true },
+					{"action": "unfreeze"},
+					{"action": "end"},
+					
+					{"action": "label", "name": "TooFar"},
+					{"action": "dialogue", "speaker": "PACHINKO MAN", "text": "Tony's lost crowbar... I should get a little closer before picking it up.", "portrait": "pman_normal" },
+					{"action": "end"}
+				]
+			},
+			
+			"DoomSphere": {
+				"x": 840,
+				"y": 120,
+				"z": 1,
+				"rotatePerPx": 0.75,
+				"initrotate": -120,
+				"animations": {
+					"default": {
+						"rowStartY": 0,
+						"frames": 1,
+						"sheetRow": 0,
+						"frameWidth": 508,
+						"frameHeight": 508
+					}
+				},
+				"default_actions": [
+					{ "action": "dialogue", "speaker": "BAAL", "text": "SO UM, HEY. I NOTICE YOU'RE BEING CHASED BY AN ENORMOUS LIVING BOULDER DEADSET ON CRUSHING YOU TO DEATH.", "portrait": "baal" },
+					{ "action": "dialogue", "speaker": "BAAL", "text": "YOU KNOW WHERE THERE ISN'T A LIVING BOULDER TRYING TO KILL YOU? BACK IN YOUR CUBICLE. JUST A THOUGHT.", "portrait": "baal" },
+					{ "action": "end" }
+				],
+				"collision_actions": [
+					{ "action": "setitemfield", "item": "crowbar", "field": "owned", "value": false },
+					{ "action": "death", "sfx": "KROOOUNCH!!", "epitaph": "THE DOOM SPHERE FLATTENS YOU INTO A PACHINKO-PANCAKE. SHOCKING, YET INCREDIBLY APPETIZING!" },
+					{ "action": "end" }
+				],
+				"item_actions": {
+					"scissors": [
+						{"action": "dialogue", "speaker": "DOOM SPHERE", "text": "Your weapons are powerless against me! CAN'T STOP THE ROCK!"}
+					],
+					"stapler": [
+						{"action": "dialogue", "speaker": "DOOM SPHERE", "text": "Your weapons are powerless against me! NOTHING MOVES THE ROCK!"}
+					],
+					"crowbar": [
+						{"action": "branch", "type": "spriteDistance", "sprite": "DoomSphere", "distance": 300, "operant": "greater", "yes": "TooFar" },
+						{"action": "freeze"},
+						{"action": "attractsprite", "sprite": "DoomSphere", "target": "DoomSphere", "seconds": 0.8, "offsetx": 60 },
+						{"action": "dialogue", "speaker": "DOOM SPHERE", "text": "YOW! Oooh, why I oughta --!" },
+						{"action": "spritewalk", "sprite": "DoomSphere", "speed": -0.5},
+						{"action": "unfreeze"},
+						{"action": "end"},
+						{"action": "label", "name": "TooFar"},
+						{"action": "dialogue", "speaker": "PACHINKO MAN", "text": "He needs to get closer before I can get a clean shot...!", "portrait": "pman_sweat"},
+						{"action": "end"}
+					],
+					"lens": [
+						{"action": "dialogue", "speaker": "DOOM SPHERE'S THOUGHTS", "text": "I... I shall consume. Consume. \n Consume a box of oreos. After I'm done crushing this guy."}
+					]
+				},
+				"animation": "default",
+				"direction": 1,
+				"width": 400,
+				"height": 400,
+				"spritesheet": "doomsphere",
+				"label": "Doom Sphere"
+			}
+		
+    }
+}

@@ -1,0 +1,256 @@
+{
+    "bg": "cavern",
+    "mode": "NORMAL",
+    "leftWall": 0,
+    "rightWall": 600,
+		"music": {
+        "song": "demo",
+        "loop": true
+    },
+    "preload_actions": [
+        { "action": "branch", "type": "playerStatus", "which": "ball", "value": true, "operant": "equals", "yes": "MissingBall" },
+				{ "action": "branch", "type": "switchValue", "which": "bathroom", "value": "plugged", "operant": "equals", "yes": "MissingBall" },
+				{ "action": "branch", "type": "switchValue", "which": "bathroom", "value": "finished", "operant": "equals", "yes": "MissingBall" },
+				{ "action": "end" },
+				{ "action": "label", "name": "MissingBall" },
+				{ "action": "killsprite", "sprite": "Eightball" },
+        { "action": "end" }
+    ],
+    "postload_actions": [
+        { "action": "branch", "type": "switchValue", "which": "cerballus", "value": "default", "operant": "equals", "no": "SkipIntro" },
+        { "action": "dialogue", "speaker": "CERBALLUS", "text": "h a r r o  ~", "portrait": "cerballus" },
+        { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "What on earth is that?!", "cage": "OUUHH NOOO NOT THE BEES!!", "portrait": "pman_normal" },
+        { "action": "dialogue", "speaker": "BAAL", "text": "AWW, IT'S A PUPPY! IT'S THREE PUPPIES. YOU SHOULD GO AND FEED THE POOR LITTLE FELLA(S)!", "portrait": "baal" },
+        { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "How can I get past this thing...?", "cage": "MY EYES! MY EYES! AUUUHHH!!!", "portrait": "pman_sweat" },
+        { "action": "setswitch", "which": "cerballus", "value": "met" },
+        { "action": "label", "name": "SkipIntro" },
+        { "action": "end" }
+    ],
+    "zones": {
+        "LeftExit": {
+            "left": 0,
+            "top": 134,
+            "width": 50,
+            "height": 180,
+            "collision_actions": [
+                { "action": "gotolevel", "level": "watercooler", "x": 420, "y": 266 },
+                { "action": "end" }
+            ]
+        },
+        "RightExit": {
+            "left": 570,
+            "top": 134,
+            "width": 30,
+            "height": 180,
+            "collision_actions": [
+                { "action": "gotolevel", "level": "lobby", "x": 60, "y": 266 },
+                { "action": "end" }
+            ]
+        },
+        "DoggieDish": {
+            "left": 280,
+            "top": 244,
+            "width": 86,
+            "height": 40,
+            "default_actions": [
+                { "action": "dialogue", "speaker": "CERBALLUS", "text": "t h i s  d i s h \n f o r   f o o d - k u n  ~", "portrait": "cerballus" },
+                { "action": "end" }
+            ],
+            "item_actions": { "mug": [
+                    { "action": "branch", "type": "switchValue", "which": "cerballus", "value": "subdued", "operant": "equals", "yes": "SkipFeeding" },
+                    { "action": "branch", "type": "itemFieldValue", "item": "mug", "field": "contents", "value": "onlytears", "operant": "equals", "yes": "JustTears" },
+                    { "action": "branch", "type": "itemFieldValue", "item": "mug", "field": "contents", "value": "onlyblood", "operant": "equals", "yes": "JustBlood" },
+                    { "action": "branch", "type": "itemFieldValue", "item": "mug", "field": "contents", "value": "bloodmix", "operant": "equals", "yes": "BloodMix" },
+                    { "action": "dialogue", "speaker": "BAAL", "text": "WHAT, ARE YOU TRYING TO SCRAPE COFFEE GROUNDS OUT OF THAT THING? YOU HAVE WEIRD HOBBIES.", "portrait": "baal" },
+                    { "action": "end" },
+                    { "action": "label", "name": "JustTears" },
+                    { "action": "dialogue", "speaker": "CERBALLUS", "text": "i t a d a k i m a s u , \n f o o d - k u n ~", "portrait": "cerballus" },
+                    { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "It's working! The monster is drinking tears from its dish instead of paying attention to me!", "portrait": "pman_normal" },
+                    { "action": "dialogue", "speaker": "BAAL", "text": "ACTUALLY I THINK IT'S ALREADY DONE WITH YOUR PALTRY OFFERING.", "portrait": "baal" },
+                    { "action": "dialogue", "speaker": "CERBALLUS", "text": "w a n - w a n ,   t i m e \n f o r   m o r e ~", "portrait": "cerballus" },
+                    { "action": "death", "sfx": "MUNCH-A-CRUNCH!", "epitaph": "THE DOG DRINKS ALL OF YOUR BLOOD. THEN IT EATS YOU. TOUGH BREAK." },
+                    { "action": "end" },
+                    { "action": "label", "name": "JustBlood" },
+                    { "action": "dialogue", "speaker": "CERBALLUS", "text": "i t a d a k i m a s u , \n f o o d - k u n ~", "portrait": "cerballus" },
+                    { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "It's working! The monster is drinking blood from its dish instead of paying attention to me!", "portrait": "pman_normal" },
+                    { "action": "dialogue", "speaker": "BAAL", "text": "ACTUALLY I THINK IT'S ALREADY DONE WITH YOUR PALTRY OFFERING.", "portrait": "baal" },
+                    { "action": "dialogue", "speaker": "CERBALLUS", "text": "w a n - w a n ,   t i m e \n f o r   m o r e ~", "portrait": "cerballus" },
+                    { "action": "death", "sfx": "MUNCH-A-CRUNCH!", "epitaph": "THE DOG SUCKS THE TEARS STRAIGHT OUT OF YOUR EYEBALLS FOR DESSERT. THEN IT EATS YOU. TOUGH BREAK." },
+                    { "action": "end" },
+                    { "action": "label", "name": "BloodMix" },
+                    { "action": "dialogue", "speaker": "CERBALLUS", "text": "i t a d a k i m a s u , \n f o o d - k u n ~", "portrait": "cerballus" },
+                    { "action": "dialogue", "text": "\n Slurp, shlorp, lepp..." },
+                    { "action": "dialogue", "speaker": "CERBALLUS", "text": "g o c h i s o s a m a \n d e s h i t a ~", "portrait": "cerballus" },
+                    { "action": "dialogue", "speaker": "BAAL", "text": "GOATS OWE LLAMAS WHAT, NOW?", "portrait": "baal" },
+                    { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "He's thanking me for the meal! How polite. I think he and I are cool, now.", "cage": "A cup of tea and a good book - a dance with a reindeer and also... PACHINKOOO...", "portrait": "pman_happy" },
+                    { "action": "dialogue", "speaker": "BAAL", "text": "ARE YOU GUYS SPEAKING IN CODE? IS THIS SOME KIND OF GANG LINGO? I AM NOT OKAY WITH THAT!", "portrait": "baal" },
+                    { "action": "setswitch", "which": "cerballus", "value": "subdued" },
+                    { "action": "end" },
+                    { "action": "label", "name": "SkipFeeding" },
+                    { "action": "dialogue", "speaker": "CERBALLUS", "text": "w a t a s h i   w a \n f u l l   d e s u ~", "portrait": "cerballus" },
+                    { "action": "end" }
+                ]
+            },
+            "label": "Doggie Dish"
+        },
+        "DeathZone": {
+            "left": 390,
+            "top": 244,
+            "width": 86,
+            "height": 60,
+            "collision_actions": [
+                { "action": "branch", "type": "switchValue", "which": "cerballus", "value": "subdued", "operant": "equals", "yes": "SkipDeath" },
+                { "action": "dialogue", "speaker": "CERBALLUS", "text": "i t a d a k i m a s u , \n f o o d - k u n ~", "portrait": "cerballus" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Wait, no! I'M not your food-kun...!", "cage": "KILLING ME WON'T BRING BACK YOUR GODDAMNED HONEY!!", "portrait": "pman_sweat" },
+                { "action": "death", "sfx": "MUNCH-A-CRUNCH!", "epitaph": "THE DOG DRINKS ALL OF YOUR BLOOD. THEN IT SUCKS THE TEARS OUT OF YOUR EYES. THEN IT EATS YOU. TOUGH BREAK." },
+                { "action": "label", "name": "SkipDeath" },
+                { "action": "end" }
+            ]
+        },
+        "Speaker": {
+            "left": 60,
+            "top": 200,
+            "width": 60,
+            "height": 60,
+            "default_actions": [
+                { "action": "dialogue", "speaker": "BAAL", "text": "A CHEW TOY, SHAPED LIKE A PA SYSTEM! A FUNCTIONAL PA SYSTEM THAT YOU MAY ERRONEOUSLY BELIEVE TO BE PRODUCING MY OMIPRESENT VOICE.", "portrait": "baal" },
+                { "action": "end" }
+            ]
+        }
+    },
+    "sprites": {
+        "Cerballus": {
+            "x": 400,
+            "y": 128,
+            "direction": 1,
+            "default_actions": [
+                { "action": "branch", "type": "switchValue", "which": "cerballus", "value": "subdued", "operant": "equals", "yes": "SkipUguu" },
+                { "action": "dialogue", "speaker": "CERBALLUS", "text": "u g u u  ~", "portrait": "cerballus" },
+                { "action": "end" },
+                { "action": "label", "name": "SkipUguu" },
+                { "action": "dialogue", "speaker": "CERBALLUS", "text": "a r i g a t o , \n p a c h i n k o - c h a n ~", "portrait": "cerballus" }
+            ],
+            "item_actions": { "mug": [
+                    { "action": "branch", "type": "switchValue", "which": "cerballus", "value": "subdued", "operant": "equals", "yes": "SkipFeeding" },
+                    { "action": "branch", "type": "itemFieldValue", "item": "mug", "field": "contents", "value": "onlytears", "operant": "equals", "yes": "JustTears" },
+                    { "action": "branch", "type": "itemFieldValue", "item": "mug", "field": "contents", "value": "onlyblood", "operant": "equals", "yes": "JustBlood" },
+                    { "action": "branch", "type": "itemFieldValue", "item": "mug", "field": "contents", "value": "bloodmix", "operant": "equals", "yes": "BloodMix" },
+                    { "action": "dialogue", "speaker": "BAAL", "text": "HEY! QUIT MEAN-MUGGIN'!", "portrait": "baal" },
+                    { "action": "end" },
+                    { "action": "label", "name": "JustTears" },
+                    { "action": "dialogue", "speaker": "CERBALLUS", "text": "i t a d a k i m a s u , \n f o o d - k u n ~", "portrait": "cerballus" },
+                    { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "It's working! The monster is drinking tears from its dish instead of paying attention to me!", "cage": "KILLING ME WON'T BRING BACK YOUR GODDAMNED HONEY!!", "portrait": "pman_normal" },
+                    { "action": "dialogue", "speaker": "BAAL", "text": "ACTUALLY I THINK IT'S ALREADY DONE WITH YOUR PALTRY OFFERING.", "portrait": "baal" },
+                    { "action": "dialogue", "speaker": "CERBALLUS", "text": "w a n - w a n ,   t i m e \n f o r   m o r e ~", "portrait": "cerballus" },
+                    { "action": "death", "sfx": "MUNCH-A-CRUNCH!", "epitaph": "THE DOG DRINKS ALL OF YOUR BLOOD. THEN IT EATS YOU. TOUGH BREAK." },
+                    { "action": "end" },
+                    { "action": "label", "name": "JustBlood" },
+                    { "action": "dialogue", "speaker": "CERBALLUS", "text": "i t a d a k i m a s u , \n f o o d - k u n ~", "portrait": "cerballus" },
+                    { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "It's working! The monster is drinking blood from its dish instead of paying attention to me!", "cage": "KILLING ME WON'T BRING BACK YOUR GODDAMNED HONEY!!", "portrait": "pman_normal" },
+                    { "action": "dialogue", "speaker": "BAAL", "text": "ACTUALLY I THINK IT'S ALREADY DONE WITH YOUR PALTRY OFFERING.", "portrait": "baal" },
+                    { "action": "dialogue", "speaker": "CERBALLUS", "text": "w a n - w a n ,   t i m e \n f o r   m o r e ~", "portrait": "cerballus" },
+                    { "action": "death", "sfx": "MUNCH-A-CRUNCH!", "epitaph": "THE DOG SUCKS THE TEARS STRAIGHT OUT OF YOUR EYEBALLS FOR DESSERT. THEN IT EATS YOU. TOUGH BREAK." },
+                    { "action": "end" },
+                    { "action": "label", "name": "BloodMix" },
+                    { "action": "dialogue", "speaker": "CERBALLUS", "text": "i t a d a k i m a s u , \n f o o d - k u n ~", "portrait": "cerballus" },
+                    { "action": "dialogue", "text": "\n Slurp, shlorp, lepp..." },
+                    { "action": "dialogue", "speaker": "CERBALLUS", "text": "g o c h i s o s a m a \n d e s h i t a ~", "portrait": "cerballus" },
+                    { "action": "dialogue", "speaker": "BAAL", "text": "GOATS OWE LLAMAS WHAT, NOW?", "portrait": "baal" },
+                    { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "He's thanking me for the meal! How polite. I think he and I are cool, now.", "cage": "A cup of tea and a good book - a dance with a reindeer and also... PACHINKOOO...", "portrait": "pman_normal" },
+                    { "action": "dialogue", "speaker": "BAAL", "text": "ARE YOU GUYS SPEAKING IN CODE? IS THIS SOME KIND OF GANG LINGO? I AM NOT OKAY WITH THAT!", "portrait": "baal" },
+                    { "action": "setswitch", "which": "cerballus", "value": "subdued" },
+                    { "action": "end" },
+                    { "action": "label", "name": "SkipFeeding" },
+                    { "action": "dialogue", "speaker": "CERBALLUS", "text": "w a t a s h i   w a \n f u l l   d e s u ~", "portrait": "cerballus" },
+                    { "action": "end" }
+                ],
+                "scissors": [
+                    { "action": "dialogue", "speaker": "CERBALLUS", "text": "y u u   a r e \n b a k a - s a n ~", "portrait": "cerballus" },
+                    { "action": "death", "sfx": "MUNCH-A-CRUNCH!", "epitaph": "THE DOG DRINKS ALL OF YOUR BLOOD. THEN IT SUCKS THE TEARS OUT OF YOUR EYES. THEN IT EATS YOU. TOUGH BREAK." }
+                ], "lens": [
+										{ "action": "dialogue", "speaker": "CERBALLUS' THOUGHTS", "text": "n e k o   g o o d  \n t o   c h a s e ~", "portrait": "cerballus" },
+										{ "action": "end" }
+								],
+								"hatemail": [
+									{ "action": "branch", "type": "switchValue", "which": "mail", "value": "over", "operant": "equals", "yes": "QuestFinished" },
+									{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "...I'd rather avoid giving the giant blood-drinking dog creature a reason to think I'm a mailman.", "portrait": "pman_sweat" },
+									{ "action": "end" },
+									{ "action": "label", "name": "QuestFinished" },
+									{ "action": "useitemactions", "item": "hatemail" },
+									{ "action": "end" }
+								]
+            },
+            "width": 230,
+            "height": 200,
+            "spritesheet": "cerballus",
+            "animations": {
+                "normal": {
+                    "frames": 4,
+                    "anispeed": 7,
+                    "sheetRow": 0
+                }
+            },
+            "animation": "normal",
+            "frame": 0,
+            "label": "Cerballus"
+        },
+        "Eightball": {
+            "x": 490,
+            "y": 206,
+						"animations": {
+							"normal": {
+									"rowStartY": 0,
+									"frames": 1,
+									"anispeed": 3,
+									"sheetRow": 0,
+									"frameWidth": 62,
+									"frameHeight": 60
+							}
+						},
+						"animation": "normal",
+            "direction": 1,
+            "default_actions": [
+                { "action": "branch", "type": "switchValue", "which": "eightball", "value": "default", "operant": "equals", "no": "GiveQuest" },
+								{ "action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "\n S - I - I - I - I - G - H..." },
+								{ "action": "branch", "type": "spriteDistance", "sprite": "Eightball", "distance": 180, "operant": "less", "no": "TooFar" },
+								
+								{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Why so tragic, Eight Ball?", "cage": "I bet I'm the last person you expected to see TONIGHT DAOOOHHH", "portrait": "pman_normal" },
+								{ "action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "THESE ROUNDED SHOULDERS BEAR THE MIGHTY WEIGHT OF PRESTIDIGITATION. I'M CURSED WITH FOREKNOWLEDGE OF MY OWN DEMISE." },
+								{ "action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "WORSE STILL, I HAPPEN TO KNOW THAT THE ONE WHO WILL BRING ABOUT MY UNDOING... STANDS BEFORE ME!" },
+								{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "M-m-me? But why would I do something like that?", "cage": "What's in the bag? A shark or something?", "portrait": "pman_sweat" },
+								{ "action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "BETTER NOT TELL YOU NOW. BUT SINCE YOU ARE MY FUTURE MURDERER, PERHAPS YOU'LL DO ME A KINDNESS." },
+								{ "action": "setswitch", "which": "eightball", "value": "met" },
+								
+								{ "action": "label", "name": "GiveQuest" },
+								{ "action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "SOMEWHERE IN BALL HELL, THERE IS A HOLE - A FATALISTIC CORNER POCKET I AM DESTINED TO FILL. WILL YOU HELP ME FIND IT?" },
+								{ "action": "option", "text": "Take the Eight Ball with you", "label": "Take" },
+								{ "action": "option", "text": "Leave the Eight Ball here for now", "label": "Leave" },
+								
+								{ "action": "label", "name": "Take" },
+								{ "action": "freeze" },
+								{ "action": "dim", "opacity": 255, "speed": 20 },
+								{ "action": "wait", "frames": 20 },
+								{ "action": "statusfx", "which": "ball", "value": true },
+								{ "action": "killsprite", "sprite": "Eightball" },
+								{ "action": "unfreeze" },
+								{ "action": "dialogue", "text": "\n TRAGIC EIGHT BALL joined your party! \n Click on Pachinko Man to confer with his new friend." },
+								{ "action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "I KNEW I COULD DEPEND ON YOU. WITH CRUSHING CERTAINTY." },
+								{ "action": "end" },
+								
+								{ "action": "label", "name": "Leave" },
+								{ "action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "IT'S ALRIGHT. I'M QUITE SURE YOU'LL RECONSIDER." },
+								{ "action": "end" },
+								
+								{ "action": "label", "name": "TooFar" },
+								{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "This Eight Ball seems pretty tragic... maybe if I get closer I can find out why.", "portrait": "pman_normal" },
+								{ "action": "end" }
+
+            ],
+            "width": 62,
+            "height": 60,
+            "spritesheet": "eightball",
+            "frame": 0,
+            "label": "Tragic 8-Ball"
+        }
+    }
+}

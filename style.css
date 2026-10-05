@@ -1,0 +1,210 @@
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans);
+@font-face {
+  font-family: 'pixelmix';
+  src: url('pixelmix.ttf');
+}
+* {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+h1, h2, p {
+	margin: 0;
+}
+ul {
+	margin: 0;
+	padding: 0;
+}
+li {
+	list-style-type: none;
+}
+h2 {
+	font-size: 14px;
+	margin-bottom: 10px;
+}
+
+body {
+	background-color: #000;
+	color: #CCC;
+	font-size: 10pt;
+}
+::selection {
+	color: #222;
+	background: black;
+}
+a {
+	color: #d03737;
+	text-decoration: none;
+}
+a:hover {
+	color: #df4848;
+}
+
+#canvas {
+    margin: 20px auto 0px auto;
+	display: block;
+}
+.mirror {
+	-webkit-transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg);
+	-o-transform: rotateY(180deg);
+	-ms-transform: rotateY(180deg);
+}
+.center
+{
+	margin-top: 20px;
+	text-align: center;
+}
+
+.row {
+	white-space: nowrap;
+}
+.row > * {
+	display: inline-block;
+	vertical-align: top;
+	white-space: normal;
+}
+
+#gameInfo {
+	font-family: Droid Sans;
+	width: 580px;
+	margin: 10px auto;
+	background: #111;
+	padding: 10px;
+	position: relative;
+}
+.main {
+	width: 380px;
+	padding-right: 10px;
+}
+.main > section {
+	width: 100%;
+	margin-bottom: 10px;
+	background: black;
+	padding: 10px;
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+.how-to-play .icon {
+	background: url('img/help-icons.png') no-repeat top left;
+	background-size: 100%;
+	width: 40px;
+	height: 40px;
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 10px;
+}
+.how-to-play .icon.right-click {
+	-webkit-transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg);
+	-o-transform: rotateY(180deg);
+	-ms-transform: rotateY(180deg);
+}
+.how-to-play .icon.left-click, .how-to-play .icon.right-click, { background-position: 0px 0px;  } 
+.how-to-play .icon.horizontal-keys { background-position: 0px -90px;  } 
+.how-to-play .icon.vertical-keys { background-position: 0px -45px;  } 
+
+.how-to-play li {
+	margin-bottom: 5px;
+}
+.how-to-play li:last-of-type {
+	margin-bottom: 0;
+}
+
+.main > .random-tip {
+	position: relative;
+	padding-right: 75px;
+	min-height: 100px;
+}
+.random-tip figure {
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-image: url('img/p_baal.png');
+	background-size: 480px 380px;
+	background-position: -32px 0;
+	width: 65px;
+	height: 75px;
+	margin: 0;
+}
+
+.open-game-info {
+	display: block;
+	text-align: center;
+	margin-top: 10px;
+	color: #777;
+}
+.close-button {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	color: #222;
+	background: #ccc;
+	border-radius: 10px;
+	width: 15px;
+	height: 15px;
+	display: block;
+	text-align: center;
+	line-height: 15px;
+}
+.close-button:after {
+	content: '\00d7';
+	font-size: 14px;
+	font-weight: bold;
+	display: block;
+}
+.inactive {
+	display: none;
+}
+
+.credits {
+	width: 150px;
+}
+.credits a {
+	text-transform: uppercase;
+	font-weight: bold;
+}
+.credits .duties {
+	display: block;
+}
+.credits li {
+	padding-bottom: 6px;
+	text-align: right;
+}
+.credits li:last-of-type {
+	padding-bottom: 0;
+}
+.credits .sound {
+	font-size: 11px;
+}
+
+.presskit-link {
+	display: block;
+	text-align: center;
+}
+.presskit-link a {
+	font-weight: bold;
+}
+
+.sep {
+	display: inline-block;
+	margin: 0 10px;
+}
+a sup {
+	color: #ccc;
+}
+
+/* Fatal startup error banner (shown by showFatalError in game.js) */
+#fatal-error {
+	display: none;
+	max-width: 600px;
+	margin: 12px auto;
+	padding: 12px 16px;
+	background: #3a0d0d;
+	color: #ffd9d9;
+	border: 2px solid #a33;
+	border-radius: 6px;
+	font-family: monospace;
+	font-size: 14px;
+	text-align: center;
+}

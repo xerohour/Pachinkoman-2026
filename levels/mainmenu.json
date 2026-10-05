@@ -1,0 +1,26 @@
+{
+    "bg": "mainmenu",
+    "mode": "MENU",
+    "buttons": [
+        {
+            "text": "New Game",
+            "top": 40,
+            "press": "newfile"
+        },
+        {
+            "text": "Load Game",
+            "top": 130,
+            "press": "loadfile"
+        },
+        {
+            "text": "How to Play",
+            "top": 220,
+            "press": "help"
+        },
+        {
+            "text": "Options Menu",
+            "top": 310,
+            "press": "options"
+        }
+    ]
+}

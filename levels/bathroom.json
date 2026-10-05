@@ -1,0 +1,333 @@
+{
+    "bg": "bathroom",
+    "mode": "NORMAL",
+    "leftWall": 180,
+    "rightWall": 600,
+		"music": {
+        "song": "demo",
+        "loop": true
+    },
+    "preload_actions": [
+				{ "action": "branch", "type": "switchValue", "which": "bathroom", "value": "taking8ball", "operant": "equals", "yes": "Taking8Ball" },
+        { "action": "branch", "type": "switchValue", "which": "bathroom", "value": "leaving8ball", "operant": "equals", "yes": "Leaving8Ball" },
+				{ "action": "branch", "type": "switchValue", "which": "bathroom", "value": "plugged", "operant": "equals", "yes": "8Ball" },
+				{ "action": "branch", "type": "switchValue", "which": "bathroom", "value": "finished", "operant": "equals", "yes": "DoneWithQuest" },
+				{ "action": "label", "name": "Default" },
+				{ "action": "killsprite", "sprite": "Eightball" },
+				{ "action": "end" },
+				{ "action": "label", "name": "Leaving8Ball" },
+				{ "action": "spriteani", "sprite": "Melissa", "animation": "crying" },
+				{ "action": "moveplayer", "x": 350 },
+				{ "action": "playerdirection", "direction": "left" },
+				{ "action": "label", "name": "8Ball" },
+				{ "action": "statusfx", "which": "ball", "value": false },
+				{ "action": "killsprite", "sprite": "Blood" },
+				{ "action": "end" },
+				{ "action": "label", "name": "Taking8Ball" },
+				{ "action": "statusfx", "which": "ball", "value": true },
+				{ "action": "spriteani", "sprite": "Melissa", "animation": "crying" },
+				{ "action": "killsprite", "sprite": "Eightball" },
+				{ "action": "end" },
+				{ "action": "label", "name": "DoneWithQuest" },
+				{ "action": "branch", "type": "switchValue", "which": "eightball", "value": "bathroom", "operant": "equals", "no": "Default" },
+				{ "action": "branch", "type": "playerStatus", "which": "ball", "value": true, "operant": "equals", "yes": "Default" },
+				{ "action": "branch", "type": "always", "jumpto": "8Ball" },
+				{ "action": "end" }
+		],
+    "postload_actions": [
+				{ "action": "branch", "type": "switchValue", "which": "bathroom", "value": "taking8ball", "operant": "equals", "yes": "Taking8Ball" },
+				{ "action": "branch", "type": "switchValue", "which": "bathroom", "value": "leaving8ball", "operant": "equals", "yes": "Leaving8Ball" },
+        { "action": "branch", "type": "switchValue", "which": "bathroom", "value": "firstvisit", "operant": "notequal", "yes": "SkipIntro" },
+        { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Is that... blood?!", "cage": "I was MADE for this sewer, baby, and I AM THE KING!!", "portrait": "pman_normal" },
+        { "action": "dialogue", "speaker": "BAAL", "text": "YES, BLOOD! RUBY, COPPER-SMELLING BLOOD... BLOOD! BLOOOOOOD!!!", "portrait": "baal" },
+        { "action": "dialogue", "speaker": "BAAL", "text": "GRANTED, THERE ISN'T USUALLY THIS MUCH OF IT AROUND IN HERE. MAYBE A PIPE BURST?", "portrait": "baal" },
+        { "action": "label", "name": "SkipIntro" },
+        { "action": "end" },
+				{ "action": "label", "name": "Leaving8Ball" },
+				{ "action": "dialogue", "speaker": "BAAL", "text": "HEY, THAT ORACLE YOU RAMMED INTO THE PLUMBING FIXED THE BLOOD LEAK! I... I THINK YOU JUST DID SOMETHING USEFUL!", "portrait": "baal" },
+				{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Huh. I guess this was a win for everybody.", "cage": "Everybody's havin' bad luck... but I'm having good luck. SORRY!", "portrait": "pman_happy" },
+				{ "action": "dialogue", "speaker": "MELISSA", "text": "HHWOOOOAAAARGHH!! AIEEEE!!! \n WHAT HAVE YOU DONE WITH MY PRECIOUS BLOODPLANET?", "portrait": "melissa" },
+				{ "action": "dialogue", "speaker": "MELISSA", "text": "WRITHING IN THAT POOL OF BLOOD WAS THE LAST CONSOLATION I HAD IN THIS AFTERLIFE! YOU'VE RUINED EVERYTHING!", "portrait": "melissa" },
+				{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "I'm - I'm sorry, I didn't know - !", "portrait": "pman_sweat" },
+				{ "action": "spriteani", "sprite": "Melissa", "animation": "normal" },
+				{ "action": "dialogue", "speaker": "MELISSA", "text": "NAH, I'M JUST KIDDING. HEY, YOU WANT A POWERFUL DEMONIC ARTIFACT?", "portrait": "melissa" },
+				{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "...yes.", "portrait": "pman_normal" },
+				{ "action": "getitem", "item": "lens" },
+				{ "action": "dialogue", "text": "\n PACHINKO MAN received the LENS OF INSIGHT! \n A looking glass with potent psychic powers." },
+				{ "action": "dialogue", "speaker": "BAAL", "text": "SERIOUSLY, HOW DO THESE THINGS KEEP FILTERING DOWN TO YOU PEOPLE?", "portrait": "baal" },
+				{ "action": "dialogue", "speaker": "MELISSA", "text": "YOU SHOULD TRY USING IT ON YOURSELF SOMETIME! IT'S WORKED WONDERS FOR ME...", "portrait": "melissa" },
+				{ "action": "setswitch", "which": "bathroom", "value": "plugged" },
+				{ "action": "end" },
+				{ "action": "label", "name": "Taking8Ball" },
+				{ "action": "dialogue", "speaker": "MELISSA", "text": "PHHTBBT! THANK YOU, TRAGIC ANTHILL. I'LL NEVER FORGET YOUR KINDNESS!", "portrait": "melissa" },
+				{ "action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "COME ALONG, PACHINKO MAN! LET'S FINISH BOTH OF OUR JOURNEYS, ONCE AND FOR ALL." },
+				{ "action": "spriteani", "sprite": "Melissa", "animation": "normal" },
+				{ "action": "dialogue", "speaker": "MELISSA", "text": "WAIT, WHO ARE YOU PEOPLE AGAIN? GET OUT OF MY BLOOD PLANET! AACK.", "portrait": "melissa" },
+				{ "action": "setswitch", "which": "bathroom", "value": "finished" },
+				{ "action": "end" }
+    ],
+    "zones": {
+        "BloodSpout": {
+            "left": 40,
+            "top": 214,
+            "width": 80,
+            "height": 100,
+            "default_actions": [
+								{ "action": "branch", "type": "switchValue", "which": "bathroom", "value": "finished", "operant": "equals", "yes": "No8Ball" },
+								{ "action": "branch", "type": "playerStatus", "which": "ball", "value": true, "operant": "equals", "no": "No8Ball" },
+								{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "You know, I'm getting another toilet-based hunch. Eight Ball, is this the 'hole' you're looking for?", "cage": "I'M A VAMPIRE! \n I'M A VAMPIRE! \n I'M A VAMPIRE!", "portrait": "pman_normal" },
+								{ "action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "HMM... YES.... YES, IT IS CERTAIN! THIS HOLE... IT WAS MADE FOR ME!" },
+								{ "action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "NOW QUICKLY! THRUST ME DEEP INSIDE THE FROTHING, BLEEDING WOUND OF DESTINY!" },
+								{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Well, if you insist...", "cage": "I'M A VAMPIRE! \n I'M A VAMPIRE! \n I'M A VAMPIRE!", "portrait": "pman_sweat" },
+								{ "action": "setswitch", "which": "bathroom", "value": "leaving8ball" },
+								{ "action": "setswitch", "which": "eightball", "value": "bathroom" },
+								{ "action": "gotolevel", "level": "bathroom" },
+								{ "action": "end" },
+								{ "action": "label", "name": "No8Ball" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "So much blood... it's inexhaustible!", "cage": "I'M A VAMPIRE! \n I'M A VAMPIRE! \n I'M A VAMPIRE!", "portrait": "pman_sweat" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "PRETTY MUCH! BLOOD IS HELL'S NUMBER ONE RESOURCE, Y'KNOW. IF HELL HAD A PERIODIC TABLE, BLOOD WOULD TAKE UP 70% OF IT!", "portrait": "baal" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "...do you even know what the Periodic Table is?", "cage": "I'M A VAMPIRE! \n I'M A VAMPIRE! \n I'M A VAMPIRE!", "portrait": "pman_normal" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "I KNOW THERE'S SOMETHING PERIODIC ABOUT THE BLOOD IN THERE.", "portrait": "baal" },
+                { "action": "end" }
+            ],
+            "item_actions": { "mug": [
+                    { "action": "branch", "type": "itemFieldValue", "item": "mug", "field": "contents", "value": "empty", "operant": "equals", "yes": "Empty" },
+                    { "action": "branch", "type": "itemFieldValue", "item": "mug", "field": "contents", "value": "onlytears", "operant": "equals", "yes": "JustTears" },
+                    { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "I'm, uh... pretty sure I'm set for now.", "cage": "I'M A VAMPIRE! \n I'M A VAMPIRE! \n I'M A VAMPIRE!", "portrait": "pman_normal" },
+                    { "action": "end" },
+                    { "action": "label", "name": "Empty" },
+                    { "action": "dialogue", "speaker": "BAAL", "text": "EWW, GROSS! WHAT ARE YOU DOING?!", "portrait": "baal" },
+                    { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Working on a hunch.", "cage": "I'M A VAMPIRE! \n I'M A VAMPIRE! \n I'M A VAMPIRE!", "portrait": "pman_normal" },
+                    { "action": "setitemfield", "item": "mug", "field": "contents", "value": "onlyblood" },
+                    { "action": "dialogue", "text": "\n You filled MURMUR'S MUG with TOILET BLOOD! \n But it's still half-empty..." },
+                    { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Granted, I've had less disgusting hunches in the past.", "cage": "I'M A VAMPIRE! \n I'M A VAMPIRE! \n I'M A VAMPIRE!", "portrait": "pman_sarcastic" },
+                    { "action": "end" },
+                    { "action": "label", "name": "JustTears" },
+                    { "action": "dialogue", "speaker": "BAAL", "text": "EWW, GROSS! WHAT ARE YOU DOING?!", "portrait": "baal" },
+                    { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Working on a hunch.", "cage": "I'M A VAMPIRE! \n I'M A VAMPIRE! \n I'M A VAMPIRE!", "portrait": "pman_normal" },
+                    { "action": "setitemfield", "item": "mug", "field": "contents", "value": "bloodmix" },
+                    { "action": "dialogue", "text": "\n You topped off MURMUR'S MUG with TOILET BLOOD! \n The BLOOD MIXTURE is complete!" },
+                    { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "That's teriffic! ...I think?", "cage": "I'M A VAMPIRE! \n I'M A VAMPIRE! \n I'M A VAMPIRE!", "portrait": "pman_normal" },
+                    { "action": "end" }
+                ]
+            },
+            "label": "Broken Toilet"
+        },
+        "Stall": {
+            "left": 155,
+            "top": 84,
+            "width": 95,
+            "height": 150,
+            "default_actions": [
+                { "action": "dialogue", "speaker": "BAAL", "text": "WHOA, THIS ONE'S TAKEN! DID YOU EVER HEAR OF KNOCKING?", "portrait": "baal" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Augh! I've stumbled across my omnipotent captor's lair! Which is... inside a stall... in the women's restroom.", "portrait": "pman_sweat" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "You just stuck another PA system in there to fake me out, didn't you?", "portrait": "pman_sarcastic" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "PA SYSTEM? WHAT! NO! STOP MAKING UP WORDS.", "portrait": "baal" },
+                { "action": "end" }
+            ]
+        },
+        "Sinks": {
+            "left": 394,
+            "top": 84,
+            "width": 162,
+            "height": 120,
+            "default_actions": [
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Hmm... can't turn these knobs. They seem to be blocked by a mix of rust and blood clots.", "portrait": "pman_normal" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "PLUS YOUR ARMS ARE, LIKE, THE SIZE OF TINY BABY ARMS.", "portrait": "baal" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "There's also that, yes.", "portrait": "pman_sarcastic" },
+                { "action": "end" }
+            ],
+            "label": "Faucets"
+        },
+        "Mirror": {
+            "left": 420,
+            "top": 10,
+            "width": 170,
+            "height": 70,
+            "default_actions": [
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "What does it mean...?", "portrait": "pman_sweat" },
+                { "action": "end" }
+            ]
+        },
+        "ExitDoor": {
+            "left": 568,
+            "top": 134,
+            "width": 50,
+            "height": 180,
+            "collision_actions": [
+                { "action": "gotolevel", "level": "hallway", "x": 120, "y": 266 },
+                { "action": "end" }
+            ]
+        }
+    },
+    "sprites": {
+				"Eightball": {
+            "x": 74,
+            "y": 234,
+            "direction": 1,
+						"animations": {
+							"normal": {
+									"rowStartY": 0,
+									"frames": 1,
+									"anispeed": 3,
+									"sheetRow": 0,
+									"frameWidth": 62,
+									"frameHeight": 60
+							}
+						},
+						"animation": "normal",
+            "default_actions": [
+							{ "action": "branch", "type": "switchValue", "which": "mail", "value": "over", "operant": "equals", "yes": "MorvenGone" },
+							{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Are you, um... holding up okay in there, Eight Ball?", "portrait": "pman_normal" },
+							{ "action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "SIGNS POINT TO YES. FOR NOW. YOU'VE STILL YET TO MURDER ME, AT LEAST." },
+							{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Still convinced that's going to happen, huh?", "portrait": "pman_sweat" },
+							{ "action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "DON'T WORRY ABOUT IT TOO MUCH. BUT REMEMBER - OUR PATHS ARE DESTINED TO CROSS AGAIN..." },
+							{ "action": "end" },
+							{ "action": "label", "name": "MorvenGone" },
+							{ "action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "HMM... SO YOU'VE COME BACK FOR ME, JUST AS I KNEW YOU WOULD. I COULD STAY HERE, YOU KNOW... AVOID MY FATE ENTIRELY..." },
+							{ "action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "BUT THEN, I'D BE ROBBING YOU OF YOUR FUTURE. NOT TO MENTION DEPRIVING POOR MELISSA OF HER ONE DERANGED COMFORT IN THIS WORLD." },
+							{ "action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "VERY WELL! I'M THROUGH WITH RUNNING. SHALL I ACCOMPANY YOU AGAIN?" },
+							{ "action": "option", "text": "Take the Eight Ball with you", "label": "Take" },
+							{ "action": "option", "text": "Leave the Eight Ball here for now", "label": "Leave" },
+							
+							{ "action": "label", "name": "Take" },
+							{ "action": "setswitch", "which": "bathroom", "value": "taking8ball" },
+							{ "action": "gotolevel", "level": "bathroom" },
+							{ "action": "end" },
+							
+							{ "action": "label", "name": "Leave" },
+							{ "action": "end" }
+            ],
+						"item_actions": {
+								"hatemail": [
+									{ "action": "branch", "type": "switchValue", "which": "mail", "value": "over", "operant": "equals", "yes": "QuestFinished" },
+									{ "action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "I FEEL THIS LETTER IS CONNECTED TO MY FATE SOMEHOW, BUT, WELL... THE OUTLOOK IS HAZY. TO COIN A PHRASE." },
+									{ "action": "end" },
+									{ "action": "label", "name": "QuestFinished" },
+									{ "action": "useitemactions", "item": "hatemail" },
+									{ "action": "end" }
+								]
+						},
+            "width": 62,
+            "height": 60,
+            "spritesheet": "eightball",
+            "frame": 0,
+            "label": "Tragic 8-Ball"
+        },
+        "Blood": {
+            "x": 262,
+            "y": 159,
+            "direction": 1,
+            "width": 466,
+            "height": 320,
+            "spritesheet": "bathroomblood",
+            "ignore": true,
+            "animations": {
+                "normal": {
+                    "frames": 7,
+                    "anispeed": 9,
+                    "sheetRow": 0
+                }
+            },
+            "animation": "normal",
+            "frame": 0
+        },
+        "Melissa": {
+            "x": 234,
+            "y": 240,
+            "direction": 1,
+            "default_actions": [
+								{ "action": "branch", "type": "itemOwned", "item": "lens", "operant": "yn", "yes": "HasLens" },
+                { "action": "branch", "type": "switchValue", "which": "melissa", "value": 1, "operant": "equals", "yes": "Response1" },
+                { "action": "branch", "type": "switchValue", "which": "melissa", "value": 2, "operant": "equals", "yes": "Response2" },
+                { "action": "branch", "type": "switchValue", "which": "melissa", "value": 3, "operant": "equals", "yes": "Response3" },
+                { "action": "label", "name": "Reponse1" },
+                { "action": "dialogue", "speaker": "MELISSA", "text": "THBBT! PTOO! NOW YOU TOO CAN SPLASH ON A BLOODPLANET", "portrait": "melissa" },
+                { "action": "setswitch", "which": "melissa", "value": 2 },
+                { "action": "branch", "type": "always", "jumpto": "End" },
+                { "action": "label", "name": "Response2" },
+                { "action": "dialogue", "speaker": "MELISSA", "text": "ROW! ROW! DO A BARREL ROW! PTOO! THKKT!", "portrait": "melissa" },
+                { "action": "setswitch", "which": "melissa", "value": 3 },
+                { "action": "branch", "type": "always", "jumpto": "End" },
+                { "action": "label", "name": "Response3" },
+                { "action": "dialogue", "speaker": "MELISSA", "text": "TRUTH! WISDOM! PERFECT SELF-KNOWLEDGE IS COMPLETE OBLITERATION! AACK PTOOIE!", "portrait": "melissa" },
+                { "action": "setswitch", "which": "melissa", "value": 1 },
+                { "action": "branch", "type": "always", "jumpto": "End" },
+                { "action": "label", "name": "End" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "I hope these flaxen locks hide my consternation...", "portrait": "pman_normal" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "YOU'RE CONSTERNATED? NO WONDER YOU'RE HOLED UP IN THIS BATHROOM! THANK YOU, THANK YOU, I'M HERE ALL WEEK.", "portrait": "baal" },
+                { "action": "end" },
+								{ "action": "label", "name": "HasLens" },
+								{ "action": "dialogue", "speaker": "MELISSA", "text": "PTOO! AACK! IF YOU USE THE LENS OF INSIGHT, YOU CAN READ SOMEBODY ELSE'S MIND.", "portrait": "melissa" },
+								{ "action": "dialogue", "speaker": "MELISSA", "text": "ALSO, YOUR OWN! PROBABLY. PFOO! WHAT COULD POSSIBLY GO WRONG? GZZKTT!", "portrait": "melissa" },
+								{ "action": "end" }
+            ],
+						"item_actions": {
+							"stapler": [
+								{ "action": "spriteani", "sprite": "Melissa", "animation": "crying" },
+								{ "action": "dialogue", "speaker": "MELISSA", "text": "AACK!", "portrait": "melissa" },
+								{ "action": "spriteani", "sprite": "Melissa", "animation": "normal" },
+								{ "action": "end" }
+							],
+							"scissors": [
+								{ "action": "spriteani", "sprite": "Melissa", "animation": "crying" },
+								{ "action": "dialogue", "speaker": "MELISSA", "text": "AACK!", "portrait": "melissa" },
+								{ "action": "spriteani", "sprite": "Melissa", "animation": "normal" },
+								{ "action": "end" }
+							],
+							"mug": [
+								{ "action": "branch", "type": "switchValue", "which": "bathroom", "value": "plugged", "operant": "equals", "yes": "NoBlood" },
+								{ "action": "dialogue", "speaker": "MELISSA", "text": "PFFT! DRINK DEEPLY OF THE DRAUGHT OF SELF-DISCOVERY! ALSO, BLOOD. PFFTOOEY!", "portrait": "melissa" },
+								{ "action": "end" },
+								{ "action": "label", "name": "NoBlood" },
+								{ "action": "dialogue", "speaker": "MELISSA", "text": "AGHHBL! YOUR NOSTALGIC BLOOD SACRIFICE CAN'T HEAL THIS LADY'S BROKEN HEART. BARF!", "portrait": "melissa" },
+								{ "action": "end" }
+							],
+							"lens": [
+								{ "action": "dialogue", "speaker": "BAAL", "text": "USING THE LENS OF INSIGHT, YOU GAZE INTO THE DEPTHS OF THIS BABBLING CRAZY'S CRANIUM! I MEAN, I ASSUME THAT'S WHAT'S GOING ON, RIGHT NOW.", "portrait": "baal" },
+								{ "action": "dialogue", "speaker": "MELISSA'S THOUGHTS", "text": "THAT MAN-FACED BLOOD BURGLAR IS IN FOR IT NOW! ONE PEEK INTO HER OWN MIND, AND SHE'LL BE JUST LIKE... JUST LIKE...", "portrait": "melissa" },
+								{ "action": "music", "song": "fakeout", "loop": true },
+								{ "action": "dialogue", "speaker": "MELISSA'S THOUGHTS", "text": "BLURHGHH! WOLF KABOB ROTH VANTAGE! BLOOD PARADE! HOME ECONOMICS!", "portrait": "melissa" },
+								{ "action": "dialogue", "speaker": "MELISSA'S THOUGHTS", "text": "WHEN THE BLOOD IS IN THE SECOND STALL AND BLOOD ALIGNS WITH BLOOD! BLOOD WILL GUIDE THE BLOODPLANETS! BLOOD BLOOD BLOOD!", "portrait": "melissa" },
+								{ "action": "stopmusic" },
+								{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Gnnhh! I seem to be getting a lot of feedback from this thing...", "portrait": "pman_sweat" },
+								{ "action": "music", "song": "demo", "loop": true },
+								{ "action": "end" }
+							],
+								"hatemail": [
+									{ "action": "branch", "type": "switchValue", "which": "mail", "value": "over", "operant": "equals", "yes": "QuestFinished" },
+									{ "action": "dialogue", "speaker": "MELISSA", "text": "AACK!! BLUGH!! IN THE FIRST BLOODLESS AGE, I KNEW A SUPPLY THIEF. PBBTT! IN FACT, HE LOOKED A BIT LIKE... A BIT LIKE...", "portrait": "melissa" },
+									{ "action": "dialogue", "speaker": "MELISSA", "text": "PBBTHH. BLOOD ORANGE! BLOOD SIMPLE! BLOOD PRESENTS THE BLOOD SHOW STARING - AACK!!", "portrait": "melissa" },
+									{ "action": "end" },
+									{ "action": "label", "name": "QuestFinished" },
+									{ "action": "useitemactions", "item": "hatemail" },
+									{ "action": "end" }
+								]
+						},
+            "width": 140,
+            "height": 130,
+            "spritesheet": "melissa",
+            "animations": {
+								"normal": {
+										"frames": 8,
+										"anispeed": 8,
+										"sheetRow": 0,
+										"frameWidth": 132,
+										"frameHeight": 122
+								},
+								"crying": {
+										"rowStartY": 122,
+										"frames": 4,
+										"anispeed": 6,
+										"sheetRow": 0,
+										"frameWidth": 124,
+										"frameHeight": 104,
+										"offsetY": 12
+								}
+            },
+            "animation": "normal",
+            "frame": 0,
+            "label": "Melissa"
+        }
+    }
+}

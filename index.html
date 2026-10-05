@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PACHINKO MAN</title>
+<link rel="stylesheet" href="style.css" />
+
+<meta name="description" content="Pachinko Man is a surreal & hilarious online adventure game. It's up to you to rescue a ball-shaped salaryman from the bowels of Ball Hell and its tormenting ruler, Baal.">
+
+<meta property="og:title" content="Pachinko Man">
+<meta property="og:image" content="https://xerohour.github.io/Pachinkoman-2026/img/CS_title.gif">
+</head>
+<body>
+<div id="fatal-error" role="alert"></div>
+
+<canvas id="canvas" width="600" height="400" tabindex="0" role="application"
+	aria-label="Pachinko Man adventure game. Left-click to interact, talk, and select. Hold the right mouse button or use the arrow keys to move.">
+<div class="center">Your browser doesn't support canvas!<br/><br/>
+Consider downloading <a href="https://www.google.com/intl/en/chrome/browser/">Chrome</a> or <a href="https://www.mozilla.org/en-US/firefox/new/">Firefox</a>.<br/><br/></div>
+</canvas>
+
+<a class="open-game-info inactive">+ ABOUT +</a>
+
+<section id="gameInfo">
+	<a class="close-button" aria-label="Close about panel"></a>
+	<div class="row">
+		<div class="main">
+			<section class="how-to-play">
+				<ul>
+					<li>
+						<span class="icon left-click"></span>
+						<span class="use">Interact / Talk / Use Item / Select Option</span>
+					</li>
+					<li>
+						<span class="icon right-click"></span>
+						<span class="use">Hold down to move</span>
+					</li>
+					<li>
+						<span class="icon horizontal-keys"></span>
+						<span class="use">Move</span>
+					</li>
+				</ul>
+			</section>
+			<section class="random-tip">
+				<div class="tip-container">
+					<h2>RANDOM TIP</h2>
+					<span class="tip-display">Digdogger hates certain kind of sound...</span>
+					<a class="tip-load">(More)</a>
+				</div>
+				<figure></figure>
+			</section>
+		</div>
+		<ul class="credits">
+			<li class="created-by">
+				By <a href="http://punchthemoon.com">PUNCH THE MOON</a> -
+			</li>
+			<li>
+				<a href="http://twitter.com/clayzulah">Clayton Chowaniec</a>
+				<span class="duties">Programming / Writing / Story / Design</span>
+			</li>
+			<li>
+				<a href="http://bfjobdog.com">Alexander Swenson</a>
+				<span class="duties">Art / Story / Design</span>
+			</li>
+			<li>
+				<a href="http://soundcloud.com/user5834437-1">Weird BIAS</a>
+				<span class="duties">Music / Sound</span>
+			</li>
+			<li>
+				<a href="http://somethingafal.com/">Afal</a>
+				<span class="duties">Programming</span>
+			</li>
+			<li class="sound">Lightning Sound Effect by Greg Evans is licensed under CC Attribution 3.0. Modified from original.</li>
+			<li class="sound">Glass Break Sound Effect by Mike Koenig is licensed under CC Attribution 3.0.</li>
+		</ul>
+	</div>
+</section>
+
+</body>
+
+<script src="game.js"></script>
+
+</html>

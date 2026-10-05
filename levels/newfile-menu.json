@@ -1,0 +1,21 @@
+{
+    "bg": "mainmenu",
+    "mode": "MENU",
+    "buttons": [
+        {
+            "text": "Normal Mode",
+            "top": 70,
+            "press": "newfile_normal"
+        },
+        {
+            "text": "Cage Match",
+            "top": 160,
+            "press": "newfile_cage"
+        },
+        {
+            "text": "Mirror Mode",
+            "top": 250,
+            "press": "newfile_mirror"
+        }
+    ]
+}

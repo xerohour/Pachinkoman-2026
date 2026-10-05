@@ -1,0 +1,476 @@
+{
+    "bg": "lobby",
+    "mode": "NORMAL",
+    "leftWall": 0,
+    "rightWall": 550,
+		"music": {
+        "song": "lobby",
+        "loop": true
+    },
+    "preload_actions": [
+				{ "action": "branch", "type": "switchValue", "which": "ghost", "value": "gone", "operant": "equals", "no": "StillHaunted" },
+				{ "action": "killsprite", "sprite": "Janitor" },
+				{ "action": "killsprite", "sprite": "Ghost" },
+				{ "action": "label", "name": "StillHaunted" },
+				{ "action": "branch", "type": "switchValue", "which": "lobby", "value": "opened", "operant": "equals", "no": "SkipOpen" },
+				{ "action": "killsprite", "sprite": "BossDoor" },
+				{ "action": "label", "name": "SkipOpen" },
+        { "action": "branch", "type": "switchValue", "which": "otan", "value": "uncut", "operant": "equals", "no": "Unstapled" },
+				{ "action": "spriteani", "sprite": "Origamitan", "animation": "normal" },
+				{ "action": "spritefield", "sprite": "Origamitan", "field": "y", "value": "221" },
+				{ "action": "spritefield", "sprite": "Origamitan", "field": "height", "value": 112 },
+				{ "action": "spritefield", "sprite": "Origamitan", "field": "label", "value": "Origami-tan" },
+				{ "action": "label", "name": "Unstapled" },
+				{ "action": "end" }
+    ],
+    "postload_actions": [
+        { "action": "branch", "type": "switchValue", "which": "lobby", "value": "default", "operant": "equals", "no": "SkipIntro" },
+        { "action": "dialogue", "speaker": "BAAL", "text": "MILDLY IMPRESSIVE! FEW HAVE PENETRATED THE PRICKLY SHELL OF OUR SUCCULENT EXECUTIVE SUITES.", "portrait": "baal" },
+				{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Executive? Does that mean... I've reached your evil lair?", "cage": "And I'M like a prickly PEAR!", "portrait": "pman_sweat" },
+				{ "action": "dialogue", "speaker": "BAAL", "text": "YEAH, NO, IT'S MOSTLY JUST THE DRAGON IN HERE. HE'S MIDDLE-MANAGEMENT, SEE.", "portrait": "baal" },
+				{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "A dragon? Middle management?!", "portrait": "pman_sweat" },
+				{ "action": "dialogue", "speaker": "BAAL", "text": "LOOK YOU NEED TO STOP SWEATING EVERY TIME I REVEAL SOMETHING. YOU'RE LEAVING PUDDLES, IT'S GROSS AND IT'S A HEALTH RISK.", "portrait": "baal" },
+        { "action": "setswitch", "which": "lobby", "value": "visited" },
+        { "action": "label", "name": "SkipIntro" },
+        { "action": "end" }
+    ],
+    "zones": {
+        "LeftExit": {
+            "left": 0,
+            "top": 134,
+            "width": 20,
+            "height": 180,
+            "collision_actions": [
+                { "action": "gotolevel", "level": "cavern", "x": 530, "y": 266 },
+                { "action": "end" }
+            ]
+        },
+        "VendingItem1": {
+            "left": 55,
+            "top": 120,
+            "width": 40,
+            "height": 50,
+            "default_actions": [
+								{ "action": "branch", "type": "switchValue", "which": "ghost", "value": "gone", "operant": "equals", "yes": "NotHaunted" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "The machine is out of order - but let's take a look at the offerings.", "cage": "Hey, where's that chocolate cake?", "portrait": "pman_normal" },
+								{ "action": "label", "name": "NotHaunted" },
+                { "action": "dialogue", "text": "PAINDEMON BAR \n The ONLY Candy Bar with the ear-splitting howl!" },
+								{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "...I'll pass.", "portrait": "pman_sarcastic", "cage": "I was saving it because I got nauseated by that pre-cooked mini-mall rotisserie chicken..." },
+								{ "action": "end" }
+            ],
+            "label": "Vending Machine"
+        },
+        "VendingItem2": {
+            "left": 95,
+            "top": 120,
+            "width": 40,
+            "height": 50,
+            "default_actions": [
+								{ "action": "branch", "type": "switchValue", "which": "ghost", "value": "gone", "operant": "equals", "yes": "NotHaunted" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "The machine is out of order - but let's take a look at the offerings.", "cage": "Hey, where's that chocolate cake?", "portrait": "pman_normal" },
+								{ "action": "label", "name": "NotHaunted" },
+                { "action": "dialogue", "text": "DEATHTOLLHAUS COOKIES \n So many chocolate chips! Chips beyond number. Too many. Why won't they go away?!" },
+								{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "...I'll pass.", "portrait": "pman_sarcastic", "cage": "I was saving it because I got nauseated by that pre-cooked mini-mall rotisserie chicken..." },
+								{ "action": "end" }
+            ],
+            "label": "Vending Machine"
+        },
+        "VendingItem3": {
+            "left": 95,
+            "top": 170,
+            "width": 40,
+            "height": 50,
+            "default_actions": [
+								{ "action": "branch", "type": "switchValue", "which": "ghost", "value": "gone", "operant": "equals", "yes": "NotHaunted" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "The machine is out of order - but let's take a look at the offerings.", "cage": "Hey, where's that chocolate cake?", "portrait": "pman_normal" },
+								{ "action": "label", "name": "NotHaunted" },
+                { "action": "dialogue", "text": "SPINECRACKERJACK \n Every delicious bag contains a prize! \n It may or may not be the antidote." },
+								{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "...I'll pass.", "portrait": "pman_sweat", "cage": "I was saving it because I got nauseated by that pre-cooked mini-mall rotisserie chicken..." },
+								{ "action": "end" }
+            ],
+            "label": "Vending Machine"
+        },
+        "VendingSpeaker": {
+            "left": 55,
+            "top": 170,
+            "width": 40,
+            "height": 60,
+            "default_actions": [
+								{ "action": "branch", "type": "switchValue", "which": "ghost", "value": "gone", "operant": "equals", "yes": "NotHaunted" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "The machine is out of order - but let's take a look at the offerings.", "cage": "Hey, where's that chocolate cake?", "portrait": "pman_normal" },
+								{ "action": "label", "name": "NotHaunted" },
+                { "action": "dialogue", "text": "GUMMI BAAL \n A NOVELTY GELATIN PA SYSTEM SO REALISTIC THAT YOU'D ALMOST BE FORGIVEN FOR THINKING I WAS SPEAKING TO YOU THROUGH IT RIGHT NOW.", "portrait": "baal" },
+								{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "...I'll pass.", "portrait": "pman_sarcastic", "cage": "I was saving it because I got nauseated by that pre-cooked mini-mall rotisserie chicken..." },
+								{ "action": "end" }
+            ],
+            "label": "Vending Machine"
+        },
+        "Sign": {
+            "left": 400,
+            "top": 40,
+            "width": 150,
+            "height": 70,
+            "default_actions": [
+                { "action": "dialogue", "speaker": "BAAL", "text": "THAT STANDS FOR, UH... MAGNANIMOUS TYRANT! PROBABLY.", "portrait": "baal" },
+                { "action": "end" }
+            ]
+        },
+        "OpenDoorway": {
+            "left": 400,
+            "top": 110,
+            "width": 140,
+            "height": 150,
+						"label": "Drachenroe's Office",
+            "default_actions": [
+                { "action": "gotolevel", "level": "dragon", "x": 60, "y": 266 },
+                { "action": "end" }
+            ]
+        }
+    },
+    "sprites": {
+        "Janitor": {
+            "animations": {
+                "normal": {
+                    "rowStartY": 0,
+                    "frames": 8,
+                    "anispeed": 3,
+                    "sheetRow": 0,
+                    "frameWidth": 168,
+                    "frameHeight": 100
+                }
+            },
+            "spritesheet": "janitor",
+            "width": 168,
+            "height": 100,
+            "x": 240,
+            "y": 240,
+            "direction": 1,
+            "frame": 0,
+            "animation": "normal",
+            "label": "Janitor",
+						"default_actions": [
+							{ "action": "branch", "type": "switchValue", "which": "janitor", "value": "met", "operant": "equals", "yes": "metbefore" },
+							{ "action": "dialogue", "speaker": "???", "text": ". . .", "portrait": "janitor" },
+							{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Excuse me... are you the custodian?", "cage": "Could I get my prescription, PLEASE?", "portrait": "pman_normal" },
+							{ "action": "dialogue", "speaker": "???", "text": "Hrmph. How's about I answer youse question, with another question?", "portrait": "janitor" },
+							{ "action": "dialogue", "speaker": "???", "text": "Say you're walkin' the cubicle beat, and some Mindflayer from HR just belched 5 tons of wet nightmare on the lineoleum.", "portrait": "janitor" },
+							{ "action": "dialogue", "speaker": "???", "text": "Whaddya do about a thing like that?", "portrait": "janitor" },
+							{ "action": "option", "text": "Walk around it", "label": "walkaround" },
+							{ "action": "option", "text": "Grab a mop", "label": "mop" },
+							{ "action": "option", "text": "Pour sawdust on it", "label": "sawdust" },
+							{ "action": "option", "text": "Close your eyes & hope it disappears", "label": "ignore" },
+							
+							{ "action": "label", "name": "walkaround" },
+							{ "action": "dialogue", "speaker": "???", "text": "Sure. You walk away. It's hell, right? Can't make the place smell any worse. Who's gonna mind?", "portrait": "janitor" },
+							{ "action": "dialogue", "speaker": "???", "text": "Well, I mind, son. I'd rather run a clean ship in hell than poke around a sty in heaven.", "portrait": "janitor" },
+							{ "action": "branch", "type": "always", "jumpto": "befriend" },
+							
+							{ "action": "label", "name": "mop" },
+							{ "action": "dialogue", "speaker": "???", "text": "Ah, the good ol' elbow grease method! I could see in your eyes that you were a hard worker, kid.", "portrait": "janitor" },
+							{ "action": "dialogue", "speaker": "???", "text": "...of course, Mindflayer vomit is highly combustible, so the broom'd catch on fire and sear your arms off.", "portrait": "janitor" },
+							{ "action": "branch", "type": "always", "jumpto": "befriend" },
+							
+							{ "action": "label", "name": "sawdust" },
+							{ "action": "dialogue", "speaker": "???", "text": "Hmm. I suppose you're the type to solve every problem by pulling some trick out o' your inventory. Is that right?", "portrait": "janitor" },
+							{ "action": "dialogue", "speaker": "???", "text": "Shame that adding sawdust to Mindflayer vomit would cause a chemical reaction with th' intensity of twelve exploding suns.", "portrait": "janitor" },
+							{ "action": "branch", "type": "always", "jumpto": "befriend" },
+							
+							{ "action": "label", "name": "ignore" },
+							{ "action": "dialogue", "speaker": "???", "text": "Not a terrible idea, actually. Mindflayer vomit is 95% imaginary, so not thinking about it is better than doin' nothing.", "portrait": "janitor" },
+							{ "action": "dialogue", "speaker": "???", "text": "...but the last 5% is always the hardest to clean up. You might just learn that, someday.", "portrait": "janitor" },
+							{ "action": "branch", "type": "always", "jumpto": "befriend" },
+							
+							{ "action": "label", "name": "befriend" },
+							{ "action": "dialogue", "speaker": "???", "text": "You got a lot to learn, kid. But you remind me of myself when I was just a wee bouncin' ball.", "portrait": "janitor" },
+							{ "action": "dialogue", "speaker": "TONY", "text": "The name's TONY. I fix things what need fixin', and clean things what need cleanin'.", "portrait": "janitor" },
+							{ "action": "dialogue", "speaker": "TONY", "text": "Now, if you'll excuse me - that ol' OUT OF ORDER sign is blinkin' my name...", "portrait": "janitor" },
+							{ "action": "setswitch", "which": "janitor", "value": "met" },
+							{ "action": "end" },
+							
+							{ "action": "label", "name": "metbefore" },
+							{ "action": "dialogue", "speaker": "TONY", "text": "What can I do ya fer, son?", "portrait": "janitor" },
+							
+							{ "action": "label", "name": "Options" },
+							{ "action": "option", "text": "Ask about the elevator", "label": "AskElevator" },
+							{ "action": "option", "text": "Ask about the bathroom", "label": "AskBathroom" },
+							{ "action": "option", "text": "Ask about the projector", "label": "AskProjector" },
+							{ "action": "option", "text": "Ask about the vending machine", "label": "AskVending" },
+							
+							{ "action": "label", "name": "AskElevator" },
+							{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "The elevator seems to be out of order.", "portrait": "pman_normal" },
+							{ "action": "dialogue", "speaker": "TONY", "text": "I'd heard as much! Apparently the doors are being sealed by a sinister unseen force. Pretty standard stuff.", "portrait": "janitor" },
+							{ "action": "dialogue", "speaker": "TONY", "text": "It's next on my list - but first I gotta fix this here vending machine. And at this rate, it might take a few decades.", "portrait": "janitor" },
+							{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "D-d-decades?", "portrait": "pman_sweat" },
+							{ "action": "dialogue", "speaker": "BAAL", "text": "D-D-D-DUH, YOU'RE IN HELL. WAIT 'TIL YOU SEE HOW LONG IT TAKES TO FILL OUT A TIMESHEET DOWN HERE.", "portrait": "baal" },
+							{ "action": "branch", "type": "always", "jumpto": "AnythingElse" },
+							
+							{ "action": "label", "name": "AskBathroom" },
+							{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "It seems there was an exceedingly gory plumbing mishap...", "portrait": "pman_normal" },
+							{ "action": "dialogue", "speaker": "TONY", "text": "I'm aware, son. Seems like it'll just be a matter of finding the leak and plugging it up with whatever happens to be on hand.", "portrait": "janitor" },
+							{ "action": "dialogue", "speaker": "TONY", "text": "'Course, that's more of a job for a professional plumber, in my opinion.", "portrait": "janitor" },
+							{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Is there - is there a demon plumber that I should try and track down?", "portrait": "pman_sweat" },
+							{ "action": "dialogue", "speaker": "BAAL", "text": "ALL PLUMBERS GO TO HEAVEN! EVERYONE KNOWS THAT.", "portrait": "baal" },
+							{ "action": "branch", "type": "always", "jumpto": "AnythingElse" },
+							
+							{ "action": "label", "name": "AskProjector" },
+							{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "The slide show in the conference room hit some kind of snag...", "portrait": "pman_normal" },
+							{ "action": "dialogue", "speaker": "TONY", "text": "Slide... show? Listen, this new-fangled mumbo jumbo is beyond this cowboy's ken.", "portrait": "janitor" },
+							{ "action": "dialogue", "speaker": "TONY", "text": "You'll want to twist the IT Guy's ear about that one. Last I heard, he was imprisoned by middle management in the next room over.", "portrait": "janitor" },
+							{ "action": "dialogue", "speaker": "TONY", "text": "Something about a web? An inner-net? I'm sure it involved all kinds o' cutting edge punch cards an' vaccuum tubes.", "portrait": "janitor" },
+							{ "action": "branch", "type": "always", "jumpto": "AnythingElse" },
+							
+							{ "action": "label", "name": "AskVending" },
+							{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "So what's up with the vending machine?", "portrait": "pman_normal" },
+							{ "action": "dialogue", "speaker": "TONY", "text": "Well, as you can see, there's a poltergeist haunting the upper rows, there.", "portrait": "janitor" },
+							{ "action": "dialogue", "speaker": "TONY", "text": "It's strange, though - none of the sanctifying fluids I use for evil spirits bother this guy.", "portrait": "janitor" },
+							{ "action": "dialogue", "speaker": "BAAL", "text": "CONFIDENTIALLY I THINK THAT GHOST DID YOU A FAVOR. PAUNCH-CHINKO MAN.", "portrait": "baal" },
+							{ "action": "branch", "type": "always", "jumpto": "AnythingElse" },
+						
+							{ "action": "label", "name": "AnythingElse" },
+							{ "action": "dialogue", "speaker": "TONY", "text": "Anything else, son?", "portrait": "janitor" },
+							{ "action": "option", "text": "Describe more problems", "label": "Options" },
+							{ "action": "option", "text": "Leave Tony to his mopping", "label": "DoneTalking" },
+						
+							{ "action": "label", "name": "DoneTalking" },
+							{ "action": "end" }
+						],
+						"item_actions": {
+							"stapler": [
+								{ "action": "dialogue", "speaker": "TONY", "text": "I'll polish your office supplies another time, kid. Bit busy at the moment.", "portrait": "janitor" },
+								{ "action": "end" }
+							],
+							"scissors": [
+								{ "action": "dialogue", "speaker": "TONY", "text": "I'll polish your office supplies another time, kid. Bit busy at the moment.", "portrait": "janitor" },
+								{ "action": "end" }
+							], "lens": [
+								{ "action": "dialogue", "speaker": "TONY'S THOUGHTS", "text": "I can weild this here mop 'til the cows come home, but as long as HE roams free... Ball Hell will never truly be clean...", "portrait": "janitor" },
+								{ "action": "end" }
+							]
+						}
+        },
+			"BossDoor": {
+					"x": 470,
+					"y": 190,
+					"direction": 1,
+					"default_actions": [
+							{ "action": "branch", "type": "spriteDistance", "sprite": "BossDoor", "distance": 130, "operant": "less", "no": "TooFar" },
+							{ "action": "dialogue", "speaker": "???", "text": "Mumble mumble E-MAILS... \n Grumbe grumble FIREWALL..." },
+							{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Hnnghh... I can hear voices on the other side, but the door won't budge.", "portrait": "pman_sweat" },
+							{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Maybe I need someone to buzz me in?", "portrait": "pman_normal" },
+							{ "action": "dialogue", "speaker": "BAAL", "text": "ANOTHER THEORY. YOUR SUBCONSCIOUS IS PREVENTING YOU FROM OPENING THAT DOOR BECAUSE, IN YOUR HEART OF HEARTS...", "portrait": "baal" },
+							{ "action": "dialogue", "speaker": "BAAL", "text": "YOU KNOW YOU SHOULD BE IN YOUR CUBICLE, WORKING ON NEXT TUESDAY'S REPORTS.", "portrait": "baal" },
+							{ "action": "dialogue", "speaker": "BAAL", "text": "THIS IS A JOURNEY OF SELF-DISCOVERY WE CAN EMBARK ON TOGETHER. IT'S CALLED, 'GET BACK TO WORK, YOU SLACKER'.", "portrait": "baal" },
+							{ "action": "end" },
+							
+							{ "action": "label", "name": "TooFar" },
+							{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "I think I hear voices coming from in there... maybe I should get closer.", "portrait": "pman_normal" },
+							{ "action": "end" }
+					],
+					"width": 142,
+					"height": 174,
+					"spritesheet": "bossdoor",
+					"frame": 0,
+					"label": "Boss Door"
+			},
+			"Ghost": {
+				"movement": {
+							"type": "walk",
+							"bounce": "walkaround",
+							"xspeed": 1,
+							"radius": 40
+					},
+					"animations": {
+							"normal": {
+									"rowStartY": 0,
+									"frames": 8,
+									"anispeed": 9,
+									"sheetRow": 0,
+									"frameWidth": 78,
+									"frameHeight": 62
+							}
+					},
+					"animation": "normal",
+					"x": 100,
+					"y": 100,
+					"alpha": 0.5,
+					"direction": 1,
+					"default_actions": [
+							{ "action": "dialogue", "speaker": "VENDINGHEIST", "text": "Hum de dum ~ \n Candied rainbows, gumdrops too \n 'Tater chips and chocolate stew" },
+							{ "action": "dialogue", "speaker": "VENDINGHEIST", "text": "Though the snacks are overpriced \n Enticed, I am \n The vendingheist ~" },
+							{ "action": "end" }
+					],
+					"item_actions": {
+						"stapler": [
+							{ "action": "dialogue", "text": "\n PACHINKO MAN used STAPLE CANNON! \n It doesn't affect VENDINGHEIST..." },
+							{ "action": "dialogue", "speaker": "BAAL", "text": "HA! AS IF ANYTHING IN YOUR PIDDLY INVENTORY IS GOING TO HARM A GHOST-TYPE.", "portrait": "baal" },
+							{ "action": "end" }
+						],
+						"scissors": [
+							{ "action": "dialogue", "text": "\n PACHINKO MAN used X-SCISSORS! \n It doesn't affect VENDINGHEIST..." },
+							{ "action": "dialogue", "speaker": "BAAL", "text": "HA! AS IF ANYTHING IN YOUR PIDDLY INVENTORY IS GOING TO HARM A GHOST-TYPE.", "portrait": "baal" },
+							{ "action": "end" }
+						],
+						"mug": [
+							{ "action": "dialogue", "text": "\n PACHINKO MAN used MUG TOSS! \n It doesn't affect VENDINGHEIST..." },
+							{ "action": "dialogue", "speaker": "BAAL", "text": "HA! AS IF ANYTHING IN YOUR PIDDLY INVENTORY IS GOING TO HARM A GHOST-TYPE.", "portrait": "baal" },
+							{ "action": "end" }
+						], "lens": [
+							{ "action": "dialogue", "text": "\n PACHINKO MAN used PSYCHIC! \n It doesn't affect VENDINGHEIST..." },
+							{ "action": "dialogue", "speaker": "BAAL", "text": "HA! AS IF ANYTHING IN YOUR PIDDLY INVENTORY IS GOING TO HARM A GHOST-TYPE.", "portrait": "baal" },
+							{ "action": "end" }
+						]
+					},
+					"width": 78,
+					"height": 62,
+					"spritesheet": "ghost",
+					"frame": 0,
+					"label": "Vendingheist"
+			},
+			"Origamitan": {
+					"animations": {
+							"normal": {
+									"rowStartY": 0,
+									"frames": 8,
+									"anispeed": 6,
+									"sheetRow": 0,
+									"frameWidth": 68,
+									"frameHeight": 134
+							},
+							"cut": {
+									"rowStartY": 134,
+									"frames": 1,
+									"anispeed": 3,
+									"sheetRow": 0,
+									"frameWidth": 150,
+									"frameHeight": 72
+							}
+					},
+					"default_actions": [
+						{ "action": "branch", "type": "switchValue", "which": "otan", "value": "uncut", "operant": "equals", "yes": "Uncut" },
+						{ "action": "branch", "type": "switchValue", "which": "otan", "value": "cut", "operant": "equals", "yes": "Cut" },
+						{ "action": "dialogue", "speaker": "BAAL", "text": "WHAT! WHO LEFT THESE SHREDS OF PAPER ALL OVER THE PLACE? ALL SHREDS OF PAPER MUST BE COLLATED AND PROPERLY FILED.", "portrait": "baal" },
+						{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "These don't seem like ordinary shreds of paper...", "portrait": "pman_normal", "cage": "How could someone MISfile something? How could it be easier, it's all alphabetical!" },
+						{ "action": "end" },
+						
+						{ "action": "label", "name": "Cut" },
+						{ "action": "dialogue", "speaker": "BAAL", "text": "ADMIRING YOUR HANDIWORK, EH? BETTER PACK HER BODY INTO SOME ENVELOPES AND MAIL HER TO YOUR KILL SPOT, YOU MONSTER.", "portrait": "baal" },
+						{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "H-hey, she's not dead! It's totally reversible!", "portrait": "pman_normal" },
+						{ "action": "dialogue", "speaker": "BAAL", "text": "JEEZE, LEARN TO TAKE A COMPLIMENT.", "portrait": "baal" },
+						{ "action": "end" },
+						
+						{ "action": "label", "name": "Uncut" },
+						{ "action": "branch", "type": "switchValue", "which": "lobby", "value": "opened", "operant": "equals", "yes": "DoorOpened" },
+						{ "action": "dialogue", "speaker": "Origami-tan", "text": "Umm, hi! Do you have, like, an appointment with Mr. Drachenroe?", "portrait": "origamitan" },
+						{ "action": "option", "text": "YES" },
+						{ "action": "option", "text": "NO", "label": "NoAppointment" },
+						{ "action": "dialogue", "speaker": "Origami-tan", "text": "Hmm... the last time I let someone in to see Mr. Drachenroe without an appointment, he like, tore me to pieces over it.", "portrait": "origamitan" },
+						{ "action": "dialogue", "speaker": "Origami-tan", "text": "You're SURE that you REALLY have an appointment?", "portrait": "origamitan" },
+						{ "action": "option", "text": "YES" },
+						{ "action": "option", "text": "NO", "label": "NoAppointment" },
+						{ "action": "dialogue", "speaker": "Origami-tan", "text": "...you wouldn't lie to me, would you?", "portrait": "origamitan" },
+						{ "action": "option", "text": "YES", "label": "Liar" },
+						{ "action": "option", "text": "NO" },
+						{ "action": "dialogue", "speaker": "Origami-tan", "text": "Well, alright. Just making sure!", "portrait": "origamitan" },
+						{ "action": "killsprite", "sprite": "BossDoor" },
+						{ "action": "dialogue", "text": "\n * KACHUNK *" },
+						{ "action": "setswitch", "which": "lobby", "value": "opened" },
+						{ "action": "dialogue", "speaker": "Origami-tan", "text": "So um, word of warning. Mr. Drachenroe is a nice guy, but he has a bit of a temper. And if he gets mad at you, then he WILL fry you.", "portrait": "origamitan" },
+						{ "action": "dialogue", "speaker": "Origami-tan", "text": "Avoid making eye contact, he sees that as a challenge to his dominance. Actually, just stay out of his range of vision completely.", "portrait": "origamitan" },
+						{ "action": "dialogue", "speaker": "Origami-tan", "text": "Apart from that, so long as you don't talk, make sudden movements, or emit any threatening odors...", "portrait": "origamitan" },
+						{ "action": "dialogue", "speaker": "Origami-tan", "text": "He's a big ol' pussy cat ~", "portrait": "origamitan" },
+						{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "*gulp*", "portrait": "pman_sweat" },
+						{ "action": "end" },
+						
+						{ "action": "label", "name": "NoAppointment" },
+						{ "action": "dialogue", "speaker": "Origami-tan", "text": "Then, umm... why did you come over here? Were you just looking for an excuse to talk to me~", "portrait": "origamitan" },
+						{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "N-no! Not that you're not, um... attractively folded...", "portrait": "pman_sweat", "cage": "A young woman called out to me - nobody wants to date me! Again, I'm going to bed alone, again!" },
+						{ "action": "dialogue", "speaker": "BAAL", "text": "HEY HEY HEY! INTRA-OFFICE ROMANCE IS EXPRESSLY FORBIDDEN! SEE, THIS IS WHY WE NEED TO START SPAYING AND NEUTERING MISBEGOTTEN SOULS.", "portrait": "baal" },
+						{ "action": "end" },
+						
+						{ "action": "label", "name": "Liar" },
+						{ "action": "dialogue", "speaker": "Origami-tan", "text": "You... you're just a big liar, aren't you?! \n ...I guess that's why you're in hell. Tee hee ~", "portrait": "origamitan" },
+						{ "action": "end" },
+						
+						{ "action": "label", "name": "DoorOpened" },
+						{ "action": "dialogue", "speaker": "Origami-tan", "text": "Oh hey, I almost forgot! I have, like, a quest for you, Mr. Pachinko Man.", "portrait": "origamitan" },
+						{ "action": "dialogue", "speaker": "Origami-tan", "text": "I would like you... \n ...to have an AWESOME DAY ~", "portrait": "origamitan" },
+						{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "D'aww, thank you, Origami-tan!", "portrait": "pman_sweat" },
+						{ "action": "dialogue", "speaker": "BAAL", "text": "GOOD DAYS ARE EXPRESSLY FORBIDDEN! DID YOU PEOPLE EVEN READ THE EMPLOYEE HANDBOOK?!", "portrait": "baal" },
+						{ "action": "end" }
+						
+					],
+					"item_actions": {
+						"stapler": [
+							{ "action": "branch", "type": "spriteDistance", "sprite": "Origamitan", "distance": 180, "operant": "less", "no": "TooFar" },
+							{ "action": "branch", "type": "switchValue", "which": "otan", "value": "uncut", "operant": "equals", "yes": "Uncut" },
+							{ "action": "dialogue", "text": "\n *click click click* \n *staple staple staple*" },
+							{ "action": "spriteani", "sprite": "Origamitan", "animation": "normal" },
+							{ "action": "spritefield", "sprite": "Origamitan", "field": "y", "value": "221" },
+							{ "action": "spritefield", "sprite": "Origamitan", "field": "height", "value": 112 },
+							{ "action": "spritefield", "sprite": "Origamitan", "field": "label", "value": "Origami-tan" },
+							{ "action": "dialogue", "speaker": "ORIGAMI-TAN", "text": "OMG! I'm like, alive again 'n junk!", "portrait": "origamitan" },
+							{ "action": "setswitch", "which": "otan", "value": "uncut" },
+							{ "action": "end" },
+							
+							{ "action": "label", "name": "TooFar" },
+							{ "action": "dialogue", "speaker": "BAAL", "text": "IT'S A STAPLER, NOT A HANDGUN! TRY GETTING CLOSER, GOOFUS.", "portrait": "baal" },
+							{ "action": "end" },
+							
+							{ "action": "label", "name": "Uncut" },
+							{ "action": "dialogue", "text": "\n *click click click* \n *staple staple staple*" },
+							{ "action": "dialogue", "speaker": "ORIGAMI-TAN", "text": "OMG! I'm like... still alive. Huh. Fun!", "portrait": "origamitan" },
+							{ "action": "end" }
+						],
+						"scissors": [
+							{ "action": "branch", "type": "spriteDistance", "sprite": "Origamitan", "distance": 180, "operant": "less", "no": "TooFar" },
+							{ "action": "branch", "type": "switchValue", "which": "otan", "value": "uncut", "operant": "equals", "no": "Cut" },
+							{ "action": "spriteani", "sprite": "Origamitan", "animation": "cut" },
+							{ "action": "spritefield", "sprite": "Origamitan", "field": "y", "value": "265" },
+							{ "action": "spritefield", "sprite": "Origamitan", "field": "height", "value": 72 },
+							{ "action": "spritefield", "sprite": "Origamitan", "field": "label", "value": "Scraps of Paper" },
+							{ "action": "dialogue", "text": "\n *clip clip clip*" },
+							{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "...oops.", "cage": "I'm sorry I was such a saint before, and uh... I'm such a PRICK now.", "portrait": "pman_normal" },
+							{ "action": "setswitch", "which": "otan", "value": "cut" },
+							{ "action": "end" },
+							
+							{ "action": "label", "name": "Cut" },
+							{ "action": "dialogue", "speaker": "BAAL", "text": "WHAT'RE YOU GONNA DO, MAKE PAPER SNOWFLAKES?! ARTS AND CRAFTS HAVE NO PLACE IN HELL, FOOLISH MORTAL!", "portrait": "baal" },
+							{ "action": "dialogue", "speaker": "BAAL", "text": "...BESIDES, YOU DON'T EVEN HAVE ANY GLITTER PAINT.", "portrait": "baal" },
+							{ "action": "end" },
+							
+							{ "action": "label", "name": "TooFar" },
+							{ "action": "dialogue", "speaker": "BAAL", "text": "UNLESS YOU PLAN ON USING THOSE AS A MAKESHIFT BOOMERANG OF SOME KIND YOU SHOULD PROBABLY GET A LITTLE CLOSER.", "portrait": "baal" },
+							{ "action": "end" }
+						], "lens": [
+							{ "action": "branch", "type": "switchValue", "which": "otan", "value": "uncut", "operant": "equals", "yes": "Uncut" },
+							{ "action": "dialogue", "speaker": "SHREDS OF PAPER'S THOUGHTS", "text": "..." },
+							{ "action": "end" },
+							
+							{ "action": "label", "name": "Uncut" },
+							{ "action": "dialogue", "speaker": "ORIGAMI-TAN'S THOUGHTS", "text": "Hmm... got to dedicate all of my spare brainpower to remembering Mr. Drachenroe's secrets for him.", "portrait": "origamitan" },
+							{ "action": "dialogue", "speaker": "ORIGAMI-TAN'S THOUGHTS", "text": "Owns more than seven cats... \n Hides embezzled treasure hoard under his bed... \n Needs meds to breathe fire these days...", "portrait": "origamitan" },
+							{ "action": "dialogue", "speaker": "ORIGAMI-TAN'S THOUGHTS", "text": "Has a crippling fear of loneliness... \n His Wi-fi password is ProudCatDad73... \n Did I forget anything?", "portrait": "origamitan" },
+							{ "action": "setswitch", "which": "dragon", "value": "havepw" },
+							{ "action": "end" }
+						],
+						"hatemail": [
+							{ "action": "branch", "type": "switchValue", "which": "mail", "value": "over", "operant": "equals", "yes": "QuestFinished" },
+							{ "action": "dialogue", "speaker": "ORIGAMI-TAN", "text": "OMG, what? What EVEN. Nobody ever steals supplies from this side of the office, silly! \n Or... visits, this side of the office.", "portrait": "origamitan" },
+							{ "action": "dialogue", "speaker": "ORIGAMI-TAN", "text": "You think they're afraid of the dog? He's so sweet 'n harmless, though! As long as you don't have any blood. Or tears ducts.", "portrait": "origamitan" },
+							{ "action": "end" },
+							{ "action": "label", "name": "QuestFinished" },
+							{ "action": "useitemactions", "item": "hatemail" },
+							{ "action": "end" }
+						]
+					},
+					"animation": "cut",
+					"spritesheet": "origamitan",
+					"width": 120,
+					"height": 72,
+					"x": 370,
+					"y": 265,
+					"direction": 1,
+					"label": "Scraps of Paper"
+			}
+	}
+}

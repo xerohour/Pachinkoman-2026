@@ -1,0 +1,270 @@
+{
+    "bg": "morvencubicle",
+    "mode": "NORMAL",
+    "leftWall": 0,
+    "rightWall": 540,
+		"music": {
+        "song": "demo",
+        "loop": true
+    },
+    "preload_actions": [
+			{ "action": "playerdirection", "direction": "right" },
+			{ "action": "branch", "type": "switchValue", "which": "thiefsDenMode", "value": "leaving", "operant": "equals", "yes": "RemoveBoth" },
+			{ "action": "branch", "type": "switchValue", "which": "thiefsDenMode", "value": "finished", "operant": "equals", "yes": "RemoveBoth" },
+			{ "action": "killsprite", "sprite": "TrapDoor" },
+			{ "action": "branch", "type": "switchValue", "which": "eightball", "value": "leftswitch", "operant": "equals", "yes": "RemoveRight" },
+			{ "action": "branch", "type": "switchValue", "which": "eightball", "value": "rightswitch", "operant": "equals", "yes": "RemoveLeft" },
+			{ "action": "label", "name": "RemoveBoth" },
+			{ "action": "killsprite", "sprite": "EightballLeft" },
+			{ "action": "killsprite", "sprite": "EightballRight" },
+			{ "action": "end" },
+			{ "action": "label", "name": "RemoveLeft" },
+			{ "action": "statusfx", "which": "ball", "value": false },
+			{ "action": "killsprite", "sprite": "EightballLeft" },
+			{ "action": "end" },
+			{ "action": "label", "name": "RemoveRight" },
+			{ "action": "statusfx", "which": "ball", "value": false },
+			{ "action": "killsprite", "sprite": "EightballRight" },
+			{ "action": "end" }
+    ],
+    "postload_actions": [
+			{ "action": "branch", "type": "switchValue", "which": "thiefsDenMode", "value": "leaving", "operant": "equals", "yes": "CrisisAverted" },
+			{ "action": "end" },
+			{ "action": "label", "name": "CrisisAverted" },
+			{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Poor Tragic Eight Ball. I guess he didn't have \n a future after all... but thanks to him, maybe \n I do.", "cage": "Uh huh! As long as I'm in here you're just going to sit out there, aren'cha?", "portrait": "pman_normal" },
+			{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Now that I have the crowbar, will I finally be able to escape this place? Signs point... \n to maybe!", "cage": "AIGHT?!", "portrait": "pman_sweat" },
+			{ "action": "setswitch", "which": "thiefsDenMode", "value": "finished" },
+			{ "action": "end" }
+    ],
+    "zones": {
+			"LeftExit": {
+				"left": 0,
+				"top": 270,
+				"width": 15,
+				"height": 50,
+				"collision_actions": [
+					{ "action": "gotolevel", "level": "alley", "x": 170, "y": 270 },
+					{ "action": "end" }
+				]
+			},
+			"Candles": {
+				"left": 120,
+				"top": 130,
+				"width": 120,
+				"height": 80,
+				"label": "Spooky Candles",
+				"default_actions": [
+					{ "action": "dialogue", "speaker": "BAAL", "text": "UM, I KNOW WE'RE IN HELL AND ALL, BUT CAN YOU SAY 'FIRE HAZARD'?", "portrait": "baal" },
+					{ "action": "dialogue", "speaker": "BAAL", "text": "OH AND THEY'D BETTER NOT BE SCENTED. THE ONLY SMELLS ALLOWED IN HELL ARE 'SULFUR', 'BRIMSTONE', AND 'FOETID MILDEW'.", "portrait": "baal" },
+					{ "action": "end" }
+				]
+			},
+			"Mask": {
+				"left": 240,
+				"top": 20,
+				"width": 156,
+				"height": 160,
+				"label": "Eerie Mask",
+				"default_actions": [
+					{ "action": "dialogue", "speaker": "GHOST OF MORVEN", "text": "Buuahh ha ha haaa! Foolish mortal! You have aroused the ire of the Haunted Mask... \n WELCOME TO YOUR DOOM-AH!" },
+					{ "action": "dialogue", "speaker": "BAAL", "text": "NAH JUST KIDDING, THAT WAS ME. I THREW MY VOICE! BET YOU DIDN'T KNOW I COULD PROJECT LIKE THAT.", "portrait": "baal" },
+					{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "You've literally done nothing but project your voice at me since I met you, Baal.", "portrait": "pman_sarcastic" },
+					{ "action": "end" }
+				]
+			},
+			"TrapDoorShut": {
+				"left": 250,
+				"top": 200,
+				"width": 140,
+				"height": 50,
+				"default_actions": [
+					{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "A metal hatch of some kind... I wonder if Morven hid any of his stolen goods underground?", "portrait": "pman_normal" },
+					{ "action": "dialogue", "speaker": "BAAL", "text": "UNDERGROUND...? WE'RE ON THE BOTTOM FLOOR OF OFFICE HELL, THAT'S GOTTA BE SOME KIND OF COSMIC BEDROCK.", "portrait": "baal" },
+					{ "action": "end" }
+				]
+			},
+			"Speaker": {
+				"left": 500,
+				"top": 40,
+				"width": 80,
+				"height": 80,
+				"default_actions": [
+					{ "action": "dialogue", "speaker": "BAAL", "text": "THAT'S DEFINITELY NOT A PA SYSTEM. MY MIGHTY VOICE IS OMNIPRESENT! YOU PROBABLY LEFT THAT UP THERE AND FORGOT ABOUT IT.", "portrait": "baal" },
+					{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "But... but this is Morven's cubicle, not mine.", "portrait": "pman_normal" },
+					{ "action": "dialogue", "speaker": "BAAL", "text": "MORVEN PROBABLY STOLE IT FROM YOU, LEFT IT UP THERE, AND FORGOT ABOUT IT.", "portrait": "baal" },
+					{ "action": "end" }
+				]
+			},
+			"MorvensPC": {
+				"left": 500,
+				"top": 88,
+				"width": 80,
+				"height": 100,
+				"label": "Morvbook",
+				"default_actions": [
+					{ "action": "branch", "type": "switchValue", "which": "thiefsDenMode", "value": "finished", "operant": "equals", "yes": "IgnoreBalls" },
+					{ "action": "branch", "type": "switchValue", "which": "eightball", "value": "leftswitch", "operant": "equals", "yes": "BallOnLeft" },
+					{ "action": "branch", "type": "switchValue", "which": "eightball", "value": "rightswitch", "operant": "equals", "yes": "BallOnRight" },
+					{ "action": "label", "name": "IgnoreBalls" },
+					{ "action": "branch", "type": "insideZone", "zone": "SwitchA", "operant": "yn", "yes": "OnlySwitchA" },
+					{ "action": "branch", "type": "insideZone", "zone": "SwitchB", "operant": "yn", "yes": "OnlySwitchB" },
+					{ "action": "dialogue", "speaker": "MORVBOOK PRO", "text": "Entry sequence pending. \n Press BOTH to continue..." },
+					{ "action": "end" },
+					{ "action": "label", "name": "OnlySwitchA" },
+					{ "action": "dialogue", "speaker": "MORVBOOK PRO", "text": "Entry sequence pending. \n Press RIGHT to continue..." },
+					{ "action": "end" },
+					{ "action": "label", "name": "OnlySwitchB" },
+					{ "action": "dialogue", "speaker": "MORVBOOK PRO", "text": "Entry sequence pending. \n Press LEFT to continue..." },
+					{ "action": "end" },
+					{ "action": "label", "name": "BallOnLeft" },
+					{ "action": "branch", "type": "insideZone", "zone": "SwitchB", "operant": "yn", "yes": "BothSwitches", "no": "OnlyRight" },
+					{ "action": "end" },
+					{ "action": "label", "name": "BallOnRight" },
+					{ "action": "branch", "type": "insideZone", "zone": "SwitchA", "operant": "yn", "yes": "BothSwitches", "no": "OnlyRight" },
+					{ "action": "end" },
+					{ "action": "label", "name": "BothSwitches" },
+					{ "action": "dialogue", "speaker": "MORVBOOK PRO", "text": "Entry sequence engaged. Welcome, Morven! \n Would you like to visit the THIEF'S DEN today?" },
+					{ "action": "option", "text": "Yes" },
+					{ "action": "option", "text": "No", "label": "Cancel" },
+					{ "action": "dialogue", "speaker": "MORVBOOK PRO", "text": "Excellent choice! Please hold as we retract the trap door directly beneath your feet." },
+					{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "...wait, what?", "portrait": "pman_normal" },
+					{ "action": "setswitch", "which": "firstwire", "value": false },
+					{ "action": "setswitch", "which": "secondwire", "value": false },
+					{ "action": "setswitch", "which": "greenwire", "value": false },
+					{ "action": "setswitch", "which": "inkfilled", "value": false },
+					{ "action": "dim", "opacity": 255, "speed": 15 },
+					{ "action": "music", "song": "fall", "loop": false },
+					{ "action": "wait", "frames": 75 },
+					{ "action": "gotolevel", "level": "thiefsden", "x": 320, "y": 254 },
+					{ "action": "label", "name": "Cancel" },
+					{ "action": "end" }
+				]
+			},
+			
+			"SwitchA": {
+				"left": 176,
+				"top": 270,
+				"width": 80,
+				"height": 30,
+				"default_actions": [
+					{ "action": "branch", "type": "playerStatus", "which": "ball", "value": true, "operant": "equals", "yes": "Has8Ball" },
+					{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "It looks like Morven installed pressure plates of some kind in his cubicle... what would happen if I held them down?", "portrait": "pman_normal" },
+					{ "action": "dialogue", "speaker": "BAAL", "text": "ODDS ARE PRETTY GOOD YOU'D WIND UP GETTING MOWED DOWN BY HIDDEN AZTEC WALL-DARTS. OR CRUSHED BY A SECRET AZTEC BOULDER.", "portrait": "baal" },
+					{ "action": "end" },
+					{ "action": "label", "name": "Has8Ball" },
+					{ "action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "I BELIEVE MY WEIGHT WOULD BE SUFFICIENT TO HOLD DOWN THIS SWITCH. SHALL I REST HERE?" },
+					{ "action": "option", "text": "Yes", "label": "Leave" },
+					{ "action": "option", "text": "No" },
+					{ "action": "end" },
+					{ "action": "label", "name": "Leave" },
+					{ "action": "setswitch", "which": "eightball", "value": "leftswitch" },
+					{ "action": "gotolevel", "level": "morvencubicle" },
+					{ "action": "end" }
+				],
+				"item_actions": {
+					"all": [
+						{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "It doesn't seem like this item is heavy enough to weigh down the switch...", "portrait": "pman_normal" },
+						{ "action": "dialogue", "speaker": "BAAL", "text": "OH, ARE YOU DOING PUZZLES AGAIN? I THINK I KNOW THIS ONE! YOU HAVE TO CUT YOURSELF IN HALF AND PUT ONE HALF ON EACH SWITCH.", "portrait": "baal" },
+						{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "I... think I'd rather not.", "portrait": "pman_sweat" },
+						{ "action": "dialogue", "speaker": "BAAL", "text": "AHA! ONLY THE TRUE PACHINKO MAN WOULD RATHER SEE THE SWITCH UNPUSHED INSTEAD OF, ER... THIS METAPHOR IS JUST CAVING IN AROUND ME, ISN'T IT?", "portrait": "baal" },
+						{ "action": "end" }
+					]
+				}
+			},
+			"SwitchB": {
+				"left": 338,
+				"top": 272,
+				"width": 78,
+				"height": 30,
+				"default_actions": [
+					{ "action": "branch", "type": "playerStatus", "which": "ball", "value": true, "operant": "equals", "yes": "Has8Ball" },
+					{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "It looks like Morven installed pressure plates of some kind in his cubicle... what would happen if I held them down?", "portrait": "pman_normal" },
+					{ "action": "dialogue", "speaker": "BAAL", "text": "ODDS ARE PRETTY GOOD YOU'D WIND UP GETTING MOWED DOWN BY HIDDEN AZTEC WALL-DARTS. OR CRUSHED BY A SECRET AZTEC BOULDER.", "portrait": "baal" },
+					{ "action": "end" },
+					{ "action": "label", "name": "Has8Ball" },
+					{ "action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "I BELIEVE MY WEIGHT WOULD BE SUFFICIENT TO HOLD DOWN THIS SWITCH. SHALL I REST HERE?" },
+					{ "action": "option", "text": "Yes", "label": "Leave" },
+					{ "action": "option", "text": "No" },
+					{ "action": "end" },
+					{ "action": "label", "name": "Leave" },
+					{ "action": "label", "name": "Leave" },
+					{ "action": "setswitch", "which": "eightball", "value": "rightswitch" },
+					{ "action": "gotolevel", "level": "morvencubicle" },
+					{ "action": "end" }
+				],
+				"item_actions": {
+					"all": [
+						{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "It doesn't seem like this item is heavy enough to weigh down the switch...", "portrait": "pman_normal" },
+						{ "action": "dialogue", "speaker": "BAAL", "text": "OH, ARE YOU DOING PUZZLES AGAIN? I THINK I KNOW THIS ONE! YOU HAVE TO CUT YOURSELF IN HALF AND PUT ONE HALF ON EACH SWITCH.", "portrait": "baal" },
+						{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "I... think I'd rather not.", "portrait": "pman_sweat" },
+						{ "action": "dialogue", "speaker": "BAAL", "text": "AHA! ONLY THE TRUE PACHINKO MAN WOULD RATHER SEE THE SWITCH UNPUSHED INSTEAD OF, ER... THIS METAPHOR IS JUST CAVING IN AROUND ME, ISN'T IT?", "portrait": "baal" },
+						{ "action": "end" }
+					]
+				}
+			}
+    },
+    "sprites": {
+			"EightballLeft": {
+					"x": 214,
+					"y": 258,
+					"direction": 1,
+					"animations": {
+						"normal": {
+								"rowStartY": 0,
+								"frames": 1,
+								"anispeed": 3,
+								"sheetRow": 0,
+								"frameWidth": 62,
+								"frameHeight": 60
+						}
+					},
+					"animation": "normal",
+					"default_actions": [
+						{ "action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "YOU KNOW, THIS IS ACTUALLY QUITE COMFORTABLE. BUT I'M FAIRLY CERTAIN WE HAVE MORE TO DO IN THIS ROOM." }
+					],
+					"width": 62,
+					"height": 60,
+					"spritesheet": "eightball",
+					"frame": 0,
+					"label": "Tragic 8-Ball"
+			},
+			"EightballRight": {
+					"x": 380,
+					"y": 258,
+					"animations": {
+						"normal": {
+								"rowStartY": 0,
+								"frames": 1,
+								"anispeed": 3,
+								"sheetRow": 0,
+								"frameWidth": 62,
+								"frameHeight": 60
+						}
+					},
+					"animation": "normal",
+					"direction": -1,
+					"default_actions": [
+						{ "action": "dialogue", "speaker": "TRAGIC EIGHT BALL", "text": "YOU KNOW, THIS IS ACTUALLY QUITE COMFORTABLE. BUT I'M FAIRLY CERTAIN WE HAVE MORE TO DO IN THIS ROOM." }
+					],
+					"width": 62,
+					"height": 60,
+					"spritesheet": "eightball",
+					"frame": 0,
+					"label": "Tragic 8-Ball"
+			},
+			"TrapDoor": {
+					"x": 310,
+					"y": 226,
+					"default_actions": [
+						{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "...No. I don't think I'm going back down there any time soon.", "portrait": "pman_sweat" },
+						{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "In any case, I'm pretty sure the tunnel is blocked. By a giant rock that wants to kill me.", "portrait": "pman_normal" },
+						{ "action": "end" }
+					],
+					"width": 174,
+					"height": 48,
+					"spritesheet": "trapdoor",
+					"frame": 0,
+					"label": "Thief's Den"
+			}
+    }
+}

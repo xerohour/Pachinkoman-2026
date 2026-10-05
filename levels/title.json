@@ -1,0 +1,11 @@
+{
+	"bg":"title",
+	"mode":"CUTSCENE",
+	"next":"mainmenu",
+	"music":{"song":"title","loop":true},
+	"preload_actions": [
+		{ "action": "playerfield", "field": "cage", "value": false },
+		{ "action": "playerfield", "field": "mirror", "value": false },
+		{ "action": "end" }
+	]
+}

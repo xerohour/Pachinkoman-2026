@@ -1,0 +1,443 @@
+{
+    "bg": "presentation",
+    "mode": "NORMAL",
+    "leftWall": 374,
+    "rightWall": 600,
+		"music": {
+        "song": "demo",
+        "loop": true
+    },
+    "preload_actions": [
+        { "action": "branch", "type": "switchValue", "which": "gregorie", "value": 0, "operant": "equals", "yes": "NotSmooshed" },
+        { "action": "spriteani", "sprite": "Murmur", "animation": "nomug" },
+        { "action": "spriteani", "sprite": "Gregorie", "animation": "smooshed" },
+        { "action": "label", "name": "NotSmooshed" },
+				{ "action": "branch", "type": "switchValue", "which": "itguy", "value": "free", "operant": "equals", "yes": "SavedITGuy" },
+				{ "action": "killsprite", "sprite": "ITGuy" },
+        { "action": "end" },
+				{ "action": "label", "name": "SavedITGuy" },
+				{ "action": "killsprite", "sprite": "FrustratedDevil" },
+				{ "action": "spritefield", "sprite": "Projector", "field": "movement", "value": null },
+				{ "action": "spriteani", "sprite": "Slide", "animation": "changed" },
+				{ "action": "branch", "type": "itemOwned", "item": "ankh", "operant": "yn", "no": "NoAnkhs" },
+				{ "action": "killsprite", "sprite": "Ankh" },
+				{ "action": "label", "name": "NoAnkhs" },
+				{ "action": "end" }
+    ],
+    "postload_actions": [
+        { "action": "branch", "type": "switchValue", "which": "gregorie", "value": 0, "operant": "greater", "yes": "Skip" },
+        { "action": "dialogue", "speaker": "GREGORIE", "text": "Come here, my young friend! I have many secrets to share.", "portrait": "gregorie" },
+        { "action": "label", "name": "Skip" },
+        { "action": "end" }
+    ],
+    "zones": {
+        "StepOnGreg": {
+            "left": 370,
+            "top": 134,
+            "width": 30,
+            "height": 180,
+            "collision_actions": [
+                { "action": "branch", "type": "switchValue", "which": "gregorie", "value": 0, "operant": "greater", "yes": "Skip" },
+                { "action": "spriteani", "sprite": "Gregorie", "animation": "smooshed" },
+                { "action": "dialogue", "speaker": "GREGORIE", "text": "AIEEE! ASSASSIN! HOW DARE YO0101001 01FF INTERNAL ERROR CANNOT READ FILE STREAM", "portrait": "gregorie_glitch" },
+                { "action": "dialogue", "speaker": "MURMUR", "text": "Hmm! Well met, young hell-walker! You are wise and powerful indeed to have passed this test.", "portrait": "murmur_mug" },
+                { "action": "dialogue", "speaker": "MURMUR", "text": "The Plaguelord Gregorie has bewitched many with his promises of hidden knowledge - only to devour their souls, wholesale.", "portrait": "murmur_drink" },
+                { "action": "dialogue", "speaker": "MURMUR", "text": "To have spurned his advances, and to slay this great hellbeast... such a feat is worthy of an artifact of REAL ANCIENT POWER!", "portrait": "murmur_mug" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "I'm confused... Gregorie is the bug I just stepped on?", "cage": "I fear the Greeks even when they bring gifts.", "portrait": "pman_normal" },
+                { "action": "dialogue", "speaker": "MURMUR", "text": "...oh. You didn't mean to slay him, then. Well, in that case I shall bestow upon you... this coffee mug!", "portrait": "murmur_mug" },
+                { "action": "getitem", "item": "mug" },
+                { "action": "spriteani", "sprite": "Murmur", "animation": "nomug" },
+                { "action": "setswitch", "which": "gregorie", "value": 1 },
+                { "action": "dialogue", "speaker": "MURMUR", "text": "May its contents someday empower you to overcome mighty foes!", "portrait": "murmur_nomug" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "But... it's empty!", "cage": "Maybe when this is all over you and I can stop by the souvenir shop but right now I just wanna find some ROCKETS!", "portrait": "pman_normal" },
+                { "action": "dialogue", "speaker": "MURMUR", "text": "The vessel may only carry that which exists inside of you...! Also, coffee.", "portrait": "murmur_nomug" },
+                { "action": "label", "name": "Skip" },
+                { "action": "end" }
+            ]
+        },
+        "Beelzoten": {
+            "left": 100,
+            "top": 60,
+            "width": 100,
+            "height": 100,
+            "default_actions": [
+								{ "action": "branch", "type": "switchValue", "which": "itguy", "value": "free", "operant": "equals", "yes": "SavedITGuy" },
+                { "action": "branch", "type": "switchValue", "which": "beelzoten", "value": "met", "operant": "equals", "yes": "SecondMeeting" },
+                { "action": "dialogue", "speaker": "BEELZOTEN", "text": "What's happenin', eh? Yeah, we're all stuck here because the projector broke. It's been a couple millennia since that there slide changed.", "portrait": "beelzoten" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Why can't anyone fix it? Doesn't hell have, like... an IT department?", "cage": "Feels like your skull's on fire, but I'm good.", "portrait": "pman_normal" },
+                { "action": "dialogue", "speaker": "BEELZOTEN", "text": "Oh, well yah, there was an IT Guy! But he got kidnapped by a dragon.", "portrait": "beelzoten" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "There are dragons in hell?!", "cage": "A spirit of vengeance... fighting fire with fire.", "portrait": "pman_sweat" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "OH MY GOSH WHY DOES THAT KIND OF STUFF EVEN STILL SURPRISE YOU? WHAT A SCRUB.", "portrait": "baal" },
+                { "action": "dialogue", "speaker": "BEELZOTEN", "text": "Hey, it's not like he's a BIG dragon. Total hoser, though. Also, his office is past that giant dog who drinks human blood.", "portrait": "beelzoten" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "That's... not incredibly reassuring, but thanks.", "cage": "A VAMPIRE!", "portrait": "pman_sarcastic" },
+                { "action": "setswitch", "which": "beelzoten", "value": "met" },
+                { "action": "end" },
+                { "action": "label", "name": "SecondMeeting" },
+                { "action": "dialogue", "speaker": "BEELZOTEN", "text": "Yeah, it's a real shame aboot that dragon kidnapping thing. For one, WE'RE all trapped here... and the IT guy is trapped THERE...", "portrait": "beelzoten" },
+                { "action": "dialogue", "speaker": "BEELZOTEN", "text": "The other thing, though, is that I never get to see the dragon's super-cute receptionist anymore. We totally had a rapport going, too!", "portrait": "beelzoten" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Hmm... I'm really curious about what's going on in that wing of the office.", "portrait": "pman_normal" },
+                { "action": "dialogue", "speaker": "BEELZOTEN", "text": "Well, don't get TOO curious! About the receptionist, I mean. I don't wanna have to kill you.", "portrait": "beelzoten" },
+                { "action": "end" },
+								{ "action": "label", "name": "SavedITGuy" },
+								{ "action": "dialogue", "speaker": "BEELZOTEN", "text": "So you saved the IT guy from the dragon, didja? Maybe we'll finally be able to reach the end o' this meeting here!", "portrait": "beelzoten" },
+								{ "action": "dialogue", "speaker": "BEELZOTEN", "text": "By the way, the dragon's receptionist... did she mention me at all? D'you think I have a shot?!", "portrait": "beelzoten" },
+								{ "action": "dialogue", "speaker": "BAAL", "text": "A LADY MADE OF PAPER AND A DUDE WHO'S CONSTANTLY ON FIRE. YEAH, I AM OFFICIALLY OKAY WITH THIS.", "portrait": "baal" },
+								{ "action": "end" }
+						],
+            "item_actions": { "scissors": [
+                    { "action": "dialogue", "speaker": "BEELZOTEN", "text": "Ow! The heck? Did you just try to stab me with a pair of scissors?", "portrait": "beelzoten" },
+                    { "action": "dialogue", "speaker": "BEELZOTEN", "text": "That's it! Get ready... for some RAAAAW DANGER!!!", "portrait": "beelzoten" },
+                    { "action": "death", "sfx": "FWOOOSH!!! KA-BURNINATION!", "epitaph": "YOU'VE BEEN INCINERATED TO A CRISP. HEY, YOU WERE KIND OF ASKING FOR IT." }
+                ], "lens": [
+										{ "action": "dialogue", "speaker": "BEELZOTEN'S THOUGHTS", "text": "Am I on fire? They - they would tell me if I was on fire again, right?", "portrait": "murmur_nomug", "portrait": "beelzoten" },
+										{ "action": "end" }
+								], "hatemail": [
+										{ "action": "branch", "type": "switchValue", "which": "mail", "value": "over", "operant": "equals", "yes": "QuestFinished" },
+										{ "action": "dialogue", "speaker": "BEELZOTEN", "text": "Whoah, ouch! I'm a charred skeletal hell-being, not a thief. Stop bein' so suspicious.", "portrait": "beelzoten" },
+										{ "action": "end" },
+										{ "action": "label", "name": "QuestFinished" },
+										{ "action": "useitemactions", "item": "hatemail" },
+										{ "action": "end" }
+								]
+            },
+            "label": "Beelzoten"
+        },
+        "SpeakerA": {
+            "left": 165,
+            "top": 0,
+            "width": 50,
+            "height": 40,
+            "default_actions": [
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "It kind of sounds like your voice is being rendered in crisp stereophonic sound here, Baal.", "portrait": "pman_normal" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "HA! A LAUGHABLE EXPLANATION. THAT'S JUST AN ECHO. THIS ROOM IS FULL OF THOSE THINGS.", "portrait": "baal" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Hmm. Strange that I didn't notice that.", "portrait": "pman_sarcastic" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "DIDN'T NOTICE THAT notice that... SEE, THERE IT GOES AGAIN! ECHOES! YOU CAN NEVER PREDICT 'EM.", "portrait": "baal" },
+                { "action": "end" }
+            ]
+        },
+        "SpeakerB": {
+            "left": 545,
+            "top": 0,
+            "width": 50,
+            "height": 70,
+            "default_actions": [
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "It kind of sounds like your voice is being rendered in crisp stereophonic sound here, Baal.", "portrait": "pman_normal" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "HA! A LAUGHABLE EXPLANATION. THAT'S JUST AN ECHO. THIS ROOM IS FULL OF THOSE THINGS.", "portrait": "baal" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Hmm. Strange that I didn't notice that.", "portrait": "pman_sarcastic" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "DIDN'T NOTICE THAT notice that... SEE, THERE IT GOES AGAIN! ECHOES! YOU CAN NEVER PREDICT 'EM.", "portrait": "baal" },
+                { "action": "end" }
+            ]
+        },
+        "ExitDoor": {
+            "left": 578,
+            "top": 134,
+            "width": 50,
+            "height": 180,
+            "collision_actions": [
+                { "action": "gotolevel", "level": "hallway", "x": 160, "y": 266 },
+                { "action": "end" }
+            ]
+        }
+    },
+    "sprites": {
+        "Gregorie": {
+            "x": 426,
+            "y": 280,
+            "direction": 1,
+            "default_actions": [
+                { "action": "branch", "type": "switchValue", "which": "gregorie", "value": 0, "operant": "greater", "yes": "Glitches" },
+                { "action": "dialogue", "speaker": "GREGORIE", "text": "Yes, that's it... just a bit closer...!", "portrait": "gregorie" },
+                { "action": "end" },
+                { "action": "label", "name": "Glitches" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "So... Gregorie. What was that secret you wanted to tell me?", "portrait": "pman_normal" },
+                { "action": "branch", "type": "switchValue", "which": "gregorie", "value": 1, "operant": "equals", "yes": "Glitch1" },
+                { "action": "branch", "type": "switchValue", "which": "gregorie", "value": 2, "operant": "equals", "yes": "Glitch2" },
+                { "action": "branch", "type": "switchValue", "which": "gregorie", "value": 3, "operant": "equals", "yes": "Glitch3" },
+                { "action": "branch", "type": "switchValue", "which": "gregorie", "value": 4, "operant": "equals", "yes": "Glitch4" },
+                { "action": "branch", "type": "switchValue", "which": "gregorie", "value": 5, "operant": "equals", "yes": "Glitch5" },
+                { "action": "end" },
+                { "action": "label", "name": "Glitch1" },
+                { "action": "dialogue", "speaker": "GREGORIE", "text": "I'm glad you like it, Mielahis!   Of course, such a hamsdone nightmare does need his fans!  You are the most beautiful nightmare ever.", "portrait": "gregorie_glitch" },
+                { "action": "setswitch", "which": "gregorie", "value": 2 },
+                { "action": "end" },
+                { "action": "label", "name": "Glitch2" },
+                { "action": "dialogue", "speaker": "GREGORIE", "text": "Do you dream of running your own concession trailer business and wish someone could take you by the hand and then put your hand in ", "portrait": "gregorie_glitch" },
+                { "action": "setswitch", "which": "gregorie", "value": 3 },
+                { "action": "end" },
+                { "action": "label", "name": "Glitch3" },
+                { "action": "dialogue", "speaker": "GREGORIE", "text": "this post shows the information which is close to standard. convincing way of expression due to that reason your post become so", "portrait": "gregorie_glitch" },
+                { "action": "setswitch", "which": "gregorie", "value": 4 },
+                { "action": "end" },
+                { "action": "label", "name": "Glitch4" },
+                { "action": "dialogue", "speaker": "GREGORIE", "text": "Want to be their master no problem what you say goes here. logic is in the eye of the logician redhanded every normal man", "portrait": "gregorie_glitch" },
+                { "action": "setswitch", "which": "gregorie", "value": 5 },
+                { "action": "end" },
+                { "action": "label", "name": "Glitch5" },
+                { "action": "dialogue", "speaker": "GREGORIE", "text": "LOCATE TABLE CHANGING BABIES YOU NEED BABY CHANGING TABLES", "portrait": "gregorie_glitch" },
+                { "action": "setswitch", "which": "gregorie", "value": 1 },
+                { "action": "end" }
+            ],
+						"item_actions": {
+							"lens": [
+										{ "action": "dialogue", "speaker": "GREGORIE'S THOUGHTS", "text": "INTERNAL MONOLOGUE NOT LOADED. \n Please consult Systems Administrator or Software Vendor.", "portrait": "gregorie_glitch" },
+										{ "action": "end" }
+								],
+								"hatemail": [
+									{ "action": "branch", "type": "switchValue", "which": "mail", "value": "over", "operant": "equals", "yes": "QuestFinished" },
+									{ "action": "dialogue", "speaker": "GREGORIE", "text": "Message could not be delivered! \n Please contact your service provider.", "portrait": "gregorie_glitch" },
+									{ "action": "end" },
+									{ "action": "label", "name": "QuestFinished" },
+									{ "action": "useitemactions", "item": "hatemail" },
+									{ "action": "end" }
+								]
+						},
+            "width": 22,
+            "height": 10,
+            "spritesheet": "gregorie",
+            "animations": {
+                "normal": {
+                    "frames": 2,
+                    "anispeed": 3,
+                    "sheetRow": 0
+                },
+                "smooshed": {
+                    "frames": 1,
+                    "anispeed": 3,
+                    "sheetRow": 1
+                }
+            },
+            "animation": "normal",
+            "frame": 0,
+            "label": "Gregorie"
+        },
+				"Slide": {
+					"animations": {
+							"default": {
+									"rowStartY": 0,
+									"frames": 1,
+									"anispeed": 3,
+									"sheetRow": 0,
+									"frameWidth": 292,
+									"frameHeight": 114
+							},
+							"changed": {
+									"rowStartY": 116,
+									"frames": 1,
+									"anispeed": 3,
+									"sheetRow": 0,
+									"frameWidth": 290,
+									"frameHeight": 116
+							}
+					},
+					"alpha": 0.8,
+					"animation": "default",
+					"default_actions": [
+							{ "action": "branch", "type": "switchValue", "which": "itguy", "value": "free", "operant": "equals", "yes": "SavedITGuy" },
+							{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "W... what on earth was this presentation supposed to be about?", "portrait": "pman_sweat" },
+							{ "action": "dialogue", "speaker": "BAAL", "text": "WELL, UM, YOU SEE... HRMM... YOU KNOW, THERE ARE CERTAIN THINGS YOU JUST CAN'T EXPLAIN TO FOOLISH MORTALS.", "portrait": "baal" },
+							{ "action": "dialogue", "speaker": "BAAL", "text": "SUFFICE IT TO SAY THAT IT DEALT IN LARGE PART WITH 'HOWRSE'.", "portrait": "baal" },
+							{ "action": "end" },
+							{ "action": "label", "name": "SavedITGuy" },
+							{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "The slide finally changed! \n ...and somehow I understand this presentation even less than before.", "portrait": "pman_sweat" },
+							{ "action": "end" }
+					],
+					"label": "Cryptic Slide",
+					"spritesheet": "slideshow",
+					"width": 290,
+					"height": 116,
+					"x": 382,
+					"y": 58,
+					"direction": 1
+			},
+			"FrustratedDevil": {
+					"x": 45,
+					"y": 178,
+					"width": 126,
+					"height": 98,
+					"spritesheet": "cryingdevil",
+					"default_actions": [
+							{ "action": "dialogue", "speaker": "BAAL", "text": "LEAVE HIM BE, FOR PITY'S SAKE! CAN'T YOU TELL THAT HE IS AT HIS WIT'S ENDS?!", "portrait": "baal" },
+							{ "action": "dialogue", "speaker": "BAAL", "text": "NAH I'M JUST PLAYING, YOU SHOULD POKE HIM WITH SHARP THINGS.", "portrait": "baal" },
+							{ "action": "end" }
+					],
+					"item_actions": { "stapler": [
+									{ "action": "dialogue", "speaker": "DEVIL AT WIT'S ENDS", "text": "Ow!" }
+							], "scissors": [
+									{ "action": "dialogue", "speaker": "DEVIL AT WIT'S ENDS", "text": "Ow!" }
+							], "lens": [
+									{ "action": "dialogue", "speaker": "FRUSTRATED DEVIL'S THOUGHTS", "text": "At this rate... all my questions about 'HOWRSE' will go forever unanswered!" },
+									{ "action": "end" }
+							]
+					},
+					"label": "Devil At Wit's Ends"
+        },
+				"ITGuy": {
+					"animations": {
+							"normal": {
+									"rowStartY": 0,
+									"frames": 8,
+									"anispeed": 6,
+									"sheetRow": 0,
+									"frameWidth": 96,
+									"frameHeight": 126
+							}
+						},
+						"default_actions": [
+							{ "action": "dialogue", "speaker": "IT GUY", "text": "This conference room's tech troubles were a bit of biscuit to yours truly! Ah, it's good to be back in the crunch.", "portrait": "itguy_happy" },
+							{ "action": "dialogue", "speaker": "IT GUY", "text": "I would never have escaped that cage if it weren't for you, chum. Any time you need tech support, you know who to call!", "portrait": "itguy_happy" },
+							{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Oh, really? Because there's this elevator just outside this room, and I was hoping...", "cage": "Bangers and mash! Bubbles and squeak!", "portrait": "pman_normal" },
+							{ "action": "dialogue", "speaker": "IT GUY", "text": "Turn it off and back on again.", "portrait": "itguy_happy" },
+							{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "I'm... not sure that applies - ", "cage": "Smoked eel pie! HAGGIS!", "portrait": "pman_sweat" },
+							{ "action": "dialogue", "speaker": "IT GUY", "text": "TURN. \n IT OFF. \n AND BACK ON AGAIN.", "portrait": "itguy" },
+							{ "action": "end" }
+						],
+						"item_actions": {
+							"scissors": [
+								{ "action": "dialogue", "speaker": "IT GUY", "text": "OW! You cleft. Keep it up and you'll get a knuckle supper!", "portrait": "itguy" }
+							],
+							"lens": [
+								{ "action": "dialogue", "speaker": "IT GUY", "text": "Huh, the printer I set up in this room is missing. Hope it's not my responsibility to worry about that.", "portrait": "itguy" }
+							],
+							"hatemail": [
+								{ "action": "branch", "type": "switchValue", "which": "mail", "value": "over", "operant": "equals", "yes": "QuestFinished" },
+								{ "action": "dialogue", "speaker": "IT GUY", "text": "You're really handing me this... snail mail? Tell me, which part of the Paleolithic Age do you hail from?!", "portrait": "itguy" },
+								{ "action": "end" },
+								{ "action": "label", "name": "QuestFinished" },
+								{ "action": "useitemactions", "item": "hatemail" },
+								{ "action": "end" }
+							]
+						},
+						"animation": "normal",
+						"label": "IT Guy",
+						"spritesheet": "itguy",
+						"width": 96,
+						"height": 126,
+						"x": 48,
+						"y": 122,
+						"direction": 1
+				},
+        "Murmur": {
+            "x": 288,
+            "y": 198,
+            "direction": 1,
+            "default_actions": [
+								{ "action": "branch", "type": "switchValue", "which": "itguy", "value": "free", "operant": "equals", "yes": "SavedITGuy" },
+                { "action": "branch", "type": "itemOwned", "item": "mug", "operant": "yn", "yes": "HasMug" },
+                { "action": "dialogue", "speaker": "MURMUR", "text": "...", "portrait": "murmur_mug" },
+                { "action": "end" },
+                { "action": "label", "name": "HasMug" },
+                { "action": "dialogue", "speaker": "MURMUR", "text": "The tale of this place is filled with woe. It was once a conference room, filled with light and joy abundant.", "portrait": "murmur_nomug" },
+                { "action": "dialogue", "speaker": "MURMUR", "text": "However! In the midsts of an invaluable presentation, the projector here got stuck on a slide. That was 1,000 years ago.", "portrait": "murmur_nomug" },
+                { "action": "dialogue", "speaker": "MURMUR", "text": "We have waited here ever since, for a hero to rise and undo this awful wrong. Then we can finish this meeting once and for all.", "portrait": "murmur_nomug" },
+                { "action": "dialogue", "speaker": "MURMUR", "text": "Ha! Technology, right?", "portrait": "murmur_nomug" },
+                { "action": "end" },
+								{ "action": "label", "name": "SavedITGuy" },	
+								{ "action": "branch", "type": "itemOwned", "item": "ankh", "operant": "yn", "yes": "HasAnkh" },
+								{ "action": "dialogue", "speaker": "MURMUR", "text": "Well met, Pachinko Man! The cubic spirit who fixed our projector has told us of your deeds since I gifted you with my mug.", "portrait": "murmur_nomug" },
+								{ "action": "dialogue", "speaker": "MURMUR", "text": "For vanquishing Drachenroe and ending our tedium, I believe you have earned an artifact of real ancient power - the SOUL ANKH!", "portrait": "murmur_nomug" },
+								{ "action": "getitem", "item": "ankh" },
+                { "action": "killsprite", "sprite": "Ankh" },
+								{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Wow, thanks! What does this item do?", "cage": "Gimme that cake. I WANT IT.", "portrait": "pman_happy" },
+								{ "action": "dialogue", "speaker": "MURMUR", "text": "Oh, it's incredibly handy! You need only rub the Ankh's surface three times...", "portrait": "murmur_nomug" },
+								{ "action": "dialogue", "speaker": "MURMUR", "text": "...and an infernal death-god will emerge to devour the souls of the innocent.", "portrait": "murmur_nomug" },
+								{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "...", "cage": "What I'm dealing with here is one of the most deadly substances the earth has ever known...", "portrait": "pman_normal" },
+								{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "WHAT?! When would I EVER use that?", "cage": "So cut me some FRIGGIN' slack!", "portrait": "pman_sweat" },
+								{ "action": "dialogue", "speaker": "MURMUR", "text": "Hey, you never know when a surplus of innocent souls is going to be an issue, right?", "portrait": "murmur_nomug" },
+								{ "action": "dialogue", "speaker": "MURMUR", "text": "...anyway, I've been looking for an excuse to bestow it on someone. Thing gives me the heebie jeebies.", "portrait": "murmur_nomug" },
+								{ "action": "end" },
+								{ "action": "label", "name": "HasAnkh" },
+								{ "action": "dialogue", "speaker": "MURMUR", "text": "Well met, Pachinko Man. How fares the Soul Ankh? Have you fed it any innocent souls lately?", "portrait": "murmur_nomug" },
+								{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "I'll, um... I'll let you know.", "portrait": "pman_sweat" },
+								{ "action": "end" }
+            ],
+            "item_actions": { "scissors": [
+                    { "action": "dialogue", "speaker": "MURMUR", "text": "You would do battle with me?! Very well! I accept your challenge. Prepare to sample MY blade!", "portrait": "murmur_nomug" },
+                    { "action": "death", "sfx": "SHHHLING! DECAPI-POW!!", "epitaph": "YOU'VE BEEN DECAPITATED BY THAT GUY'S SWORD. NOT SURE HOW HE MANAGED THAT, SINCE YOU ARE LITERALLY A WALKING HEAD." }
+                ],
+                "mug": [
+                    { "action": "dialogue", "speaker": "MURMUR", "text": "No, really! It's yours now! I realize it's an overwhelming gesture.", "portrait": "murmur_nomug" }
+                ], "lens": [
+										{ "action": "dialogue", "speaker": "MURMUR", "text": "Hmm. I have been dispensing many a Mighty Relic lately. I hope I've not been irresponsible in that respect.", "portrait": "murmur_nomug" },
+										{ "action": "dialogue", "speaker": "MURMUR", "text": "Oh, hey! That boy is holding the Artifact I gave Melissa. Charming girl! I wonder what she's up to these days.", "portrait": "murmur_nomug" },
+										{ "action": "end" }
+								],
+								"hatemail": [
+									{ "action": "branch", "type": "switchValue", "which": "mail", "value": "over", "operant": "equals", "yes": "QuestFinished" },
+									{ "action": "dialogue", "speaker": "MURMUR", "text": "A missive for a thief? Do you mean to impinge on my honor by handing me this, sir?!", "portrait": "murmur_nomug" },
+									{ "action": "option", "text": "Yes", "label": "Accuse" },
+									{ "action": "option", "text": "No", "label": "NoAccuse" },
+									{ "action": "label", "name": "Accuse" },
+									{ "action": "death", "sfx": "SHHHLING! SCHLA-KLORP!!", "epitaph": "WELL, THAT DIDN'T TAKE LONG. DUDE PULLED OUT A SWORD AND CORED YOU LIKE AN APPLE. SMOOTH MOVES!" },
+									{ "action": "end" },
+									{ "action": "label", "name": "NoAccuse" },
+									{ "action": "dialogue", "speaker": "MURMUR", "text": "Ah. A conversation piece, then. Nice stationary!", "portrait": "murmur_nomug" },
+									{ "action": "dialogue", "speaker": "MURMUR", "text": "...of course, you're right to be diligent in your pusuit. A truly crafty demon might appear anywhere - in any form.", "portrait": "murmur_nomug" },
+									{ "action": "dialogue", "speaker": "BAAL", "text": "MAYBE THE THIEF WAS YOU ALL ALONG! RIGHT? \"AND THEN PACHINKO MAN WAS THE DEMONS!\" TOTALLY CALLING THIS.", "portrait": "baal" },
+									{ "action": "end" },
+									{ "action": "label", "name": "QuestFinished" },
+									{ "action": "useitemactions", "item": "hatemail" },
+									{ "action": "end" }
+								]
+            },
+            "width": 170,
+            "height": 236,
+            "spritesheet": "murmur",
+            "animations": {
+                "mug": {
+                    "frames": 1,
+                    "sheetRow": 0
+                },
+                "nomug": {
+                    "frames": 1,
+                    "sheetRow": 1
+                }
+            },
+            "animation": "mug",
+            "frame": 0,
+            "label": "Murmur"
+        },
+        "Ankh": {
+            "x": 140,
+            "y": 242,
+            "direction": 1,
+            "default_actions": [
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Hmm... this looks significant.", "portrait": "pman_normal" }
+            ],
+            "width": 40,
+            "height": 22,
+            "spritesheet": "ankh",
+            "frame": 0,
+            "label": "???"
+        },
+				"Projector": {
+            "x": 0,
+            "y": 254,
+            "width": 130,
+            "height": 100,
+						"direction": 1,
+            "default_actions": [
+								{ "action": "branch", "type": "switchValue", "which": "itguy", "value": "free", "operant": "equals", "yes": "SavedITGuy" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "This projector seems to be in pretty bad shape.", "portrait": "pman_normal" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "WHOAH, STAND BACK EVERYONE, DR. NORTON MCAFFEE'S ON THE CASE. GOT ANY OTHER FRESH DIAGNOSES TO LAY DOWN?", "portrait": "baal" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Maybe if we... swapped the RAM, and the... kiloflops...?", "portrait": "pman_normal" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "DON'T QUIT YOUR DAY JOB, KID. OH WAIT, YOU CAN'T. BECAUSE YOU'RE TRAPPED HERE FOREVER. HA.", "portrait": "baal" },
+                { "action": "end" },
+								{ "action": "label", "name": "SavedITGuy" },
+								{ "action": "dialogue", "speaker": "IT GUY", "text": "The old girl's up and running again, powering through points as smooth as you like!", "portrait": "itguy" },
+								{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "I see. Was it a problem with the... with the RAM? Not enough kiloflops?", "portrait": "pman_normal" },
+								{ "action": "dialogue", "speaker": "IT GUY", "text": "Firstly, projectors don't have RAM. Secondly, that's not a real word. Thirdly, you are a nub.", "portrait": "itguy" },
+								{ "action": "dialogue", "speaker": "BAAL", "text": "I'M NOT SURE WHICH ONE OF YOU SEEMS LAMER TO ME RIGHT NOW.", "portrait": "baal" },
+								{ "action": "end" }
+            ],
+						"movement": {
+							"type": "jitter",
+							"xspeed": 1,
+							"xbound": 2
+						},
+						"spritesheet": "projector",
+						"width": 184,
+						"height": 128,
+            "label": "Cryptic Slide Projector"
+        }
+    }
+}

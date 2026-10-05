@@ -1,0 +1,40 @@
+{
+    "bg": "intro1",
+    "mode": "NORMAL",
+		"music": {
+        "song": "opening",
+        "loop": true
+    },
+    "leftWall": 0,
+    "rightWall": 600,
+    "preload_actions": [],
+		"monologue": true,
+    "postload_actions": [
+				{"action": "wait", "frames": 90}, 
+        {"action":"dialogue","text":"\n I was never a man of many vices. \n \n \n (Space Bar or Click to Continue)"},
+				{"action":"dialogue","text":"\n I punched in at work on time. \n Never caused any trouble."},
+				{"action":"dialogue","text":"My manager, Tanaka-san, described my output as 'Above Below Exceeds Expectations'. \n But I did have a weakness."},
+				{ "action": "dim", "opacity": 255, "speed": 20 },
+				{ "action": "wait", "frames": 20 },
+				{ "action": "background", "bg": "intro2" },
+				{ "action": "dim", "opacity": 0, "speed": 20 },
+				{ "action": "wait", "frames": 30 },
+				{"action":"dialogue","text":"...Pachinko."},
+				{"action":"dialogue","text":"When I wasn't at the office, I spent every moment at the Pachinko Parlor... \n Looking for my lucky break."},
+				{"action":"dialogue","text":"\n Unfortunately, I also spent all my money there. \n But I had a plan to get it back."},
+				{ "action": "dim", "opacity": 255, "speed": 20 },
+				{ "action": "wait", "frames": 20 },
+				{ "action": "background", "bg": "intro3" },
+				{ "action": "dim", "opacity": 0, "speed": 20 },
+				{ "action": "wait", "frames": 40 },
+				{"action":"dialogue","text":"I'd heard tell of a legendary Pachinko machine, discovered in the ruins of Ancient Babylon. \n They said that one round at this table could restore a man's fortunes... or destroy them."},
+				{"action":"dialogue","text":"I found this machine. \n I placed my last Yen in its crumbling slot. \n I turned the knob and watched those balls, tumbling through the pins."},
+				{"action":"dialogue","text":"And then..."},
+				{ "action": "dim", "opacity": 255, "speed": 20 },
+				{ "action": "wait", "frames": 30 },
+				{"action":"gotolevel","level":"cubicle","x":230,"y":276},
+				{"action":"end"}
+    ],
+    "zones": {},
+    "sprites": {}
+}

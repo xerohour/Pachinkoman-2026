@@ -1,0 +1,6 @@
+{
+	"bg":"logo",
+	"mode":"CUTSCENE",
+	"next":"title",
+	"stopmusic":true
+}

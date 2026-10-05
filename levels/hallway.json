@@ -1,0 +1,362 @@
+{
+    "bg": "hallway",
+    "mode": "NORMAL",
+    "leftWall": 90,
+    "rightWall": 600,
+		"music": {
+        "song": "demo",
+        "loop": true
+    },
+    "preload_actions": [
+				{ "action": "branch", "type": "switchValue", "which": "ghost", "value": "gone", "operant": "equals", "yes": "KeepJanitor" },
+				{ "action": "killsprite", "sprite": "Janitor" },
+				{ "action": "label", "name": "KeepJanitor" },
+        { "action": "branch", "type": "itemOwned", "item": "rope", "operant": "yn", "no": "NoRope" },
+        { "action": "killsprite", "sprite": "Rope" },
+        { "action": "label", "name": "NoRope" },
+        { "action": "branch", "type": "switchValue", "which": "bathroom", "value": "locked", "operant": "equals", "no": "KeepWig" },
+        { "action": "killsprite", "sprite": "Wig" },
+        { "action": "end" },
+        { "action": "label", "name": "KeepWig" },
+        { "action": "branch", "type": "playerStatus", "which": "wig", "value": true, "operant": "equals", "no": "DontTakeOffWig" },
+        { "action": "statusfx", "which": "wig", "value": false },
+        { "action": "label", "name": "DontChangeStatus" },
+        { "action": "end" }
+    ],
+    "postload_actions": [
+        { "action": "branch", "type": "switchValue", "which": "bathroom", "value": "firstvisit", "operant": "equals", "no": "SkipHair" },
+        { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "That hair smells like... Led Zeppelin albums. I'll leave it here until I need it again.", "cage": "May I also suggest a haircut? Unless you're a 20 year old guitarist from Seattle.", "portrait": "pman_normal" },
+        { "action": "setswitch", "which": "bathroom", "value": "visited" },
+        { "action": "label", "name": "SkipHair" }
+    ],
+    "zones": {
+        "Elevator": {
+            "left": 260,
+            "top": 100,
+            "width": 170,
+            "height": 190,
+            "default_actions": [
+								{ "action": "branch", "type": "itemOwned", "item": "crowbar", "operant": "yn", "yes": "HasCrowbar" },
+								{ "action": "branch", "type": "itemOwned", "item": "hatemail", "operant": "yn", "yes": "StartedQuest" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "An elevator! Maybe I can use this to get out of here...!", "portrait": "pman_normal" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "AS IF! THAT ELEVATOR'S ONLY GOING ONE WAY, CHUMP - AND IT'S NOWHERE, FAST!", "portrait": "baal" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "YEAH, IT'S BEEN OUT OF ORDER FOR AGES. UNLESS YOU'RE HIDING A TOOL BELT IN THAT NECKTIE OF YOURS, YOU'D BETTER FORGET ABOUT IT.", "portrait": "baal" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "I don't suppose I can just take the stairs?", "portrait": "pman_normal" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "THE STAIRS ARE ALSO BROKEN. EVERYTHING BREAKS HERE. BECAUSE IT'S HELL! BOOGEDY-BOOGEDY!", "portrait": "baal" },
+                { "action": "end" },
+								{ "action": "label", "name": "StartedQuest" },
+								{ "action": "dialogue", "speaker": "TONY", "text": "Like I said - ain't no way I can crack those doors open 'til I get my lost item back.", "portrait": "janitor" },
+								{ "action": "dialogue", "speaker": "TONY", "text": "'Til then, well, I guess I'll make sure the floor outside the elevator is extra-clean.", "portrait": "janitor" },
+								{ "action": "end" },
+								
+								{ "action": "label", "name": "HasCrowbar" },
+								{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Freedom's one pry away... crowbar, time to do your stuff!", "portrait": "pman_normal" },
+								{ "action": "end" }
+            ],
+						"item_actions": {
+							"crowbar": [
+								{ "action": "freeze" },
+								{ "action": "spriteani", "sprite": "Elevator", "animation": "opening" },
+								{ "action": "wait", "frames": 20 },
+								{"action": "music", "song": "elevator", "loop": false },
+								{ "action": "wait", "frames": 30 },
+								{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "FINALLY! The elevator's open! Time to hightail it out of here!", "cage": "Champagne would fall from the heavens. Doors would open. Velvet ropes would part.", "portrait": "pman_normal" },
+								{"action": "dim", "opacity": 255, "speed": 20 },
+								{ "action": "wait", "seconds": 1 },
+								{ "action": "moveplayer", "y": -100 },
+								{ "action": "killsprite", "sprite": "Elevator" },
+								{"action": "dim", "opacity": 0, "speed": 16 },
+								{ "action": "wait", "seconds": 1 },
+								{ "action": "dialogue", "speaker": "TONY", "text": "...you know, he could've given me my crowbar back before leaving.", "portrait": "janitor" },
+								{ "action": "dialogue", "speaker": "TONY", "text": "Or offered me a trip out of hell. Just sayin'. \n Ah well. This ol' netherworld ain't gonna spitshine itself...", "portrait": "janitor" },
+								{ "action": "unfreeze" },
+								{ "action": "branch", "type": "playerField", "which": "cage", "operant": "yn", "yes": "IsCage" },
+								{ "action": "gotolevel", "level": "elevator" },
+								{ "action": "end" },
+								{ "action": "label", "name": "IsCage" },
+								{ "action":"gotolevel","level":"baalroom","x":170,"y":270 },
+								{ "action": "end" }
+							]
+						},
+            "label": "The Elevator"
+        },
+        "FloorList": {
+            "left": 450,
+            "top": 160,
+            "width": 58,
+            "height": 100,
+            "default_actions": [
+                { "action": "dialogue", "speaker": "CIRCLES OF OFFICE HELL", "text": "FLOOR 1 - Reception \n FLOOR 2 - Procrastinators \n FLOOR 3 - Breakroom Foodstealers" },
+                { "action": "dialogue", "speaker": "CIRCLES OF OFFICE HELL", "text": "FLOOR 4 - Petty Thieves \n FLOOR 5 - The Monday-Casers \n FLOOR 6 - In-the-box Thinkers" },
+                { "action": "dialogue", "speaker": "CIRCLES OF OFFICE HELL", "text": "FLOOR 7 - Buzzword Users \n FLOOR 8 - Yes-Men \n FLOOR 9 - Ink Cartridge Wasters" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "...Ball Hell isn't even on this list.", "cage": "I didn't misspell ANYthing! Not ONCE, not ONE TIME!", "portrait": "pman_normal" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "WE'RE RENTING OUT THE BASEMENT! PRETTY INDIE, RIGHT?", "portrait": "baal" },
+                { "action": "end" }
+            ],
+            "label": "Floor Listing"
+        },
+        "UpButton": {
+            "left": 222,
+            "top": 170,
+            "width": 22,
+            "height": 26,
+            "default_actions": [
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Going up?", "portrait": "pman_normal" },
+                { "action": "dialogue", "speaker": "???", "text": "WHIIIIIR CHUNK, KA-THUNK!" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Hey, I just heard a noise! Maybe this elevator is still working?", "portrait": "pman_normal" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "WHAT ARE YOU TALKING ABOUT, FOOL? THAT WAS JUST THE RETRO ELEVATOR-THEMED RINGTONE ON MY APPLE SMARTPOD. NO WORKING ELEVATORS HERE!", "portrait": "baal" },
+                { "action": "end" }
+            ],
+            "label": "Elevator Buttons"
+        },
+        "DownButton": {
+            "left": 222,
+            "top": 196,
+            "width": 22,
+            "height": 24,
+            "default_actions": [
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "I honestly don't see how I could get much lower.", "portrait": "pman_normal" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "OOH, OUCH! KITTY'S GOT CLAWS!", "portrait": "baal" },
+                { "action": "end" }
+            ],
+            "label": "Elevator Buttons"
+        },
+        "Chandelier": {
+            "left": 60,
+            "top": 0,
+            "width": 158,
+            "height": 94,
+            "default_actions": [
+                { "action": "dialogue", "speaker": "BAAL", "text": "SWANKY DECOR, RIGHT? YEAH, I LIKE TO LAY SOME OPULENCE ON FOLKS WHEN THEY WALK THROUGH THE DOOR.", "portrait": "baal" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Through what door? The elevator door? Is the elevator still working?", "cage": "I have money, I have taste. But I'm not on anybody's A list, and Saturday night is the loneliest night for me.", "portrait": "pman_normal" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "THROUGH THE DOOR I AM ABOUT TO PUNCH INTO YOUR FACE WITH MY OMNIPOTENT DEVIL-FISTS!", "portrait": "baal" },
+                { "action": "end" }
+            ]
+        },
+        "Speaker": {
+            "left": 480,
+            "top": 0,
+            "width": 52,
+            "height": 60,
+            "default_actions": [
+                { "action": "dialogue", "speaker": "BAAL", "text": "YEAH, THAT'S NOT A PA SYSTEM. IT'S PROBABLY, LIKE, PART OF A SPIDER'S WEB. SPIDERS IN HELL ARE REALLY BIG ELECTRONICS GEEKS.", "portrait": "baal" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Are you saying they're... Akihabarachnids?", "portrait": "pman_normal" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "...STOP IT. THAT SORT OF THING IS ONLY CLEVER WHEN I DO IT.", "portrait": "baal" },
+                { "action": "end" }
+            ]
+        },
+        "HoleInWall": {
+            "left": 110,
+            "top": 180,
+            "width": 100,
+            "height": 90,
+            "default_actions": [
+                { "action": "playerdirection", "direction": "left" },
+                { "action": "gotolevel", "level": "presentation", "x": 510, "y": 238 },
+                { "action": "end" }
+            ],
+            "label": "Hole in the Wall"
+        },
+        "BathroomDoor": {
+            "left": 0,
+            "top": 134,
+            "width": 60,
+            "height": 180,
+            "default_actions": [
+                { "action": "playerdirection", "direction": "left" },
+                { "action": "branch", "type": "playerStatus", "which": "wig", "value": true, "operant": "equals", "yes": "WearingWig" },
+                { "action": "branch", "type": "switchValue", "which": "bathroom", "value": "visited", "operant": "equals", "yes": "Revisit" },
+								{ "action": "branch", "type": "switchValue", "which": "bathroom", "value": "plugged", "operant": "equals", "yes": "Revisit" },
+								{ "action": "branch", "type": "switchValue", "which": "bathroom", "value": "finished", "operant": "equals", "yes": "Revisit" },
+                { "action": "dialogue", "speaker": "BATHROOM DOOR", "text": "You perv! This is a restroom for LADIES ONLY. Or did you miss the shapely demoness in silhouette on the door?" },
+                { "action": "dialogue", "speaker": "BATHROOM DOOR", "text": "Granted, your doughy face lacks pronounced masculine features... but with hair like that, there's no way you're a girl!" },
+                { "action": "end" },
+                { "action": "label", "name": "WearingWig" },
+                { "action": "dialogue", "speaker": "BATHROOM DOOR", "text": "Ohh, who is that pretty lady? You must be new here, madame!" },
+                { "action": "dialogue", "speaker": "BATHROOM DOOR", "text": "Please, allow me to welcome you to Ball Hell's sparkling Ladies Rest Facilities!" },
+                { "action": "setswitch", "which": "bathroom", "value": "firstvisit" },
+                { "action": "gotolevel", "level": "bathroom", "x": 520, "y": 266 },
+                { "action": "end" },
+                { "action": "label", "name": "Revisit" },
+                { "action": "dialogue", "speaker": "BATHROOM DOOR", "text": "No boys allowed!" },
+                { "action": "statusfx", "which": "wig", "value": true },
+                { "action": "killsprite", "sprite": "Wig" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "*sigh* How about now?", "cage": "If you'll excuse me, I have to use the... little boy's... wee wee room.", "portrait": "pman_normal" },
+                { "action": "dialogue", "speaker": "BATHROOM DOOR", "text": "What the...? I could have sworn you were a pudgy middle-aged marble just a moment ago! Please enter, dear." },
+                { "action": "gotolevel", "level": "bathroom", "x": 520, "y": 266 },
+                { "action": "end" }
+            ],
+            "label": "Ladies Room"
+        },
+        "ExitDoor": {
+            "left": 548,
+            "top": 134,
+            "width": 50,
+            "height": 180,
+            "default_actions": [
+                { "action": "gotolevel", "level": "watercooler", "x": 160, "y": 266 },
+                { "action": "end" }
+            ],
+            "collision_actions": [
+                { "action": "gotolevel", "level": "watercooler", "x": 160, "y": 266 },
+                { "action": "end" }
+            ]
+        }
+    },
+    "sprites": {
+				"Elevator": {
+					"animations": {
+						"hidden": {
+							"frames": 1,
+							"frameWidth": 0
+						},
+						"opening": {
+							"rowStartY": 0,
+							"frames": 12,
+							"anispeed": 9,
+							"sheetRow": 0,
+							"frameWidth": 190,
+							"frameHeight": 164,
+							"nextani": "opened"
+						},
+						"opened": {
+							"rowStartY": 164,
+							"frames": 1,
+							"anispeed": 3,
+							"sheetRow": 0,
+							"frameWidth": 190,
+							"frameHeight": 164
+						}
+					},
+					"z": -1,
+					"animation": "hidden",
+					"spritesheet": "elevator",
+					"width": 0,
+					"height": 0,
+					"x": 345,
+					"y": 194,
+					"direction": 1
+				},
+				"Janitor": {
+            "animations": {
+                "normal": {
+                    "rowStartY": 0,
+                    "frames": 8,
+                    "anispeed": 3,
+                    "sheetRow": 0,
+                    "frameWidth": 168,
+                    "frameHeight": 100
+                }
+            },
+            "spritesheet": "janitor",
+            "width": 168,
+            "height": 100,
+            "x": 270,
+            "y": 256,
+            "direction": -1,
+            "frame": 0,
+            "animation": "normal",
+            "label": "Janitor",
+						"default_actions": [
+							{ "action": "branch", "type": "itemOwned", "item": "crowbar", "operant": "yn", "yes": "HasCrowbar" },
+							{ "action": "branch", "type": "switchValue", "which": "mail", "value": "over", "operant": "equals", "yes": "MailDelivered" },
+							{ "action": "branch", "type": "itemOwned", "item": "hatemail", "operant": "yn", "yes": "StartedQuest" },
+							{ "action": "dialogue", "speaker": "TONY", "text": "The elevator's up and running again! You can jet back up to the living world as you please.", "portrait": "janitor" },
+							{ "action": "dialogue", "speaker": "TONY", "text": "...yep, those are both things I'd like to have been able to say, if they were true.", "portrait": "janitor" },
+							{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Y-you can't fix the elevator? But you're a janitor!", "cage": "Alright, I'm a little TIRED... I'm a little WIRED... and I think, I deserve, a LITTLE appreciation!", "portrait": "pman_sweat" },
+							{ "action": "dialogue", "speaker": "TONY", "text": "Janitors ain't gods, kid. I know it's easy to forget that. We're only good as our tool belts.", "portrait": "janitor" },
+							{ "action": "stopmusic" },
+							{ "action": "dialogue", "speaker": "TONY", "text": "Truth is, I used to own a tool that could break this seal. Before... the dark times...", "portrait": "janitor" },
+							{ "action": "dialogue", "speaker": "BAAL", "text": "OOH, IS THIS GONNA BE A SECRET BACKSTORY? I LOVES ME SOME SECRET BACKSTORY.", "portrait": "baal" },
+							{ "action": "label", "name": "Story" },
+							{ "action": "music", "song": "opening", "loop": true },
+							{ "action": "dialogue", "speaker": "TONY", "text": "I was out on a routine custodial call. Someone had stuffed a giant squid in the watercooler. Nothin' I hadn't dealt with before.", "portrait": "janitor" },
+							{ "action": "dialogue", "speaker": "TONY", "text": "What I didn't realize was that earlier that day, a demon had escaped from a higher circle of Office Hell... one reserved for PETTY THIEVES.", "portrait": "janitor" },
+							{ "action": "dialogue", "speaker": "TONY", "text": "I turned my head, and just like that - half my tool belt was gone. Including the only item that can open this elevator.", "portrait": "janitor" },
+							{ "action": "dialogue", "speaker": "TONY", "text": "But it didn't stop there. Over the years, that Supply Thief plundered bagged lunches, whiteout... staples beyond counting.", "portrait": "janitor" },
+							{ "action": "dialogue", "speaker": "TONY", "text": "Nobody's ever seen that thief's face. But we know they're still out there... blending silently into our ranks.", "portrait": "janitor" },
+							{ "action": "music", "song": "demo", "loop": true },
+							{ "action": "branch", "type": "itemOwned", "item": "hatemail", "operant": "yn", "yes": "SkipToEnd" },
+							{ "action": "dialogue", "speaker": "BAAL", "text": "MEH. AN EARNEST EFFORT, BUT FAILS TO DAZZLE. BAAL GIVES THIS BACKSTORY - A 7.3 OUT OF 10.", "portrait": "baal" },
+							{ "action": "dialogue", "speaker": "TONY", "text": "Hey. Kid. It probably won't do much good, but... I want you to take this letter with you.", "portrait": "janitor" },
+							{ "action": "getitem", "item": "hatemail" },
+							{ "action": "setswitch", "which": "mail", "value": "started" },
+							{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "'To: The Scandalous Supply-Snatchler'... \n You wrote hate mail to the item thief?", "portrait": "pman_normal" },
+							{ "action": "dialogue", "speaker": "TONY", "text": "Mostly as self-therapy. But hey, maybe you Pachinko Men rub shoulders with types we janitors don't.", "portrait": "janitor" },
+							{ "action": "dialogue", "speaker": "TONY", "text": "If you can track down the thief, and show 'em that letter - maybe they'll be overcome by guilt and fork over my item.", "portrait": "janitor" },
+							{ "action": "dialogue", "speaker": "BAAL", "text": "UH. YEAH. GOOD LUCK WITH THAT.", "portrait": "baal" },
+							{ "action": "end" },
+							{ "action": "label", "name": "StartedQuest" },
+							{ "action": "dialogue", "speaker": "TONY", "text": "How goes the hunt, kid?", "portrait": "janitor" },
+							{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Er... I'm not really sure where to start? There's a lot of ground to cover.", "portrait": "pman_sweat" },
+							{ "action": "dialogue", "speaker": "BAAL", "text": "A LOT OF... YOU'VE VISITED A TOTAL OF LIKE 10 ROOMS, YOU ENORMOUS INFANT.", "portrait": "baal" },
+							{ "action": "dialogue", "speaker": "TONY", "text": "Well, mebbe you just need a refresher course on the facts of the case, huh?", "portrait": "janitor" },
+							{ "action": "branch", "type": "always", "jumpto": "Story" },
+							{ "action": "label", "name": "SkipToEnd" },
+							{ "action": "dialogue", "speaker": "TONY", "text": "...so just run with that, yeah? I'm not expecting miracles, here.", "portrait": "janitor" },
+							{ "action": "end" },
+							{ "action": "label", "name": "MailDelivered" },
+							{ "action": "dialogue", "speaker": "TONY", "text": "Hey, uh, still waitin' on that lost item. Not to be passive agressive about it or nothin'.", "portrait": "janitor" },
+							{ "action": "end" },
+							
+							{ "action": "label", "name": "HasCrowbar" },
+							{ "action": "dialogue", "speaker": "TONY", "text": "I'll be re-damned... it's my old crowbar! You haven't aged a day, old friend.", "portrait": "janitor" },
+							{ "action": "dialogue", "speaker": "TONY", "text": "But, hey, that's more 'n enough jawin' from me. You and I had better get that elevator running again, eh?", "portrait": "janitor" },
+							{ "action": "dialogue", "speaker": "TONY", "text": "Why don't you do the honors, kid? Seems appropriate. You're an honorary custodian for the day!", "portrait": "janitor" },
+							{ "action": "end" }
+						],
+						"item_actions": {
+							"stapler": [
+								{ "action": "dialogue", "speaker": "TONY", "text": "I'll polish your office supplies another time, kid. Bit busy at the moment.", "portrait": "janitor" },
+								{ "action": "end" }
+							],
+							"scissors": [
+								{ "action": "dialogue", "speaker": "TONY", "text": "I'll polish your office supplies another time, kid. Bit busy at the moment.", "portrait": "janitor" },
+								{ "action": "end" }
+							], "lens": [
+								{ "action": "dialogue", "speaker": "TONY'S THOUGHTS", "text": "I can weild this here mop 'til the cows come home, but as long as HE roams free... Ball Hell will never truly be clean...", "portrait": "janitor" },
+								{ "action": "end" }
+							], "hatemail": [
+								{ "action": "branch", "type": "itemOwned", "item": "crowbar", "operant": "yn", "yes": "HasCrowbar" },
+								{ "action": "usedefaultactions" },
+								{ "action": "label", "name": "HasCrowbar" },
+								{ "action": "dialogue", "speaker": "TONY", "text": "So whatever happened to the Supply Thief, eh? Finally hauled off to meet justice, eh?", "portrait": "janitor" },
+								{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "I can confirm that he was hauled off.", "portrait": "pman_normal" },
+								{ "action": "end" }
+							], "crowbar": [
+								{ "action": "usedefaultactions" }
+							]
+						}
+				},
+        "Rope": {
+            "x": 152,
+            "y": 158,
+            "direction": 1,
+            "default_actions": [
+                { "action": "getitem", "item": "rope" },
+                { "action": "killsprite", "sprite": "Rope" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "This length of rope seems like it might come in handy. I'd better stash it in my inventory.", "portrait": "pman_normal" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "Y'KNOW, YOU HAVE PRETTY DEEP POCKETS FOR A SPHERE WITH LIMBS.", "portrait": "baal" },
+                { "action": "end" }
+            ],
+            "width": 93,
+            "height": 236,
+            "spritesheet": "rope",
+            "frame": 0,
+            "label": "Dangling Rope"
+        },
+        "Wig": {
+            "x": 92,
+            "y": 228,
+            "direction": 1,
+            "default_actions": [
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "I hope Pinball Man won't mind that I'm taking a break from his 'do.", "portrait": "pman_normal" }
+            ],
+            "width": 51,
+            "height": 88,
+            "spritesheet": "wig",
+            "frame": 0,
+            "label": "Mighty Locks"
+        }
+			}
+}

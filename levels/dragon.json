@@ -1,0 +1,383 @@
+{
+    "bg": "office",
+    "mode": "NORMAL",
+    "leftWall": 0,
+    "rightWall": 450,
+		"music": {
+        "song": "lobby",
+        "loop": true
+    },
+    "preload_actions": [
+			{ "action": "playerdirection", "direction": "right" },
+			{ "action": "branch", "type": "switchValue", "which": "itguy", "value": "free", "operant": "equals", "no": "ITGuyHere" },
+			{ "action": "spriteani", "sprite": "itguy", "animation": "gone" },
+			{ "action": "spritefield", "sprite": "itguy", "field": "label", "value": "Empty Cage" },
+			{ "action": "label", "name": "ITGuyHere" },
+			{ "action": "branch", "type": "switchValue", "which": "bathroom", "value": "finished", "operant": "equals", "yes": "BathroomFinished" },
+			{ "action": "branch", "type": "switchValue", "which": "bathroom", "value": "plugged", "operant": "equals", "yes": "Extinguished" },
+			{ "action": "end" },
+			{ "action": "label", "name": "Extinguished" },
+			{ "action": "spriteani", "sprite": "compyFX", "animation": "blood" },
+			{ "action": "spritefield", "sprite": "compyFX", "field": "label", "value": "Blood Font" },
+			{ "action": "end" },
+			{ "action": "label", "name": "BathroomFinished" },
+			{ "action": "branch", "type": "playerStatus", "which": "ball", "value": true, "operant": "equals", "yes": "KillFX" },
+			{ "action": "branch", "type": "switchValue", "which": "eightball", "value": "bathroom", "operant": "equals", "yes": "Extinguished" },
+			{ "action": "branch", "type": "always", "jumpto": "KillFX" },
+			{ "action": "end" },
+			{ "action": "label", "name": "KillFX" },
+			{ "action": "killsprite", "sprite": "compyFX" },
+			{ "action": "end" }
+    ],
+    "postload_actions": [
+			{ "action": "branch", "type": "switchValue", "which": "dragon", "value": "default", "operant": "equals", "no": "SkipOpen" },
+			{ "action": "dialogue", "speaker": "MR. DRACHENROE", "text": "Seriously? Are you KIDDING me?!", "portrait": "dragon" },
+			{ "action": "dialogue", "speaker": "MR. DRACHENROE", "text": "That computer was ONLINES! It was ON THE LINES! I don't BELIEVE this!", "portrait": "dragon" },
+			{ "action": "dialogue", "speaker": "IT GUY", "text": "Erm... perhaps if you were to try rebooting in safe mode...", "portrait": "itguy" },
+			{ "action": "setswitch", "which": "dragon", "value": "met" },
+      { "action": "label", "name": "SkipOpen" },
+			{ "action": "end" }
+    ],
+    "zones": {
+        "Router": {
+            "left": 170,
+            "top": 130,
+            "width": 40,
+            "height": 60,
+						"label": "Netfear Router",
+            "default_actions": [
+								{ "action": "branch", "type": "switchValue", "which": "itguy", "value": "free", "operant": "equals", "yes": "QuestDone" },
+                { "action": "dialogue", "speaker": "NETFEAR ROUTER", "text": "UNIDENTIFIED NETWORK - No Webzone Access. \n Please Enter Password." },
+								{ "action": "branch", "type": "switchValue", "which": "dragon", "value": "havepw", "operant": "equals", "yes": "HasPassword" },
+								{ "action": "label", "name": "BadOptions" },
+								{ "action": "option", "text": "DragonsRule97" },
+								{ "action": "option", "text": "123password" },
+								{ "action": "option", "text": "Ramses II" },
+								{ "action": "option", "text": "I have no idea", "label": "GiveUp" },
+								{ "action": "dialogue", "speaker": "NETFEAR ROUTER", "text": "Incorrect Password. Please contact your Systems Administrator." },
+								{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "B-but he's currently trapped inside of a cage!", "cage": "I didn't misspell ANYTHING! Not once, not one time!", "portrait": "pman_sweat" },
+								{ "action": "dialogue", "speaker": "NETFEAR ROUTER", "text": "Tell you what. Your frustration amuses me, so I'll let you take Another Stab."},
+                { "action": "branch", "type": "always", "jumpto": "BadOptions" },
+								{ "action": "label", "name": "GiveUp" },
+								{ "action": "end" },
+								{ "action": "label", "name": "HasPassword" },
+								{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "ProudCatDad73...?", "portrait": "pman_sweat" },
+								{ "action": "dialogue", "speaker": "NETFEAR ROUTER", "text": "Aw, you're no fun anymore." },
+								{ "action": "dialogue", "speaker": "MR. D's PC", "text": "*ding* \n Welcome! \n You've got mail!" },
+								{ "action": "dialogue", "speaker": "MR. DRACHENROE", "text": "Well IT Guy, it took you long enough, but I guess incarceration finally motivated you to fix my computer. I guess you can go now.", "portrait": "dragon" },
+								{ "action": "dialogue", "speaker": "IT GUY", "text": "At last! Sweet freedom!", "portrait": "itguy_happy" },
+								{ "action": "dialogue", "speaker": "MR. DRACHENROE", "text": "By the way, there's a projector broken in one of the conference rooms. You'd better go and fix that right away.", "portrait": "dragon" },
+								{ "action": "dialogue", "speaker": "IT GUY", "text": "* SIGH * \n You'd hope it would last a mite longer.", "portrait": "itguy" },
+								{ "action": "freeze" },
+								{ "action": "dim", "opacity": 255, "speed": 20 },
+								{ "action": "wait", "frames": 20 },
+								{ "action": "spriteani", "sprite": "itguy", "animation": "gone" },
+								{ "action": "spritefield", "sprite": "itguy", "field": "label", "value": "Empty Cage" },
+								{ "action": "setswitch", "which": "itguy", "value": "free" },
+								{ "action": "unfreeze" },
+								{ "action": "dialogue", "speaker": "MR. DRACHENROE", "text": "As for you, other... guy... Pachinko man-ball thing... I'm in a good mood! So I'll let you leave here alive.", "portrait": "dragon" },
+								{ "action": "dialogue", "speaker": "MR. DRACHENROE", "text": "Provided you do so RIGHT NOW. And never come into my office uninvited EVER AGAIN.", "portrait": "dragonmad" },
+								{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Y-yes sir...", "cage": "WHAT? I'll be ARRESTED? Put in AIRPORT JAIL?", "portrait": "pman_sweat" },
+								{ "action": "end" },
+								{ "action": "label", "name": "QuestDone" },
+								{ "action": "dialogue", "speaker": "NETFEAR ROUTER", "text": "SIGNAL STRENGTH: Excellent \n ...don't worry, I'll find a way to muck it up again before too long." },
+								{ "action": "end" }
+						]
+        },
+				"Speaker": {
+            "left": 494,
+            "top": 40,
+            "width": 40,
+            "height": 60,
+            "default_actions": [
+								{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "It looks like Drachenroe has one of your PA systems in his office, Baal.", "portrait": "pman_normal" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "OH THAT'S JUST DRACHENROE'S 'PHENOMENAL APTITUTDE' AWARD. FOR EXEMPLARY DESPOTISM.", "portrait": "baal" },
+								{ "action": "dialogue", "speaker": "BAAL", "text": "IF YOU HAD ANY APTITUDE WHATSOEVER YOU MIGHT HAVE RECOGNIZED IT.", "portrait": "baal" },
+								{ "action": "end" }
+            ]
+        },
+				"Fountain": {
+            "left": 514,
+            "top": 0,
+            "width": 60,
+            "height": 40,
+            "default_actions": [
+								{ "action": "branch", "type": "switchValue", "which": "bathroom", "value": "plugged", "operant": "equals", "yes": "Extinguished" },
+								{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "That's strange... there's a showerhead above Drachenroe's computer.", "portrait": "pman_normal" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "LOOKS LIKE A FANCY EYE-WASHING STATION! BETTER STUFF YOUR FACE INTO IT.", "portrait": "baal" },
+								{ "action": "branch", "type": "switchValue", "which": "itguy", "value": "default", "operant": "equals", "yes": "NoITHelp" },
+								{ "action": "dialogue", "speaker": "IT GUY", "text": "Actually, that's a blood-based coolant system. But it seems to be blocked off somehow...", "portrait": "itguy" },
+								{ "action": "label", "name": "NoITHelp" },
+                { "action": "end" },
+								{ "action": "label", "name": "Extinguished" },
+								{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "This is new... I guess plugging that leak in the bathroom also fixed this blood shower. Yuck!", "portrait": "pman_sweat" },
+								{ "action": "dialogue", "speaker": "BAAL", "text": "OH YOU ARE SUCH THE PRUDE! WE'VE ALL GOT BLOOD SHOWERS INSIDE OUR BODY, Y'KNOW.", "portrait": "baal" },
+								{ "action": "dialogue", "speaker": "BAAL", "text": "PRETTY SOON YOU WILL HAVE ONE OUTSIDE OF YOUR BODY. IF YOU DON'T GET BACK TO WORK, I MEAN.", "portrait": "baal" },
+								{ "action": "end" }
+            ]
+        },
+				"PC": {
+            "left": 490,
+            "top": 190,
+            "width": 70,
+            "height": 90,
+						"label": "Mr. D'S PC",
+            "default_actions": [
+								{ "action": "branch", "type": "switchValue", "which": "bathroom", "value": "plugged", "operant": "equals", "yes": "Extinguished" },
+								{ "action": "branch", "type": "switchValue", "which": "bathroom", "value": "finished", "operant": "equals", "yes": "Extinguished" },
+                { "action": "dialogue", "speaker": "MR. D'S PC", "text": "The popups... the spyware... the 36 brands of anti-virus software... it's all too much to take! \n I need some kind of relief...!" },
+                { "action": "end" },
+								{ "action": "label", "name": "Extinguished" },
+								{ "action": "dialogue", "speaker": "MR. D'S PC", "text": "Ahh, sweet relief! I'm raring to crunch spreadsheets again..." },
+                { "action": "end" }
+            ]
+        },
+				"Monitor": {
+            "left": 390,
+            "top": 140,
+            "width": 70,
+            "height": 50,
+						"label": "Monitor",
+            "default_actions": [
+								{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Nghh... can't quite make out what's on the monitor from this angle.", "portrait": "pman_sweat" },
+								{ "action": "branch", "type": "switchValue", "which": "itguy", "value": "free", "operant": "equals", "yes": "QuestDone" },
+								{ "action": "branch", "type": "switchValue", "which": "itguy", "value": "default", "operant": "equals", "yes": "NoITHelp" },
+								{ "action": "dialogue", "speaker": "IT GUY", "text": "Oh! My involuntary vantage point may come in handy here.", "portrait": "itguy" },
+								{ "action": "branch", "type": "switchValue", "which": "bathroom", "value": "plugged", "operant": "equals", "yes": "NeedWifiPW" },
+								{ "action": "dialogue", "speaker": "IT GUY", "text": "At the moment, the computer is utterly unresponsive. Nothing to speak of but the odd blue screen!", "portrait": "itguy" },
+								{ "action": "dialogue", "speaker": "MR. DRACHENROE", "text": "This BLUE screen... has got me SEEING RED! \n So it's BASICALLY A PURPLE SCREEN! \n And I'm NOT OKAY WITH THAT!", "portrait": "dragonmad" },
+								{ "action": "end" },
+								{ "action": "label", "name": "NeedWifiPW" },
+								{ "action": "dialogue", "speaker": "IT GUY", "text": "Dear me! The machine has cooled down and got to running properly again. But it seems Drachenroe is still having a spot of trouble...", "portrait": "itguy" },
+								{ "action": "dialogue", "speaker": "MR. DRACHENROE", "text": "Double you double you double you dot... \n What's a Wee-Fee password? Why can't I enter my webzones? WHERE IS MY SOCIAL NETSCAPE?!", "portrait": "dragonmad" },
+								{ "action": "label", "name": "NoITHelp" },
+								{ "action": "label", "name": "QuestDone" },
+                { "action": "end" }
+            ]
+        },
+				"LeftExit": {
+            "left": 0,
+            "top": 270,
+            "width": 15,
+            "height": 50,
+            "collision_actions": [
+                { "action": "gotolevel", "level": "lobby", "x": 430, "y": 266 },
+                { "action": "end" }
+            ]
+        }
+    },
+    "sprites": {
+		
+			"dragon": {
+				"animations": {
+						"normal": {
+								"rowStartY": 0,
+								"frames": 8,
+								"anispeed": 10,
+								"sheetRow": 0,
+								"frameWidth": 172,
+								"frameHeight": 132
+						}
+				},
+				"animation": "normal",
+				"spritesheet": "dragon",
+				"default_actions": [
+					{ "action": "branch", "type": "switchValue", "which": "itguy", "value": "free", "operant": "equals", "yes": "QuestDone" },
+					{ "action": "dialogue", "speaker": "MR. DRACHENROE", "text": "Alright. Exactly who or what are you supposed to be?", "portrait": "dragon" },
+					{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Er... I suppose I'm... a Pachinko Man?", "portrait": "pman_normal" },
+					{ "action": "dialogue", "speaker": "MR. DRACHENROE", "text": "Okay. So when exactly did you schedule the appointment? The appointment for speaking to me right now?", "portrait": "dragon" },
+					{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Er... your receptionist just let me in... but I thought I could -", "portrait": "pman_sweat" },
+					{ "action": "dialogue", "speaker": "MR. DRACHENROE", "text": "Alright, LISTEN UP, you JERK. I am BEHIND on accounts, BEHIND on analytics, and I CAN'T BLOG ON TO MY TWEET-MAILS.", "portrait": "dragonmad" },
+					{ "action": "dialogue", "speaker": "MR. DRACHENROE", "text": "And I will LITERALLY kill my receptionist for thinking I have ever - IN THIS LIFE - had time to waste on an unemployed DORK like YOU!", "portrait": "dragonmad" },
+					{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "B-but - I'm not unemployed - !", "cage": "This is murder... MURDER! YOU'LL ALL BE GUILTY!", "portrait": "pman_sweat" },
+					{ "action": "dialogue", "speaker": "MR. DRACHENROE", "text": "ARE YOU SURE?! BECAUSE YOU'RE ABOUT TO GET... FIRED!!!", "portrait": "dragonattack" },
+					{ "action": "setswitch", "which": "otan", "value": "cut" },
+					{ "action": "death", "sfx": "FWOOOSH!!! KA-BURNINATION!", "epitaph": "YOU WERE ENVELOPED IN A DRAGON'S FIERY BREATH AND MELTED TO A PUDDLE... NOT AN UNCOOL WAY TO GO, TBH." },
+					{ "action": "end" },
+					{ "action": "label", "name": "QuestDone" },
+					{ "action": "dialogue", "speaker": "MR. DRACHENROE", "text": "...", "portrait": "dragon" },
+					{ "action": "dialogue", "speaker": "PACHINKO MAN", "cage": "This is murder... MURDER! YOU'LL ALL BE GUILTY!", "text": "...", "portrait": "pman_normal" },
+					{ "action": "dialogue", "speaker": "MR. DRACHENROE", "text": "Y'KNOW, I DID WARN YOU.", "portrait": "dragonattack" },
+					{ "action": "death", "sfx": "FWOOOSH!!! KA-BURNINATION!", "epitaph": "YOU WERE ENVELOPED IN A DRAGON'S FIERY BREATH AND MELTED TO A PUDDLE... NOT AN UNCOOL WAY TO GO, TBH." },
+					{ "action": "end" }
+				],
+				"item_actions": {
+					"stapler": [
+						{ "action": "dialogue", "speaker": "MR. DRACHENROE", "text": ". . .", "portrait": "dragon" },
+						{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": ". . .", "cage": "This is murder... MURDER! YOU'LL ALL BE GUILTY!", "portrait": "pman_normal" },
+						{ "action": "dialogue", "speaker": "MR. DRACHENROE", "text": "KRRRREEEEEYYAAAAAUUUGGGGHHH!!!!!!!", "portrait": "dragonattack" },
+						{ "action": "death", "sfx": "FWOOOSH!!! KA-BURNINATION!", "epitaph": "YOU WERE ENVELOPED IN A DRAGON'S FIERY BREATH AND MELTED TO A PUDDLE... NOT AN UNCOOL WAY TO GO, TBH." },
+						{ "action": "end" }
+					],
+					"scissors": [
+						{ "action": "dialogue", "speaker": "MR. DRACHENROE", "text": ". . .", "portrait": "dragon" },
+						{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": ". . .", "cage": "This is murder... MURDER! YOU'LL ALL BE GUILTY!", "portrait": "pman_normal" },
+						{ "action": "dialogue", "speaker": "MR. DRACHENROE", "text": "KRRRREEEEEYYAAAAAUUUGGGGHHH!!!!!!!", "portrait": "dragonattack" },
+						{ "action": "death", "sfx": "FWOOOSH!!! KA-BURNINATION!", "epitaph": "YOU WERE ENVELOPED IN A DRAGON'S FIERY BREATH AND MELTED TO A PUDDLE... NOT AN UNCOOL WAY TO GO, TBH." },
+						{ "action": "end" }
+					],
+					"lens": [
+						{ "action": "branch", "type": "switchValue", "which": "itguy", "value": "free", "operant": "equals", "yes": "QuestDone" },
+						{ "action": "dialogue", "speaker": "MR. DRACHENROE'S THOUGHTS", "text": "Hrmm, what was my password for this computer... was it 'HOW DOES THIS THING WORK HELLO'? Nah, that's my bank password...", "portrait": "dragon" },
+						{ "action": "dialogue", "speaker": "MR. DRACHENROE'S THOUGHTS", "text": "Wait, why am I thinking about this? Don't I PAY people to remember these things for me? \n WHY HAVE THOSE PEOPLE FAILED ME?!", "portrait": "dragonmad" },
+						{ "action": "end" },
+						{ "action": "label", "name": "QuestDone" },
+						{ "action": "dialogue", "speaker": "MR. DRACHENROE'S THOUGHTS", "text": "Now that my webzones are restored, I can resume my all-important task... OF LOOKING UP PICTURES OF CATS.", "portrait": "dragon" },
+						{ "action": "end" }
+					],
+					"hatemail": [
+						{ "action": "branch", "type": "switchValue", "which": "mail", "value": "over", "operant": "equals", "yes": "QuestFinished" },
+						{ "action": "dialogue", "speaker": "MR. DRACHENROE", "text": "...", "portrait": "dragon" },
+						{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "...", "portrait": "pman_normal" },
+						{ "action": "dialogue", "speaker": "MR. DRACHENROE", "text": "You realize I'm going to kill you purely for wasting my time with this, right?", "portrait": "dragonmad" },
+						{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "*sigh* \n I kind of had an idea, yeah.", "cage": "This is murder... MURDER! YOU'LL ALL BE GUILTY!", "portrait": "pman_sweat" },
+						{ "action": "death", "sfx": "FWOOOSH!!! KA-BURNINATION!", "epitaph": "YOU WERE ENVELOPED IN A DRAGON'S FIERY BREATH AND MELTED TO A PUDDLE... NOT AN UNCOOL WAY TO GO, TBH." },
+						{ "action": "end" },
+						{ "action": "label", "name": "QuestFinished" },
+						{ "action": "useitemactions", "item": "hatemail" },
+						{ "action": "end" }
+					]
+				},
+				"width": 172,
+				"height": 132,
+				"x": 328,
+				"y": 102,
+				"label": "Mr. Drachenroe",
+				"direction": 1
+			},
+			
+			"itguy": {
+				"animations": {
+						"normal": {
+								"rowStartY": 180,
+								"frames": 8,
+								"anispeed": 6,
+								"sheetRow": 0,
+								"frameWidth": 162,
+								"frameHeight": 180,
+								"offsetY": 0
+						},
+						"gone": {
+								"rowStartY": 0,
+								"frames": 1,
+								"anispeed": 0,
+								"sheetRow": 0,
+								"frameWidth": 164,
+								"frameHeight": 180
+						}
+				},
+				"default_actions": [
+					{ "action": "branch", "type": "switchValue", "which": "itguy", "value": "free", "operant": "equals", "yes": "QuestDone" },
+					{ "action": "branch", "type": "switchValue", "which": "itguy", "value": "default", "operant": "equals", "no": "AlreadyMet" },
+					{ "action": "dialogue", "speaker": "IT GUY", "text": "Come to get some computer help, have you? Well, I'm afraid you'll need to wait in line. See that great dragon over there?", "portrait": "itguy" },
+					{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "H-he's sort of hard to miss...", "cage": "What are these IGUANAS doing on my coffee table?", "portrait": "pman_sweat" },
+					{ "action": "dialogue", "speaker": "IT GUY", "text": "Right? He's one fiery dragon you DON'T want to pull by the tail - a real titan of terror!", "portrait": "itguy" },
+					{ "action": "dialogue", "speaker": "IT GUY", "text": "And he's refused to release me from this prison until I can tell him how to fix the 'mail-zone' on his 'web-box'.", "portrait": "itguy" },
+					{ "action": "dialogue", "speaker": "MR. DRACHENROE", "text": "I'M PRESSING EVERY KEY AND NOTHING IS HAPPENING!", "portrait": "dragonmad" },
+					{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "It doesn't sound like he'll be very receptive to your instructions.", "portrait": "pman_normal" },
+					{ "action": "dialogue", "speaker": "IT GUY", "text": "Listen, I don't know who you are, but you've got to serve as my proxy out there and troubleshoot Drachenroe into submission.", "portrait": "itguy" },
+					{ "action": "dialogue", "speaker": "IT GUY", "text": "The fate of tech support itself hangs in the balance... ", "portrait": "itguy" },
+					{ "action": "setswitch", "which": "itguy", "value": "met" },
+					{ "action": "end" },
+					
+					{ "action": "label", "name": "QuestDone" },
+					{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "The IT Guy is free now! Good for him.", "portrait": "pman_normal" },
+					{ "action": "dialogue", "speaker": "BAAL", "text": "EXACTLY! HE'S FREE TO TOIL ENDLESSLY FOR NO PAY HERE IN GOOD OL' BALL HELL.", "portrait": "baal" },
+					{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "...maybe I shouldn't think too hard about this.", "portrait": "pman_sweat" },
+					{ "action": "end" },
+					
+					{ "action": "label", "name": "AlreadyMet" },
+					{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "You know, something occurred to me since we last spoke.", "cage": "You think there's a lot of, uh, lot of anger flowing around this island?", "portrait": "pman_normal" },
+					{ "action": "dialogue", "speaker": "IT GUY", "text": "What would that be, my pearl-shaped pal?", "portrait": "itguy" },
+					{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "I KNOW ABSOLUTELY NOTHING ABOUT TECH SUPPORT.", "cage": "Kind of a pubescent volatility?", "portrait": "pman_sweat" },
+					{ "action": "dialogue", "speaker": "IT GUY", "text": "Well, you're in the thick of the crunch now, mate. There's no better time to learn.", "portrait": "itguy" },
+					{ "action": "dialogue", "speaker": "IT GUY", "text": "You ought to cross-examine the devices, diagnose their problems, and track down their sources.", "portrait": "itguy" },
+					{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "That's, um, pretty vague. Do you have any specific IT knowledge that could help me?", "portrait": "pman_normal" },
+					{ "action": "dialogue", "speaker": "IT GUY", "text": "Oh! And try turning the computer off and then back on again.", "portrait": "itguy" },
+					{ "action": "dialogue", "speaker": "IT GUY", "text": "...that's about the best I've got.", "portrait": "itguy" },
+					{ "action": "end" }
+				],
+				"animation": "normal",
+				"spritesheet": "itguy_cage",
+				"item_actions": {
+					"rope": [
+						{ "action": "branch", "type": "switchValue", "which": "itguy", "value": "free", "operant": "equals", "no": "ITGuyHere" },
+						{ "action": "useitemactions", "item": "rope" },
+						{ "action": "label", "name": "ITGuyHere" },
+						{ "action": "dialogue", "speaker": "IT GUY", "text": "Brilliant! I could use that rope as a ladder and climb down to freedom! If it weren't for, you know, the iron bars.", "portrait": "itguy" },
+						{ "action": "dialogue", "speaker": "IT GUY", "text": "You cleft.", "portrait": "itguy" },
+						{ "action": "end" }
+					],
+					"scissors": [
+						{ "action": "branch", "type": "switchValue", "which": "itguy", "value": "free", "operant": "equals", "no": "ITGuyHere" },
+						{ "action": "useitemactions", "item": "scissors" },
+						{ "action": "label", "name": "ITGuyHere" },
+						{ "action": "dialogue", "speaker": "IT GUY", "text": "Uhh, I don't think those scissors will break these bars. You'd be better off dealing with this in an orthodox manner.", "portrait": "itguy" },
+						{ "action": "end" }
+					],
+					"lens": [
+						{ "action": "branch", "type": "switchValue", "which": "itguy", "value": "free", "operant": "equals", "no": "ITGuyHere" },
+						{ "action": "useitemactions", "item": "lens" },
+						{ "action": "label", "name": "ITGuyHere" },
+						{ "action": "dialogue", "speaker": "IT GUY'S THOUGHTS", "text": "Eh? What type of magnifying glass is that luddite waving 'round the room? Is he look for clues?", "portrait": "itguy" },
+						{ "action": "dialogue", "speaker": "IT GUY'S THOUGHTS", "text": "If that's how he conducts an investigation, I expect he'll have as much luck as a Kadinsky-Weiler search algorithm.", "portrait": "itguy" },
+						{ "action": "dialogue", "speaker": "IT GUY'S THOUGHTS", "text": "And that algorithm is particularly ineffective!", "portrait": "itguy" },
+						{ "action": "end" }
+					]
+				},
+				"label": "IT Guy",
+				"width": 164,
+				"height": 180,
+				"x": 82,
+				"y": 90,
+				"direction": 1
+			},
+			
+			"compyFX": {
+				"animations": {
+					"fire": {
+							"rowStartY": 0,
+							"frames": 8,
+							"anispeed": 9,
+							"sheetRow": 0,
+							"frameWidth": 76,
+							"frameHeight": 126
+					},
+					"blood": {
+							"rowStartY": 126,
+							"frames": 8,
+							"anispeed": 8,
+							"sheetRow": 0,
+							"frameWidth": 70,
+							"frameHeight": 242,
+							"offsetY": 34,
+							"offsetX": 24
+					}
+				},
+				"default_actions": [
+					{ "action": "branch", "type": "switchValue", "which": "bathroom", "value": "plugged", "operant": "equals", "yes": "Extinguished" },
+					{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Th-that computer has burst into flames!", "cage": "HOW'D IT GET BURNED? HOW'D IT GET BURNED?!", "portrait": "pman_sweat" },
+					{ "action": "dialogue", "speaker": "BAAL", "text": "UHH, YEAH? THIS IS HELL, THE MAJORITY OF OBJECTS YOU ENCOUNTER SHOULD BY ALL RIGHTS BE ON FIRE.", "portrait": "baal" },
+					{ "action": "branch", "type": "switchValue", "which": "itguy", "value": "default", "operant": "equals", "yes": "NoITHelp" },
+					{ "action": "dialogue", "speaker": "IT GUY", "text": "Erm, sorry - this seems like a classic case of overheating. We need to find a way to cool the case down!", "portrait": "itguy" },
+					{ "action": "dialogue", "speaker": "BAAL", "text": "MAYBE YOU SLOUCHERS HAD BETTER COOL YOURSELVES DOWN. HUH? GET OFFA MY CASE.", "portrait": "baal" },
+					{ "action": "label", "name": "NoITHelp" },
+					{ "action": "end" },
+					{ "action": "label", "name": "Extinguished" },
+					{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "This is new... I guess plugging that leak in the bathroom also fixed this blood shower. Yuck!", "cage": "HOW'D IT GET BURNED? HOW'D IT GET BURNED? HOW'D IT GET BURNED?!", "portrait": "pman_sweat" },
+					{ "action": "dialogue", "speaker": "BAAL", "text": "OH YOU ARE SUCH THE PRUDE! WE'VE ALL GOT BLOOD SHOWERS INSIDE OUR BODY, Y'KNOW.", "portrait": "baal" },
+					{ "action": "dialogue", "speaker": "BAAL", "text": "PRETTY SOON YOU WILL HAVE ONE OUTSIDE OF YOUR BODY. IF YOU DON'T GET BACK TO WORK, I MEAN.", "portrait": "baal" },
+					{ "action": "end" }
+				],
+				"animation": "fire",
+				"label": "Flash Fire",
+				"spritesheet": "compyfx",
+				"width": 50,
+				"height": 142,
+				"x": 538,
+				"y": 130,
+				"direction": 1
+			}
+
+    }
+}

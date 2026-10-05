@@ -1,0 +1,31 @@
+{
+    "bg": "options",
+    "mode": "MENU",
+	"return": true,
+    "buttons": [
+        {
+            "text": "Movement: Arrow Keys",
+            "top": 40,
+            "press": "controls",
+            "selected": false
+        },
+        {
+            "text": "Text Speed: Normal",
+            "top": 130,
+            "press": "textspeed",
+            "selected": false
+        },
+        {
+            "text": "Volume: Normal",
+            "top": 220,
+            "press": "volume",
+            "selected": false
+        },
+        {
+            "text": "Return",
+            "top": 310,
+            "press": "return",
+            "selected": false
+        }
+    ]
+}

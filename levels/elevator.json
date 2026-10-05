@@ -1,0 +1,29 @@
+{
+    "bg": "elevator",
+    "mode": "NORMAL",
+		"music": {
+        "song": "opening",
+        "loop": true
+    },
+    "leftWall": 0,
+    "rightWall": 600,
+    "preload_actions": [],
+		"monologue": true,
+    "postload_actions": [
+			{"action": "wait", "frames": 30},
+			{"action":"dialogue", "text": "...and that was the end of my stay in Ball Hell."},
+			{"action":"dialogue", "text": "As I rose back to the land of the living, the strange realm I'd escaped from began to seem like a blur. I thought again of the life I'd left behind."},
+			{"action":"dialogue", "text": "I was coming home. Home to the debt, to problems at the office... to silver balls, tumbling through pins like so many -"},
+			{"action": "music", "song": "elevator", "loop": false },
+			{"action":"dialogue", "text": "* DING *"},
+			{"action":"dialogue", "text": "Wait. Was that - was that my stop? I'm at the surface already?"},
+			{"action":"dialogue", "speaker": "???", "text": "FLOOR B1. \n JUST DESSERTS AND SEALING YOUR DOOM. \n PLEASE DISEMBARK."},
+			{"action":"dialogue", "text": "I - I think there's been some mistake -"},
+			{"action": "music", "song": "showdown", "loop": true },
+			{"action":"dialogue", "speaker": "???", "text": "I'M AFRAID DISEMBARKING IS MANDATORY, PA-CHUMP-O MAN... THIS ELEVATOR ISN'T GOING ANYWHERE WITHOUT MY SAY. BWA HA HA!"},
+			{"action":"gotolevel","level":"baalroom","x":170,"y":270},
+			{"action":"end"}
+    ],
+    "zones": {},
+    "sprites": {}
+}

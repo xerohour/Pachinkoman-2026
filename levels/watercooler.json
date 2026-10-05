@@ -1,0 +1,331 @@
+{
+    "bg": "watercooler",
+    "mode": "NORMAL",
+    "leftWall": 50,
+    "rightWall": 550,
+		"music": {
+        "song": "demo",
+        "loop": true
+    },
+    "preload_actions": [
+				{ "action": "branch", "type": "switchValue", "which": "mail", "value": "over", "operant": "equals", "yes": "KeepMorven" },
+				{ "action": "killsprite", "sprite": "TinyMorven" },
+				{ "action": "label", "name": "KeepMorven" },
+		
+        { "action": "branch", "type": "switchValue", "which": "pinball", "value": "haircut", "operant": "equals", "no": "KeepHair" },
+        { "action": "spriteani", "sprite": "PinballMan", "animation": "haircut" },
+        { "action": "label", "name": "KeepHair" },
+        { "action": "end" }
+    ],
+	"postload_actions": [
+		{ "action": "branch", "type": "switchValue", "which": "watercooler", "value": "unseen", "operant": "equals", "no": "seenwater" },
+		{ "action": "dialogue", "speaker": "BAAL", "text": "PLANNING TO LOAF IT UP BY THE WATER COOLER, EH? THINKING YOU'LL CHAT UP LAST NIGHT'S SITCOMS WITH YOUR FELLOW GADABOUTS?", "portrait": "baal" },
+		{ "action": "dialogue", "speaker": "BAAL", "text": "WELL, LOAF CAREFULLY, FOOLISH MORTAL. FOR THE ONLY WATER YOU'LL FIND IN THIS COOLER... IS TEARS OF UNDRINKABLE SADNESS! HA HA HA!", "portrait": "baal" },
+		{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "I'm... not thirsty, actually.", "cage": "Hey, where's that chocolate cake?", "portrait": "pman_sarcastic" },
+		{ "action": "dialogue", "speaker": "BAAL", "text": "DRAT! NOBODY EVER DRINKS THE TEARS OF UNDRINKABLE SADNESS. I SHOULD PUT PRETZELS IN THE BREAK ROOM OR SOMETHING.", "portrait": "baal" },
+		{ "action": "dialogue", "speaker": "BAAL", "text": "...ALSO I SHOULD INVEST IN A BREAK ROOM.", "portrait": "baal" },
+		{ "action": "setswitch", "which": "watercooler", "value": "full" },
+		{ "action": "label", "name": "seenwater" },
+		{ "action": "end" }
+    ],
+    "zones": {
+        "Downhill": {
+            "left": 370,
+            "top": 200,
+            "width": 90,
+            "height": 70,
+            "default_actions": [
+                { "action": "playerdirection", "direction": "left" },
+                { "action": "gotolevel", "level": "alley", "x": 545, "y": 270 },
+                { "action": "end" }
+            ],
+            "label": "Cubicle Valley"
+        },
+        "Hallway": {
+            "left": 0,
+            "top": 250,
+            "width": 100,
+            "height": 65,
+            "default_actions": [
+                { "action": "gotolevel", "level": "hallway", "x": 494, "y": 264 },
+                { "action": "end" }
+            ],
+            "collision_actions": [
+                { "action": "gotolevel", "level": "hallway", "x": 494, "y": 264 },
+                { "action": "end" }
+            ],
+            "label": "Hallway Entrance"
+        },
+        "Cavern": {
+            "left": 500,
+            "top": 250,
+            "width": 100,
+            "height": 65,
+            "default_actions": [
+                { "action": "playerdirection", "direction": "right" },
+                { "action": "gotolevel", "level": "cavern", "x": 100, "y": 264 },
+                { "action": "end" }
+            ],
+            "collision_actions": [
+                { "action": "playerdirection", "direction": "right" },
+                { "action": "gotolevel", "level": "cavern", "x": 90, "y": 264 },
+                { "action": "end" }
+            ],
+            "label": "Cavern"
+        },
+        "WeepingDemon": {
+            "left": 180,
+            "top": 10,
+            "width": 90,
+            "height": 70,
+            "default_actions": [
+                { "action": "branch", "type": "switchValue", "which": "pinball", "value": "haircut", "operant": "equals", "yes": "Haircut" },
+                { "action": "dialogue", "speaker": "PINBALL MAN", "text": "Hey, you don't need to worry about that guy, man! He was my old Guard Demon back when I was a cubicle rat.", "portrait": "pinball_chat" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Oh, really? How'd you give him the slip?", "cage": "How, in the name of Zeus' BUTTHOLE, did you get out of your cell?", "portrait": "pman_normal" },
+                { "action": "dialogue", "speaker": "PINBALL MAN", "text": "Not sure! I just explained my views on foreign policy and gun control to him one day, and he's been hanging out up there ever since.", "portrait": "pinball_chat" },
+                { "action": "end" },
+                { "action": "label", "name": "Haircut" },
+                { "action": "dialogue", "speaker": "PINBALL MAN", "text": "Hey, you don't need to worry about that guy, man! He was my old Guard Demon back when I was a cubicle rat.", "portrait": "pinball_shaved_chat" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Oh, really? How'd you give him the slip?", "cage": "How, in the name of Zeus' BUTTHOLE, did you get out of your cell?", "portrait": "pman_normal" },
+                { "action": "dialogue", "speaker": "PINBALL MAN", "text": "Not sure! I just explained my views on foreign policy and gun control to him one day, and he's been hanging out up there ever since.", "portrait": "pinball_shaved_chat" },
+                { "action": "end" }
+            ],
+						"item_actions": {
+								"lens": [
+										{ "action": "dialogue", "speaker": "GUARD DEMON'S THOUGHTS", "text": "I SWEAR, IF HE INVOKES THE MIDDLE CLASS ONE MORE TIME...!" },
+										{ "action": "end" }
+								],
+								"hatemail": [
+									{ "action": "branch", "type": "switchValue", "which": "mail", "value": "over", "operant": "equals", "yes": "QuestFinished" },
+									{ "action": "dialogue", "speaker": "WEEPING DEMON", "text": "GUARD DEMONS ARE NEVER THIEVES. *snf* \n WE'D HAVE TO ARREST OURSELVES, SEE. GETS TOO CONFUSING. *weep*" },
+									{ "action": "end" },
+									{ "action": "label", "name": "QuestFinished" },
+									{ "action": "useitemactions", "item": "hatemail" },
+									{ "action": "end" }
+								]
+						},
+            "label": "Weeping Demon"
+        },
+        "WaterCooler": {
+            "left": 190,
+            "top": 120,
+            "width": 90,
+            "height": 90,
+            "default_actions": [
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Well, I don't plan on drinking out of this thing any time soon.", "portrait": "pman_normal" },
+				{ "action": "dialogue", "speaker": "BAAL", "text": "OH, DON'T BE A BABY. IT'S ONLY TOXIC TO, LIKE 80% OF ALL LIFEFORMS.", "portrait": "baal" },
+                { "action": "end" }
+            ],
+            "item_actions": { "mug": [
+                    { "action": "branch", "type": "itemFieldValue", "item": "mug", "field": "contents", "value": "empty", "operant": "equals", "yes": "Empty" },
+                    { "action": "branch", "type": "itemFieldValue", "item": "mug", "field": "contents", "value": "onlyblood", "operant": "equals", "yes": "JustBlood" },
+                    { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Hmm... empty already?", "portrait": "pman_normal" },
+                    { "action": "dialogue", "speaker": "WEEPING DEMON", "text": "I'M CRYING AS FAST AS I CAN ALREADY WEEO WEOO BOOHOO" },
+                    { "action": "end" },
+                    { "action": "label", "name": "Empty" },
+                    { "action": "setitemfield", "item": "mug", "field": "contents", "value": "onlytears" },
+                    { "action": "dialogue", "text": "\n You filled MURMUR'S MUG with DEMON TEARS! \n But it's still half-empty..." },
+                    { "action": "dialogue", "speaker": "BAAL", "text": "YUMMY! YOU SHOULD DRINK THAT TASTY BEVERAGE RIGHT AWAY, IMO.", "portrait": "baal" },
+                    { "action": "end" },
+                    { "action": "label", "name": "JustBlood" },
+                    { "action": "setitemfield", "item": "mug", "field": "contents", "value": "bloodmix" },
+                    { "action": "dialogue", "text": "\n You topped off MURMUR'S MUG with DEMON TEARS! \n The BLOOD MIXTURE is complete!" },
+                    { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "That's teriffic! ...I think?", "portrait": "pman_normal" },
+                    { "action": "dialogue", "speaker": "BAAL", "text": "BLOOD MIXTURE IS DELICIOUS! YOU SHOULD REALLY TRY IT SOMETIME.", "portrait": "baal" },
+                    { "action": "end" }
+                ]
+            },
+            "label": "Water Cooler"
+        },
+        "Speaker": {
+            "left": 260,
+            "top": 270,
+            "width": 70,
+            "height": 40,
+            "default_actions": [
+                { "action": "dialogue", "speaker": "BAAL", "text": "WOW, WHAT THE HECK! WHO BURIED THIS THING HERE? I DON'T EVEN KNOW WHAT THAT IS.", "portrait": "baal" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "It sounds like your voice is coming out of it.", "portrait": "pman_sarcastic" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "MY VOICE COMES OUT OF EVERYTHING! I'M OMNIPRESENT, REMEMBER? ANYWAY DON'T WALK ON THAT, IT'S EXPENSIVE.", "portrait": "baal" },
+                { "action": "end" }
+            ]
+        },
+        "BurningHorizon": {
+            "left": 280,
+            "top": 50,
+            "width": 200,
+            "height": 100,
+            "default_actions": [
+                { "action": "dialogue", "speaker": "BAAL", "text": "LOOK UPON MY WORLD, YE FLIGHTY, AND DESPAIR! AS FAR AS THE EYE CAN SEE, SINNERS TOIL TO PAY FOR THEIR BALL-RELATED CRIMES.", "portrait": "baal" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Are there really that many people in hell because of balls?", "portrait": "pman_normal" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "OKAY, GRANTED, I LEAN A BIT ON TEMPS FROM THE REST OF OFFICE HELL. STILL THOUGH! LOOK! DESPAIR!", "portrait": "baal" },
+                { "action": "end" }
+            ],
+            "label": "Burning Horizon"
+        }
+    },
+    "sprites": {
+				"TinyMorven": {
+					"x": 400,
+					"y": 20,
+					"movement": {
+							"type": "walk",
+							"bounce": "walkaround",
+							"xspeed": 0.2,
+							"radius": 100
+					},
+          "direction": 1,
+					"width": 14,
+					"height": 22,
+					"spritesheet": "tinymorven",
+					"frame": 0,
+					"default_actions": [
+						{ "action": "dialogue", "speaker": "MORVEN", "text": "Unhand me, you blinded brute!!", "portrait": "morven_unmasked" },
+						{ "action": "dialogue", "speaker": "MORVEN", "text": "Wait, no. Maybe lower your altitude, and THEN unhand me?", "portrait": "morven_unmasked" },
+						{ "action": "end" }
+					]
+				},
+        "PinballMan": {
+            "x": 306,
+            "y": 162,
+            "direction": 1,
+            "default_actions": [
+                { "action": "branch", "type": "switchValue", "which": "pinball", "value": "default", "operant": "equals", "yes": "FirstMeeting" },
+                { "action": "branch", "type": "switchValue", "which": "pinball", "value": "met", "operant": "equals", "yes": "SecondMeeting" },
+                { "action": "branch", "type": "playerStatus", "which": "wig", "value": true, "operant": "equals", "yes": "WearingWig" },
+                { "action": "branch", "type": "switchvalue", "value": "haircut", "operant": "equals", "yes": "LostWig" },
+                { "action": "label", "name": "FirstMeeting" },
+                { "action": "dialogue", "speaker": "PINBALL MAN", "text": "Whoah, righteous! Another Pinball Man had the cajones to blow that cubicle-flavored popsicle stand!", "portrait": "pinball_chat" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Actually, I'm... *sigh*... a Pachinko Man.", "cage": "Well, two Rogers don't make a RIGHT!", "portrait": "pman_sarcastic" },
+                { "action": "dialogue", "speaker": "PINBALL MAN", "text": "Look, friend, I don't know the Chinese word for it. All I know is that in my book, you're an ALL-AMERICAN HERO.", "portrait": "pinball_flag" },
+                { "action": "dialogue", "speaker": "PINBALL MAN", "text": "Not blown away by that combover, though. You need some pointers on mane-tamin'? Or, um, other stuff?", "portrait": "pinball_chat" },
+                { "action": "setswitch", "which": "pinball", "value": "met" },
+                { "action": "branch", "type": "always", "jumpto": "Choices" },
+                { "action": "label", "name": "SecondMeeting" },
+                { "action": "dialogue", "speaker": "PINBALL MAN", "text": "Need some more wisdom from the Heartland, my all-too-excellent friend?", "portrait": "pinball_chat" },
+                { "action": "label", "name": "Choices" },
+                { "action": "option", "text": "How do I get out of here?", "label": "Escape" },
+                { "action": "option", "text": "What's in the cave?", "label": "Cave" },
+                { "action": "option", "text": "Let's talk HAIR", "label": "Hair" },
+                { "action": "option", "text": "Later, gator", "label": "End" },
+                { "action": "label", "name": "Escape" },
+                { "action": "dialogue", "speaker": "PINBALL MAN", "text": "You're blowing the popsicle stand of all popsicle stands...? WHOOAH!! You are my kind of crazy, dude!", "portrait": "pinball_chat" },
+                { "action": "dialogue", "speaker": "PINBALL MAN", "text": "...I say that, but you're actually a little crazier than I am. I mean, this is hell, bro! Not a lot of happy endings around here.", "portrait": "pinball_chat" },
+                { "action": "dialogue", "speaker": "PINBALL MAN", "text": "You should scope out that hallway over to the left, though! Maybe one of the dudes over there has some ideas.", "portrait": "pinball_chat" },
+                { "action": "dialogue", "speaker": "PINBALL MAN", "text": "Just make sure you stay out of that cave over on the right, okay? Trust me on this one, man!", "portrait": "pinball_chat" },
+                { "action": "branch", "type": "always", "jumpto": "Choices" },
+                { "action": "label", "name": "Cave" },
+                { "action": "dialogue", "speaker": "PINBALL MAN", "text": "Look, I know you're Asian and you probably know Karate or whatever... but the monster in there? You can't take 'im.", "portrait": "pinball_chat" },
+                { "action": "dialogue", "speaker": "PINBALL MAN", "text": "They say that if he catches you creepin' in his lair, he'll suck literally all of your blood.", "portrait": "pinball_chat" },
+                { "action": "dialogue", "speaker": "PINBALL MAN", "text": "And then, he'll chase it down by sucking the tears straight out of your eyes! At least, that's what I hear.", "portrait": "pinball_chat" },
+                { "action": "dialogue", "speaker": "PINBALL MAN", "text": "I could wipe the floor with the guy if I wanted to, but, ah... I'm more of a pre-emptive strike kind of guy, you know?", "portrait": "pinball_chat" },
+                { "action": "branch", "type": "always", "jumpto": "Choices" },
+                { "action": "label", "name": "Hair" },
+                { "action": "dialogue", "speaker": "PINBALL MAN", "text": "Look, pal, having great hair isn't about what's on your head. It's about what's in your heart.", "portrait": "pinball_chat" },
+                { "action": "dialogue", "speaker": "PINBALL MAN", "text": "I mean, check out these mighty locks! You think those were easy to churn out in a dark, product-less wasteland?", "portrait": "pinball_chat" },
+                { "action": "dialogue", "speaker": "PINBALL MAN", "text": "...You know what my one regret is in all o' this hell business?", "portrait": "pinball_chat" },
+                { "action": "dialogue", "speaker": "PINBALL MAN", "text": "I'm stuck here on a this featureless gray hillside... totally alone... and there's nobody around to compliment my hair!", "portrait": "pinball_chat" },
+                { "action": "dialogue", "speaker": "PINBALL MAN", "text": "I wish I could send my hair on tour, y'know? Get someone to carry it around for me. It'd be like Woodstock for follicles!", "portrait": "pinball_flag" },
+                { "action": "branch", "type": "always", "jumpto": "Choices" },
+                { "action": "label", "name": "End" },
+                { "action": "dialogue", "speaker": "PINBALL MAN", "text": "Tubular! Catch you on the flip side!", "portrait": "pinball_chat" },
+                { "action": "end" },
+                { "action": "label", "name": "WearingWig" },
+                { "action": "dialogue", "speaker": "PINBALL MAN", "text": "*sniff* My baby's finally leavin' the nest... knock 'em dead, you heartbreaker, you!", "portrait": "pinball_shaved_chat" },
+                { "action": "end" },
+                { "action": "label", "name": "LostWig" },
+                { "action": "dialogue", "speaker": "PINBALL MAN", "text": "Yo, my man! I've been meaning to ask you... what ever happened to my hair?", "portrait": "pinball_shaved_chat" },
+                { "action": "option", "text": "Gave it to Van Halen", "label": "VanHalen" },
+                { "action": "option", "text": "Hung it in the Louvre!", "label": "Louvre" },
+                { "action": "option", "text": "Hung it outside a girl's bathroom", "label": "Bathroom" },
+                { "action": "label", "name": "VanHalen" },
+                { "action": "dialogue", "speaker": "PINBALL MAN", "text": "Righteous! I've always said, the only thing that could make Eddie more awesome is a lil' piece of my head.", "portrait": "pinball_shaved_chat" },
+                { "action": "end" },
+                { "action": "label", "name": "Louvre" },
+                { "action": "dialogue", "speaker": "PINBALL MAN", "text": "The... Loof? What is Loof?", "portrait": "pinball_shaved_chat" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "It's a museum! In France?", "cage": "WELL VIVA LA FRIGGIN' FRANCE!", "portrait": "pman_normal" },
+                { "action": "dialogue", "speaker": "PINBALL MAN", "text": ". . .", "portrait": "pinball_shaved_steady" },
+                { "action": "dialogue", "speaker": "PINBALL MAN", "text": "WHAT.", "portrait": "pinball_shaved_steady" },
+                { "action": "end" },
+                { "action": "label", "name": "Bathroom" },
+                { "action": "dialogue", "speaker": "PINBALL MAN", "text": "Hmm. I kinda wish it would have gone farther... but maybe it'll meet a nice tuft of girl hair there and settle down... *sniff*", "portrait": "pinball_shaved_chat" },
+                { "action": "end" }
+            ],
+            "item_actions": { "stapler": [
+                    { "action": "branch", "type": "switchValue", "which": "pinball", "value": "haircut", "operant": "equals", "yes": "Haircut" },
+                    { "action": "dialogue", "speaker": "PINBALL MAN", "text": "Um, nice stapler, buddy. What, are you going to a costume party as the guy from 'Office Space'?", "portrait": "pinball_chat" },
+                    { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "I fear I'm missing a cultural reference.", "portrait": "pman_sarcastic" },
+                    { "action": "dialogue", "speaker": "PINBALL MAN", "text": "Huh? Oh, right! What I mean is, are you COSPLAYING as the guy from 'Office Space'?", "portrait": "pinball_chat" },
+                    { "action": "end" },
+                    { "action": "label", "name": "Haircut" },
+                    { "action": "dialogue", "speaker": "PINBALL MAN", "text": "Um, nice stapler, buddy. What, are you going to a costume party as the guy from 'Office Space'?", "portrait": "pinball_shaved_chat" },
+                    { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "I fear I'm missing a cultural reference.", "portrait": "pman_sarcastic" },
+                    { "action": "dialogue", "speaker": "PINBALL MAN", "text": "Huh? Oh, right! What I mean is, are you COSPLAYING as the guy from 'Office Space'?", "portrait": "pinball_shaved_chat" },
+                    { "action": "end" }
+                ],
+                "scissors": [
+                    { "action": "branch", "type": "switchValue", "which": "pinball", "value": "haircut", "operant": "equals", "yes": "AlreadyCut" },
+                    { "action": "branch", "type": "switchValue", "which": "pinball", "value": "met", "operant": "equals", "yes": "TheCuttening" },
+                    { "action": "dialogue", "speaker": "PINBALL MAN", "text": "Hey, these curls need some winin' and dinin' before they're ready for a trim! Put the clippers away for a sec.", "portrait": "pinball_chat" },
+                    { "action": "end" },
+                    { "action": "label", "name": "TheCuttening" },
+                    { "action": "dialogue", "speaker": "PINBALL MAN", "text": "Whoah... those clippers of yours are givin' me a radical new idea!", "portrait": "pinball_chat" },
+                    { "action": "dialogue", "speaker": "PINBALL MAN", "text": "You're trying to escape from this dump, right? Well, how 'bout you gimme a trim and take my hair along with you?", "portrait": "pinball_chat" },
+                    { "action": "dialogue", "speaker": "PINBALL MAN", "text": "Think about it! You get to cover up that mess on your forehead... the surface world gets to see my flaxen awesomeness...", "portrait": "pinball_chat" },
+                    { "action": "dialogue", "speaker": "PINBALL MAN", "text": "It's a win-win, bro! Whaddya say?", "portrait": "pinball_chat" },
+                    { "action": "option", "text": "Cut Pinball Man's hair", "label": "GetHair" },
+                    { "action": "option", "text": "Another time, maybe", "label": null },
+                    { "action": "dialogue", "speaker": "PINBALL MAN", "text": "Aww, come on! This 'Can't-Do' Spirit is exactly why you people lost back in 'Nam!", "portrait": "pinball_chat" },
+                    { "action": "end" },
+                    { "action": "label", "name": "GetHair" },
+                    { "action": "dialogue", "text": "Snip snip snip... \n Trim trim trim..." },
+                    { "action": "statusfx", "which": "wig", "value": true },
+                    { "action": "spriteani", "sprite": "PinballMan", "animation": "haircut" },
+                    { "action": "setswitch", "which": "pinball", "value": "haircut" },
+                    { "action": "dialogue", "speaker": "BAAL", "text": "PINBALL MAN'S HAIR has joined the party!", "portrait": "baal" },
+                    { "action": "dialogue", "speaker": "PINBALL MAN", "text": "*sniff* My baby's finally leavin' the nest... knock 'em dead, you heartbreaker, you!", "portrait": "pinball_shaved_chat" },
+                    { "action": "end" },
+                    { "action": "label", "name": "AlreadyCut" },
+                    { "action": "dialogue", "speaker": "PINBALL MAN", "text": "The scalp needs some time to work its magic, bro! Give it some space.", "portrait": "pinball_shaved_chat" },
+                    { "action": "end" }
+                ], "lens": [
+										{ "action": "dialogue", "speaker": "PINBALL MAN'S THOUGHTS", "text": "Widdly widdly widdly weeooowww!", "portrait": "pinball_shaved_chat" },
+										{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "His... his inner monologue is a guitar solo. I don't know what else I was expecting.", "portrait": "pman_sweat" },
+										{ "action": "end" }
+								],
+								"hatemail": [
+									{ "action": "branch", "type": "switchValue", "which": "mail", "value": "over", "operant": "equals", "yes": "QuestFinished" },
+									{ "action": "dialogue", "speaker": "PINBALL MAN", "text": "Chill out, bro! The only thing I steal is the hearts of All Ladies. But I have seen a supply thief sneakin' around these parts...", "portrait": "pinball_shaved_chat" },
+									{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Really? What did they look like? Why didn't you try and stop them?!", "portrait": "pman_normal" },
+									{ "action": "dialogue", "speaker": "PINBALL MAN", "text": "Hey, burglary is just the free market at work, man! I bet all that thieving was, like, creating jobs. Or something.", "portrait": "pinball_shaved_flag" },
+									{ "action": "dialogue", "speaker": "PINBALL MAN", "text": "It's weird, though, I can't seem to remember the dude's face. Or what 'the free market' is.", "portrait": "pinball_shaved_chat" },
+									{ "action": "end" },
+									{ "action": "label", "name": "QuestFinished" },
+									{ "action": "useitemactions", "item": "hatemail" },
+									{ "action": "end" }
+								]
+            },
+            "width": 92,
+            "height": 106,
+            "spritesheet": "pinballman",
+            "animations": {
+                "normal": {
+										"frames": 4,
+										"anispeed": 5,
+										"sheetRow": 0
+                },
+                "haircut": {
+										"frames": 4,
+										"anispeed": 5,
+										"sheetRow": 1,
+										"frameWidth": 74,
+										"frameHeight": 96,
+										"offsetX": 4,
+										"offsetY": 4
+                }
+            },
+            "animation": "normal",
+            "frame": 0,
+            "label": "Pinball Man"
+        }
+    }
+}

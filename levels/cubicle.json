@@ -1,0 +1,294 @@
+{
+    "bg": "cubicle",
+    "mode": "NORMAL",
+    "leftWall": 220,
+    "rightWall": 600,
+    "music": {
+        "song": "demo",
+        "loop": true
+    },
+    "preload_actions": [
+        { "action": "pausesprite", "sprite": "Guard" },
+        { "action": "branch", "type": "switchValue", "which": "guard", "value": "justcarried", "operant": "equals", "yes": "ShowGuard" },
+        { "action": "killsprite", "sprite": "Guard" },
+        { "action": "label", "name": "ShowGuard" },
+        { "action": "branch", "type": "itemOwned", "item": "stapler", "operant": "yn", "no": "NoStapler" },
+        { "action": "killsprite", "sprite": "Stapler" },
+        { "action": "label", "name": "NoStapler" },
+        { "action": "branch", "type": "itemOwned", "item": "scissors", "operant": "yn", "no": "NoScissors" },
+        { "action": "killsprite", "sprite": "Scissors" },
+        { "action": "label", "name": "NoScissors" },
+        { "action": "branch", "type": "switchValue", "which": "chairStatus", "value": "up", "operant": "equals", "no": "ChairDown" },
+        { "action": "spriteani", "sprite": "Chair", "animation": "raised" },
+        { "action": "label", "name": "ChairDown" },
+        { "action": "branch", "type": "switchValue", "which": "onChair", "operant": "yn", "no": "End" },
+        { "action": "levelbounds", "left": 300, "right": 380 },
+        { "action": "label", "name": "End" },
+        { "action": "end" }
+    ],
+    "postload_actions": [
+        { "action": "branch", "type": "switchValue", "which": "guard", "value": "justcarried", "operant": "equals", "no": "SkipGuard" },
+        { "action": "dialogue", "speaker": "GUARD DEMON", "text": "GWAAHH LET THAT BE A LESSON TO YOU ABOUT THE VALUE OF WORK ETHIC GURRAAH" },
+        { "action": "unpausesprite", "sprite": "Guard" },
+        { "action": "setswitch", "which": "guard", "value": "default" },
+        { "action": "label", "name": "SkipGuard" },
+        { "action": "branch", "type": "switchValue", "which": "startedGame", "operant": "yn", "yes": "Skip" },
+        { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Ugh... where am I? Why do I feel so... spherical?", "cage": "I'll be darn tootin' - what the heck is goin' on around here?", "portrait": "pman_normal" },
+        { "action": "dialogue", "speaker": "???", "text": "BWAHAHAHA! WELCOME TO BALL HELL, FOOLISH MORTAL. YOU HAVE BEEN CURSED WITH THE FORM OF THAT WHICH YOU ONCE LOVED!", "portrait": "baal" },
+        { "action": "dialogue", "speaker": "???", "text": "YOU MIGHT SAY YOU'VE BECOME... A PACHINKO MAN !!!", "portrait": "baal" },
+        { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Augh! How did I get here?!", "cage": "Ah - ah - ah don't understand!!", "portrait": "pman_sweat" },
+        { "action": "dialogue", "speaker": "???", "text": "YOU WERE GAMBLING WITH YOUR SOUL, SIMPLETON! THOSE BETS VERY RARELY WORK OUT. AND NOW I, THE DEMON LORD BAAL, OWN YOU!", "portrait": "baal" },
+        { "action": "dialogue", "speaker": "BAAL", "text": "YOUR SENTENCE: ONE HUNDRED EONS OF DULL OFFICE LABOR. AN ETERNITY OF AGONY! BOREDOM! AND POSSIBLY CARPAL TUNNEL SYNDROME!", "portrait": "baal" },
+        { "action": "dialogue", "speaker": "BAAL", "text": "...ANYWAY, YOU START IMMEDIATELY. GOOD TO HAVE YOU ON BOARD.", "portrait": "baal" },
+        { "action": "setswitch", "which": "startedGame", "value": true },
+        { "action": "label", "name": "Skip" },
+        { "action": "end" }
+    ],
+    "zones": {
+        "Computer": {
+            "left": 168,
+            "top": 100,
+            "width": 60,
+            "height": 100,
+            "label": "Inconsolable CPU",
+            "default_actions": [
+                { "action": "dialogue", "speaker": "INCONSOLABLE CPU", "text": "Oh... hello. *sniff* I guess I'm your Computer. Where would you like to go today? I hope it's hell. Because we're both stuck here. *sob*" },
+                { "action": "label", "name": "choices" },
+                { "action": "option", "text": "Surf the Net", "label": "Surf" },
+                { "action": "option", "text": "Games Folder", "label": "Games" },
+                { "action": "option", "text": "Bash Shell", "label": "Bash" },
+                { "action": "option", "text": "Log Out", "label": "Skip" },
+                { "action": "dialogue", "speaker": "INCONSOLABLE CPU", "text": "You're leaving already? Was it something I did?! I tried so hard... *whimper*" },
+                { "action": "end" },
+                { "action": "label", "name": "Surf" },
+                { "action": "dialogue", "speaker": "INCONSOLABLE CPU", "text": "I don't think that's a good idea... the company firewall blocks everything except a website with a bunch of cat pictures." },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "That seems surprisingly benevolent, actually.", "portrait": "pman_normal" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "ALL OF THE CATS ARE DEAD.", "portrait": "baal" },
+                { "action": "branch", "type": "always", "jumpto": "choices" },
+                { "action": "label", "name": "Games" },
+                { "action": "dialogue", "speaker": "INCONSOLABLE CPU", "text": "The only game anyone bothered to install on me was an illegal copy of 'Resident Evil'. The port for the Gameboy Color. *moan*" },
+                { "action": "branch", "type": "always", "jumpto": "choices" },
+                { "action": "label", "name": "Bash" },
+                { "action": "dialogue", "speaker": "INCONSOLABLE CPU", "text": "People are always bashing me and my shell. *weep* I guess there's no reason why you should be different. *lip quiver*" },
+                { "action": "branch", "type": "always", "jumpto": "choices" }
+            ]
+        },
+        "Poster1": {
+            "left": 232,
+            "top": 20,
+            "width": 60,
+            "height": 120,
+            "label": "Motivational Poster",
+            "default_actions": [
+                { "action": "dialogue", "speaker": "BAAL", "text": "AREN'T YOU JUST ASHAMED OF YOURSELF?", "portrait": "baal" },
+                { "action": "end" }
+            ]
+        },
+        "Poster2": {
+            "left": 372,
+            "top": 20,
+            "width": 60,
+            "height": 120,
+            "label": "Motivational Poster",
+            "default_actions": [
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Well, um... at least the message is positive?", "portrait": "pman_normal" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "WRONG! IT IS SECRETLY IRONIC.", "portrait": "baal" },
+                { "action": "end" }
+            ]
+        },
+        "Speaker": {
+            "left": 322,
+            "top": 0,
+            "width": 40,
+            "height": 60,
+            "default_actions": [
+                { "action": "dialogue", "speaker": "BAAL", "text": "THAT'S DEFINITELY NOT A PA SYSTEM. THE MIGHTY VOICE OF BAAL IS OMNIPRESENT! YOU PROBABLY LEFT THAT UP THERE AND FORGOT ABOUT IT.", "portrait": "baal" },
+                { "action": "end" }
+            ]
+        },
+        "Exit": {
+            "left": 572,
+            "top": 200,
+            "width": 30,
+            "height": 120,
+            "collision_actions": [
+                { "action": "gotolevel", "level": "alley", "x": 80, "y": 270 },
+                { "action": "end" }
+            ]
+        }
+    },
+    "sprites": {
+        "Stapler": {
+            "x": 264,
+            "y": 162,
+            "direction": 1,
+            "default_actions": [
+                { "action": "branch", "type": "spriteDistance", "sprite": "Chair", "distance": 130, "operant": "greater", "yes": "TooFar" },
+                { "action": "branch", "type": "switchValue", "which": "chairStatus", "value": "down", "operant": "equals", "yes": "TooFar" },
+                { "action": "branch", "type": "switchValue", "which": "onChair", "operant": "yn", "no": "TooFar" },
+                { "action": "getitem", "item": "stapler" },
+                { "action": "killsprite", "sprite": "Stapler" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "A Stapler! I should probably carry this with me in case I run into any paperwork-related obstacles.", "portrait": "pman_normal" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "THAT IS NO ORDINARY STAPLER, FOOL! IT ONCE BELONGED TO MOLOCH, THE BLOODY DEMON-GOD OF HUMAN SACRIFICE.", "portrait": "baal" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "W-what did he use it for...?", "portrait": "pman_sweat" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "PAPERWORK, MOSTLY.", "portrait": "baal" },
+                { "action": "end" },
+                { "action": "label", "name": "TooFar" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Hnrghh... stubby Pachniko arms... can't reach...!", "portrait": "pman_sweat" },
+                { "action": "end" }
+            ],
+            "width": 36,
+            "height": 32,
+            "spritesheet": "stapler",
+            "animations": {
+                "sit": {
+                    "frames": 2,
+                    "anispeed": 3,
+                    "sheetRow": 0
+                }
+            },
+            "animation": "sit",
+            "frame": 0,
+            "label": "Stapler"
+        },
+        "Chair": {
+            "x": 360,
+            "y": 226,
+            "direction": 1,
+            "default_actions": [
+                { "action": "branch", "type": "spriteDistance", "sprite": "Chair", "distance": 130, "operant": "less", "no": "TooFar" },
+                { "action": "branch", "type": "switchValue", "which": "onChair", "operant": "yn", "yes": "AlreadyOnChair" },
+                { "action": "option", "text": "Sit On Chair", "label": "SitOnChair" },
+                { "action": "option", "text": "Adjust Chair", "label": "OffChairAdjust" },
+                { "action": "option", "text": "Avoid Chair", "label": "Skip" },
+                { "action": "label", "name": "SitOnChair" },
+                { "action": "branch", "type": "switchValue", "which": "chairStatus", "value": "up", "operant": "equals", "yes": "ChairTooHighToSit" },
+                { "action": "playerdirection", "direction": "left" },
+                { "action": "moveplayer", "x": 328, "y": 186 },
+                { "action": "levelbounds", "left": 300, "right": 380 },
+                { "action": "setswitch", "which": "onChair", "value": true },
+                { "action": "end" },
+                { "action": "label", "name": "ChairTooHighToSit" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "HAHAHA! YOU'RE SERIOUSLY TRYING TO CLIMB THE CHAIR WHEN IT'S ADJUSTED THAT HIGH? YOU'RE PACHINKO MAN, NOT PACHINKO-SPIDER-MAN.", "portrait": "baal" },
+                { "action": "end" },
+                { "action": "label", "name": "OffChairAdjust" },
+                { "action": "branch", "type": "switchValue", "which": "chairStatus", "value": "down", "operant": "equals", "yes": "OffChairRaise", "no": "OffChairLower" },
+                { "action": "label", "name": "OffChairRaise" },
+                { "action": "spriteani", "sprite": "Chair", "animation": "raised" },
+                { "action": "setswitch", "which": "chairStatus", "value": "up" },
+                { "action": "end" },
+                { "action": "label", "name": "OffChairLower" },
+                { "action": "spriteani", "sprite": "Chair", "animation": "lowered" },
+                { "action": "setswitch", "which": "chairStatus", "value": "down" },
+                { "action": "end" },
+                { "action": "label", "name": "AlreadyOnChair" },
+                { "action": "option", "text": "Get Off Chair", "label": "GetOffChair" },
+                { "action": "option", "text": "Adjust Chair", "label": "OnChairAdjust" },
+                { "action": "option", "text": "Luxuriate", "label": "Luxuriance" },
+                { "action": "label", "name": "GetOffChair" },
+                { "action": "branch", "type": "switchValue", "which": "chairStatus", "value": "up", "operant": "equals", "yes": "ChairTooHighToGetOff" },
+                { "action": "moveplayer", "y": 276 },
+                { "action": "levelbounds", "left": 220, "right": 600 },
+                { "action": "setswitch", "which": "onChair", "value": false },
+                { "action": "end" },
+                { "action": "label", "name": "ChairTooHighToGetOff" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "AS MUCH AS I'D LOVE TO WATCH YOU SMASH OPEN ALL HUMPTY-DUMPTY STYLE, CHAIR-LEAPING SUICIDES ARE PROHIBITED IN THE OFFICE.", "portrait": "baal" },
+                { "action": "end" },
+                { "action": "label", "name": "OnChairAdjust" },
+                { "action": "branch", "type": "switchValue", "which": "chairStatus", "value": "down", "operant": "equals", "yes": "OnChairRaise", "no": "OnChairLower" },
+                { "action": "label", "name": "OnChairRaise" },
+                { "action": "moveplayer", "y": 163 },
+                { "action": "spriteani", "sprite": "Chair", "animation": "raised" },
+                { "action": "setswitch", "which": "chairStatus", "value": "up" },
+                { "action": "end" },
+                { "action": "label", "name": "OnChairLower" },
+                { "action": "moveplayer", "y": 186 },
+                { "action": "spriteani", "sprite": "Chair", "animation": "lowered" },
+                { "action": "setswitch", "which": "chairStatus", "value": "down" },
+                { "action": "end" },
+                { "action": "label", "name": "TooFar" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "GO OVER TO YOUR SEAT AND GET TO WORK ALREADY! I'M NOT PAYING YOU TO STAND.", "portrait": "baal" },
+				{ "action": "dialogue", "text": "\n (Use the keyboard or the right mouse button to put Pachinko Man through his paces.)"},
+                { "action": "end" },
+                { "action": "label", "name": "Luxuriance" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "YOU'LL FIND THAT DIFFICULT. OUR CHAIRS HAVE BEEN ERGONOMICALLY DESIGNED FOR MAXIMUM DISCOMFORT.", "portrait": "baal" },
+                { "action": "label", "name": "Skip" },
+                { "action": "end" }
+            ],
+            "width": 150,
+            "height": 178,
+            "spritesheet": "chair",
+            "animations": {
+                "raised": {
+                    "frames": 1,
+                    "anispeed": 0,
+                    "sheetRow": 0
+                },
+                "lowering": {
+                    "frames": 5,
+                    "anispeed": 14,
+                    "sheetRow": 1,
+                    "nextani": "lowered"
+                },
+                "lowered": {
+                    "frames": 1,
+                    "anispeed": 0,
+                    "sheetRow": 2
+                },
+                "rising": {
+                    "frames": 5,
+                    "anispeed": 1,
+                    "sheetRow": 3,
+                    "nextani": "raised"
+                }
+            },
+            "animation": "lowered",
+            "frame": 0,
+            "label": "Office Chair"
+        },
+        "Scissors": {
+            "x": 306,
+            "y": 162,
+            "direction": 1,
+            "default_actions": [
+                { "action": "branch", "type": "spriteDistance", "sprite": "Chair", "distance": 130, "operant": "greater", "yes": "TooFar" },
+                { "action": "branch", "type": "switchValue", "which": "chairStatus", "value": "down", "operant": "equals", "yes": "TooFar" },
+                { "action": "branch", "type": "switchValue", "which": "onChair", "operant": "yn", "no": "TooFar" },
+                { "action": "getitem", "item": "scissors" },
+                { "action": "killsprite", "sprite": "Scissors" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Maybe this pair of Scissors can serve as a makeshift weapon in future scrapes?", "cage": "I'm going to kidnap the President of the United States.", "portrait": "pman_normal" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "HA. HAHA. HAHAHAHAHAHAHAHA. NO, THAT'S A GOOD IDEA, YOU SHOULD REALLY TRY THAT SOMETIME.", "portrait": "baal" },
+                { "action": "end" },
+                { "action": "label", "name": "TooFar" },
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Hnrghh... stubby Pachniko arms... can't reach...!", "portrait": "pman_sweat" },
+                { "action": "end" }
+            ],
+            "width": 40,
+            "height": 22,
+            "spritesheet": "scissors",
+            "frame": 0,
+            "label": "Scissors"
+        },
+        "Guard": {
+            "x": 430,
+            "y": 222,
+            "direction": 1,
+            "movement": {
+                "type": "walk",
+                "xspeed": 5
+            },
+            "width": 128,
+            "height": 146,
+            "spritesheet": "demonguard",
+            "animations": {
+                "warning": {
+                    "frames": 4,
+                    "anispeed": 6,
+                    "sheetRow": 1
+                }
+            },
+            "animation": "warning",
+            "frame": 0
+        }
+    }
+}

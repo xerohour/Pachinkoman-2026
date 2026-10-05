@@ -1,0 +1,76 @@
+{
+    "bg": "badend",
+    "mode": "NORMAL",
+		"music": {
+        "song": "opening",
+        "loop": true
+    },
+    "leftWall": 0,
+    "rightWall": 600,
+    "preload_actions": [],
+		"monologue": true,
+    "postload_actions": [
+				{"action": "freeze"}, 
+				{ "action": "wait", "frames": 30}, 
+        {"action":"dialogue","text":"Whew! What a harrowing day this has been. \n But I'm sure glad Ball Hell turned out to be a fake." },
+				{"action":"dialogue","text":"Spending eternity in a cubicle, doing pointless office work for evil bosses who hate you..."},
+				{"action":"dialogue","text":"I can hardly imagine."},
+				{"action":"dialogue","text":"Hmm. Is it me, or are things a bit...", "cage": "Hmm. Is it me, or am I..." },
+				{"action": "stopmusic"},
+				{"action":"dialogue","text":"Rounder than they were before?", "cage": "A VAMPIRE?!?!" },
+				{ "action": "wait", "seconds": 2}, 
+				{"action": "music", "song": "ankh", "loop": true},
+				{ "action": "dim", "opacity": 255, "speed": 2 },
+				{ "action": "wait", "frames": 20 },
+				{ "action": "background", "bg": "credits1" },
+				{ "action": "dim", "opacity": 0, "speed": 10 },
+				{ "action": "wait", "seconds": 4 },
+				{ "action": "dim", "opacity": 255, "speed": 10 },
+				{ "action": "wait", "frames": 20 },
+				{ "action": "background", "bg": "credits2" },
+				{ "action": "dim", "opacity": 0, "speed": 10 },
+				{ "action": "wait", "seconds": 4 },
+				{ "action": "dim", "opacity": 255, "speed": 10 },
+				{ "action": "wait", "frames": 20 },
+				{ "action": "background", "bg": "credits3" },
+				{ "action": "dim", "opacity": 0, "speed": 10 },
+				{ "action": "wait", "seconds": 4 },
+				{ "action": "dim", "opacity": 255, "speed": 10 },
+				{ "action": "wait", "frames": 20 },
+				{ "action": "background", "bg": "credits4" },
+				{ "action": "dim", "opacity": 0, "speed": 10 },
+				{ "action": "wait", "seconds": 3 },
+				{ "action": "dim", "opacity": 255, "speed": 10 },
+				{ "action": "wait", "seconds": 3 },
+				
+				{ "action": "branch", "type": "playerField", "which": "cage", "operant": "yn", "yes": "IsCageCard" },
+				
+				{ "action": "background", "bg": "the_end_bad" },
+				{ "action": "branch", "type": "always", "jumpto": "EndCardSelected" },
+				
+				{ "action": "label", "name": "IsCageCard" },
+				{ "action": "background", "bg": "cage_end_bad" },
+				
+				{ "action": "label", "name": "EndCardSelected" },
+				
+				{ "action": "dim", "opacity": 0, "speed": 3 },
+				{ "action": "wait", "seconds": 2 },
+				{ "action": "dim", "opacity": 255, "speed": 3 },
+				{ "action": "wait", "seconds": 3 },
+				
+				{ "action": "background", "bg": false },
+				{"action": "stopmusic"},
+				
+				{"action": "stopmusic"},
+				{ "action": "dialogue", "speaker": "BAAL", "text": "PSST. HEY! BEFORE YOU SWITCH THIS STUPID THING OFF.", "portrait": "baal" },
+				{ "action": "dialogue", "speaker": "BAAL", "text": "I JUST WANTED TO LET YOU KNOW... THIS IS ONE OF THOSE DUMB GAMES WITH 'GOOD' AND 'BAD' ENDINGS.", "portrait": "baal" },
+				{ "action": "dialogue", "speaker": "BAAL", "text": "AND THE ENDING YOU JUST UNLOCKED... \n WAS THE BEST ONE! YEP, NO REASON TO EVER PICK THIS THING UP AGAIN.", "portrait": "baal" },
+				{ "action": "dialogue", "speaker": "BAAL", "text": "THAT'S IT! NO MORE SECRETS OR CONTENT TO DISCOVER. NOTHING WHATSOEVER!", "portrait": "baal" },
+				{ "action": "dialogue", "speaker": "BAAL", "text": "SO YEAH. GAME OVER. \n CUT TO THE TITLE SCREEN ALREADY.", "portrait": "baal" },
+				{ "action": "unfreeze" },
+				{ "action": "gotolevel", "level": "logo", "x": 430, "y": 266 },
+				{"action":"end"}
+    ],
+    "zones": {},
+    "sprites": {}
+}

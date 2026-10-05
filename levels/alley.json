@@ -1,0 +1,358 @@
+{
+    "bg": "alley",
+    "mode": "NORMAL",
+    "leftWall": 0,
+    "rightWall": 600,
+		"music": {
+        "song": "demo",
+        "loop": true
+    },
+    "preload_actions": [
+				{ "action": "branch", "type": "switchValue", "which": "mail", "value": "over", "operant": "equals", "yes": "MailDelivered" },
+        { "action": "branch", "type": "switchValue", "which": "guard", "value": "stapled", "operant": "equals", "no": "Skip" },
+        { "action": "spriteani", "sprite": "Guard", "animation": "stapled" },
+        { "action": "label", "name": "Skip" },
+        { "action": "end" },
+				{ "action": "label", "name": "MailDelivered" },
+				{ "action": "killsprite", "sprite": "Guard" },
+				{ "action": "killsprite", "sprite": "Morven" },
+				{ "action": "end" }
+		],
+    "postload_actions": [
+        { "action": "branch", "type": "switchValue", "which": "morven", "value": "default", "operant": "equals", "no": "Skip" },
+        { "action": "spritefield", "sprite": "Morven", "field": "label", "value": "Co-Worker" },
+        { "action": "dialogue", "speaker": "CO-WORKER", "text": "Psst! Over here!", "portrait": "morven_chat" },
+        { "action": "label", "name": "Skip" },
+        { "action": "end" }
+    ],
+    "zones": {
+        "LeftExit": {
+            "left": 0,
+            "top": 270,
+            "width": 15,
+            "height": 50,
+            "collision_actions": [
+                { "action": "gotolevel", "level": "cubicle", "x": 530, "y": 276 },
+                { "action": "end" }
+            ]
+        },
+        "RightExit": {
+            "left": 585,
+            "top": 270,
+            "width": 15,
+            "height": 50,
+            "collision_actions": [
+                { "action": "gotolevel", "level": "watercooler", "x": 420, "y": 266 },
+                { "action": "end" }
+            ]
+        },
+        "Coworker1": {
+            "left": 75,
+            "top": 120,
+            "width": 35,
+            "height": 75,
+            "label": "Colleague",
+            "default_actions": [
+                { "action": "dialogue", "speaker": "COLLEAGUE", "text": "You should get back to your cubicle, before the Guard Demon catches you slouching!" },
+                { "action": "end" }
+            ],
+						"item_actions": {
+							"lens": [
+                { "action": "dialogue", "speaker": "CO-WORKER'S THOUGHTS", "text": "Every icon on my desktop is a secret shortcut to Minesweeper. No one must know!" },
+								{ "action": "end" }
+							],
+							"hatemail": [
+								{ "action": "branch", "type": "switchValue", "which": "mail", "value": "over", "operant": "equals", "yes": "QuestFinished" },
+								{ "action": "dialogue", "speaker": "COLLEAGUE", "text": "A letter to a thief... sorry, I think you've grossly overestimated my importance." },
+								{ "action": "end" },
+								{ "action": "label", "name": "QuestFinished" },
+								{ "action": "useitemactions", "item": "hatemail" },
+								{ "action": "end" }
+							]
+						}
+        },
+        "Coworker2": {
+            "left": 335,
+            "top": 130,
+            "width": 75,
+            "height": 75,
+            "label": "Cubicle Mate",
+            "default_actions": [
+                { "action": "dialogue", "speaker": "CUBICLE MATE", "text": "I really need to use the bathroom... but my next break isn't for another twelve centuries!" },
+                { "action": "dialogue", "speaker": "CUBICLE MATE", "text": "Think I can make it?" },
+                { "action": "end" }
+            ],
+						"item_actions": {
+							"lens": [
+                { "action": "dialogue", "speaker": "CUBICLE MATE'S THOUGHTS", "text": "All in all, I'm pretty certain that I hate Mondays." },
+								{ "action": "end" }
+							],
+							"hatemail": [
+								{ "action": "branch", "type": "switchValue", "which": "mail", "value": "over", "operant": "equals", "yes": "QuestFinished" },
+								{ "action": "dialogue", "speaker": "CUBICLE MATE", "text": "A letter to a thief?! Oh no, I've been found out! I've been illegally pirating file-sharing software for years!" },
+								{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "I don't think pirating the software itself is a crime, actually.", "portrait": "pman_normal" },
+								{ "action": "dialogue", "speaker": "CUBICLE MATE", "text": "What're you, a legal scholar?" },
+								{ "action": "end" },
+								{ "action": "label", "name": "QuestFinished" },
+								{ "action": "useitemactions", "item": "hatemail" },
+								{ "action": "end" }
+							]
+						}
+        },
+        "Poster": {
+            "left": 370,
+            "top": 85,
+            "width": 65,
+            "height": 40,
+            "label": "Discouraging Poster",
+            "default_actions": [
+                { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Is this the kind of twisted ethos that drives my captors...?", "portrait": "pman_normal" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "KIND OF! BUT ACTUALLY THAT'S JUST A BAND I WAS INTO BACK IN HIGH SCHOOL. YOU SHOULD CHECK THEM OUT SOMETIME.", "portrait": "baal" },
+                { "action": "end" }
+            ]
+        },
+        "Speaker": {
+            "left": 515,
+            "top": 80,
+            "width": 30,
+            "height": 50,
+            "default_actions": [
+                { "action": "dialogue", "speaker": "BAAL", "text": "THAT'S NOT A PA SYSTEM. I USE THOSE SPEAKERS TO PUMP OUT INSPIRATIONAL HIP-HOP 'BEATZ'. DRIVES THE GUARD DEMONS WILD.", "portrait": "baal" },
+                { "action": "end" }
+            ]
+        },
+        "GuardDangerZone": {
+            "left": 402,
+            "top": 250,
+            "width": 70,
+            "height": 60,
+            "collision_actions": [
+                { "action": "branch", "type": "switchValue", "which": "guard", "value": "stapled", "operant": "equals", "yes": "Skip" },
+                { "action": "spriteani", "sprite": "Guard", "animation": "warning" },
+								{ "action": "attractsprite", "sprite": "Guard", "target": "Player", "seconds": 1, "offsety": -110 },
+                { "action": "dialogue", "speaker": "GUARD DEMON", "text": "WEOO WEEOO LACK OF WORKING DETECTED IN SECTOR 66, ESCORTING BACK TO CUBICLE ASAP" },
+                { "action": "pausesprite", "sprite": "Guard" },
+                { "action": "setswitch", "which": "guard", "value": "justcarried" },
+                { "action": "gotolevel", "level": "cubicle", "x": 230, "y": 276 },
+                { "action": "label", "name": "Skip" },
+                { "action": "end" }
+            ]
+        },
+				"MorvenCubicleEntrance": {
+					"left": 150,
+					"top": 100,
+					"width": 110,
+					"height": 120,
+					"label": "Shadowy Cubicle",
+					"default_actions": [
+						{ "action": "gotolevel", "level": "morvencubicle", "x": 80, "y": 236 }
+					]
+				}
+    },
+    "sprites": {
+        "Morven": {
+            "x": 192,
+            "y": 152,
+            "direction": 1,
+            "default_actions": [
+                { "action": "branch", "type": "switchValue", "which": "morven", "value": "met", "operant": "equals", "yes": "SecondMeeting" },
+                { "action": "branch", "type": "switchValue", "which": "morven", "value": "wowed", "operant": "equals", "yes": "Wowed" },
+                { "action": "branch", "type": "spriteDistance", "sprite": "Morven", "distance": 150, "operant": "greater", "yes": "TooFar" },
+                { "action": "dialogue", "speaker": "CO-WORKER", "text": "Good to meetcha! The name's Morven. I'm a plain ol' working stiff, like you.", "portrait": "morven_chat" },
+                { "action": "dialogue", "speaker": "MORVEN", "text": "I bet you're thinking about trying to escape from this place, right? Well, don't think that. Baal's got this place sealed up tight.", "portrait": "morven_chat" },
+                { "action": "dialogue", "speaker": "MORVEN", "text": "Take that Guard Demon over there. If he spots you trying to pull a fast one, he'll haul your ball-shaped butt right back to your desk!", "portrait": "morven_chat" },
+								{ "action": "dialogue", "speaker": "MORVEN", "text": "Maybe if one of us held his eye shut, we'd have a chance... but, well, I'm sort of on lockdown at the moment.", "portrait": "morven_chat" },
+                { "action": "dialogue", "speaker": "MORVEN", "text": "That Guard's not even the worst of what Baal keeps around, either. This place makes the other levels of Office Hell look like cakewalk!", "portrait": "morven_chat" },
+                { "action": "dialogue", "speaker": "MORVEN", "text": "Well, enough said. You should head back to your cubicle and lay low... just like me...", "portrait": "morven_chat" },
+                { "action": "spritefield", "sprite": "Morven", "field": "label", "value": "Morven" },
+                { "action": "setswitch", "which": "morven", "value": "met" },
+                { "action": "end" },
+                { "action": "label", "name": "TooFar" },
+                { "action": "dialogue", "speaker": "CO-WORKER", "text": "Psst! Over here!", "portrait": "morven_chat" },
+                { "action": "end" },
+                { "action": "label", "name": "SecondMeeting" },
+                { "action": "dialogue", "speaker": "MORVEN", "text": "Unless you can snap his great big peeper shut, you can't slip past the Guard Demon. No sir.", "portrait": "morven_chat" },
+				{ "action": "dialogue", "speaker": "MORVEN", "text": "Best stick to your cubicle and avoid making waves... hum de dum...", "portrait": "morven_chat" },
+                { "action": "end" },
+                { "action": "label", "name": "Wowed" },
+                { "action": "dialogue", "speaker": "MORVEN", "text": "Hey, you're a crack shot with that Stapler! I'll bet you've put some mileage on those things in your day.", "portrait": "morven_chat" },
+                { "action": "dialogue", "speaker": "MORVEN", "text": "Well, if you make it out of this place, tell the world my story! ...But don't use my real name. Trying to keep a low profile. You understand.", "portrait": "morven_chat" },
+                { "action": "end" }
+            ],
+            "item_actions": { "stapler": [
+                    { "action": "dialogue", "speaker": "MORVEN", "text": "Hey, d'you mind if I borrow that stapler for a while? Hmm? I'll owe ya for it! Well, the offer's open, anyway.", "portrait": "morven_chat" }
+                ],
+                "scissors": [
+                    { "action": "dialogue", "speaker": "MORVEN", "text": "Hey, d'you mind if I steal those Scissors for a while? I'll give you a nickel for 'em! Well, let me know if you change your mind.", "portrait": "morven_chat" }
+                ],
+                "rope": [
+                    { "action": "dialogue", "speaker": "MORVEN", "text": "Don't suppose I could talk you into parting with that rope? Nah, I guess not. Those things do tend to come in handy.", "portrait": "morven_chat" }
+                ],
+								"mug": [
+                    { "action": "dialogue", "speaker": "MORVEN", "text": "You know, if that mug's taking up space in your inventory, I could watch it for a while. No? Just offering...", "portrait": "morven_chat" }
+                ],
+								"lens": [
+									{ "action": "dialogue", "speaker": "MORVEN'S THOUGHTS", "text": "Heh... Baal and his cronies can look and look, but they'll never find me out.", "portrait": "morven_chat" },
+									{ "action": "dialogue", "speaker": "MORVEN'S THOUGHTS", "text": "Yep, I'm just too smooth...", "portrait": "morven_chat" },
+									{ "action": "end" }
+								],
+								"hatemail": [
+									{ "action": "dialogue", "speaker": "MORVEN", "text": "'To: The Scandalous Supply-Snatchler'. \n You don't mean to deliver this to me, do you?", "portrait": "morven_chat" },
+									{ "action": "option", "text": "Yes", "label": "Accuse" },
+									{ "action": "option", "text": "No", "label": "NoAccuse" },
+									{ "action": "label", "name": "Accuse" },
+									{ "action": "freeze" },
+									{ "action": "stopmusic" },
+									{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Morven. The janitor says he was robbed not far from here... and that he never saw the criminal's face.", "cage": "I'd like to take his face...", "portrait": "pman_normal" },
+									{ "action": "music", "song": "crisis", "loop": true },
+									{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Could that have been because the criminal... \n ...HAD NO FACE TO SEE?!", "cage": "OFF.", "portrait": "pman_accuse" },
+									{ "action": "dialogue", "speaker": "MORVEN", "text": "! ! ! ! !", "portrait": "morven_chat" },
+									{ "action": "dialogue", "speaker": "MORVEN", "text": ". . . ha. Ha ha ha. \n Don't be ridiculous, friend. The thief did have a face.", "portrait": "morven_chat" },
+									{ "action": "dialogue", "speaker": "MORVEN", "text": "AND IT'S PAST TIME... I SHOW IT TO YOU.", "portrait": "morven_unmasking" },
+									{ "action": "dialogue", "speaker": "MORVEN", "text": "BWA HA HA! No mere office drone am I... for I am Morven, greatest petty thief in all the underworld!!", "portrait": "morven_unmasked" },
+									{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Your reign of inconvenience is over, Snatchler! Fork over your stolen goods and answer to JUSTICE!", "cage": "Nose. Skin. Teeth. It's coming off.", "portrait": "pman_accuse" },
+									{ "action": "dialogue", "speaker": "MORVEN", "text": "Oh? And whose justice is that, Pachinko Man? \n By the laws of Ball Hell, I am less a fugitive than you are!", "portrait": "morven_unmasked" },
+									{ "action": "dialogue", "speaker": "MORVEN", "text": "Do you see the brilliance of it? So long as everyone thinks I'm stuck in this cubicle, none of these fools will take any interest in me!", "portrait": "morven_unmasked" },
+									{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "(H-he's right... boisterous accusations aside, I have no way of compelling him to do anything.)", "cage": "And this whole time... you stand there... with this WHO ME expression... on your FACE!", "portrait": "pman_twitch" },
+									{ "action": "dialogue", "speaker": "MORVEN", "text": "WA HA HA! Even if Baal and his cronies decided to come after me, what would they do? Haul me back to my cubicle for slouching?!", "portrait": "morven_unmasked" },
+									{ "action": "attractsprite", "sprite": "Guard", "target": "Guard", "seconds": 0.4, "offsetx": 0, "offsety": 20 },
+									{ "action": "dialogue", "speaker": "GUARD DEMON", "text": "...HAUL YOU BACK TO YOUR CUBICLE... FOR SLOUCHING?" },
+									{ "action": "attractsprite", "sprite": "Guard", "target": "Morven", "seconds": 0.4, "offsetx": 180, "offsety": 50 },
+									{ "action": "dialogue", "speaker": "GUARD DEMON", "text": "WEEOO WEEOO! SLOUCH DETECTED!" },
+									{ "action": "dialogue", "speaker": "MORVEN", "text": "W-what? No, you blind idiot, that was a rhetorical statement! I'm already IN my cubicle!", "portrait": "morven_unmasked" },
+									{ "action": "dialogue", "speaker": "GUARD DEMON", "text": "LIES FROM A SLOUCH AND A SASSMOUTH! IT'S BACK TO THE CUBICLE FOR YOU! GURAAHHHHH!!!" },
+									{ "action": "attractsprite", "sprite": "Guard", "target": "Morven", "frames": 50, "offsetx": 0, "offsety": 0 },
+									{ "action": "dim", "opacity": 255, "speed": 20 },
+									{ "action": "wait", "frames": 20 },
+									{ "action": "killsprite", "sprite": "Guard" },
+									{ "action": "killsprite", "sprite": "Morven" },
+									{ "action": "stopmusic" },
+									{ "action": "dialogue", "speaker": "BAAL", "text": "HUH. WELL, I CAN'T SAY EXACTLY WHERE MY GUARD DEMON IS HAULING THAT GUY, BUT I'M THINKIN' IT'LL BE PRETTY FAR FROM HIS CUBICLE.", "portrait": "baal" },
+									{ "action": "music", "song": "demo", "loop": true },
+									{ "action": "dialogue", "speaker": "BAAL", "text": "INCIDENTALLY, WHAT THE CRAP WAS ALL OF THAT? DID SOMEONE SURGICALLY IMPLANT A BACKBONE IN YOU WHEN I WASN'T LOOKING?", "portrait": "baal" },
+									{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "...I watch a lot of procedural dramas.", "cage": "I could eat a peach for hours.", "portrait": "pman_sweat" },
+									{ "action": "unfreeze" },
+									{ "action": "setswitch", "which": "mail", "value": "over" },
+									{ "action": "end" },
+									{ "action": "label", "name": "NoAccuse" },
+									{ "action": "dialogue", "speaker": "BAAL", "text": "OF COURSE YOU DON'T! MORVEN IS A MODEL EMPLOYEE. JUST LOOK AT THIS GUY!", "portrait": "baal" },
+									{ "action": "dialogue", "speaker": "MORVEN", "text": "*whistles non-chalantly*", "portrait": "morven_steady" },
+									{ "action": "dialogue", "speaker": "BAAL", "text": "THERE, YOU SEE? WHISTLING NON-CHALANTLY IS THE INDELIBLE MARK OF A PERSON NOT HIDING ANYTHING.", "portrait": "baal" },
+									{ "action": "end" },
+									{ "action": "label", "name": "QuestFinished" },
+									{ "action": "useitemactions", "item": "hatemail" },
+									{ "action": "end" }
+								]
+            },
+            "width": 142,
+            "height": 196,
+            "spritesheet": "morven",
+            "animations": {
+                "normal": {
+                  "rowStartY": 0,
+									"frames": 4,
+									"anispeed": 5,
+									"sheetRow": 0,
+									"frameWidth": 134,
+									"frameHeight": 192
+                }
+            },
+            "animation": "normal",
+            "frame": 0,
+            "label": "Morven"
+        },
+        "Guard": {
+            "x": 460,
+            "y": 172,
+            "direction": -1,
+            "default_actions": [
+                { "action": "branch", "type": "switchValue", "which": "guard", "value": "stapled", "operant": "equals", "yes": "Stapled" },
+                { "action": "dialogue", "speaker": "BAAL", "text": "SNEAKING OFF, EH? YOU'LL NEVER MAKE IT PAST THE PROUD AND MIGHTY GUARD DEMON! ITS GREAT EYE IS EVER-SCANNING FOR LOAFERS AND DUTY-SHIRKERS.", "portrait": "baal" },
+                { "action": "end" },
+                { "action": "label", "name": "Stapled" },
+                { "action": "dialogue", "speaker": "GUARD DEMON", "text": "WEEO WEEO SOMEONE PLEASE TURN THE LIGHTS BACK ON, I AM WORRIED THAT I AM OVERLOOKING SHENANIGANS" },
+                { "action": "end" }
+            ],
+            "item_actions": { "stapler": [
+                    { "action": "branch", "type": "spriteDistance", "sprite": "Guard", "distance": 200, "operant": "greater", "yes": "TooFar" },
+                    { "action": "branch", "type": "switchValue", "which": "guard", "value": "stapled", "operant": "equals", "yes": "Stapled" },
+                    { "action": "spriteani", "sprite": "Guard", "animation": "stapled" },
+                    { "action": "dialogue", "speaker": "GUARD DEMON", "text": "GUAAAGH WHERE DID EVERYBODY GO" },
+                    { "action": "dialogue", "speaker": "BAAL", "text": "YOU'VE BLINDED MY POOR GUARD DEMON. . . AN IMPRESSIVE OPENING GAMBIT!", "portrait": "baal" },
+                    { "action": "dialogue", "speaker": "BAAL", "text": "BUT DON'T GET TOO COMFORTABLE. I'VE GOT PLENTY OF OTHER TRICKS UP MY SLEEVES TO DEAL WITH SLACKERS LIKE YOU!", "portrait": "baal" },
+                    { "action": "setswitch", "which": "guard", "value": "stapled" },
+                    { "action": "setswitch", "which": "morven", "value": "wowed" },
+                    { "action": "end" },
+                    { "action": "label", "name": "TooFar" },
+                    { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "He's too far away for my stubby Pachinko-arms to reach...!", "portrait": "pman_normal" },
+                    { "action": "end" },
+                    { "action": "label", "name": "Stapled" },
+                    { "action": "dialogue", "speaker": "BAAL", "text": "HASN'T HE HAD ENOUGH?! SHEESH, AND THEY CALL ME A SADIST! CORRECTLY! HEY, WE SHOULD COMPARE NOTES SOMETIME.", "portrait": "baal" },
+                    { "action": "end" }
+                ],
+                "scissors": [
+                    { "action": "branch", "type": "spriteDistance", "sprite": "Guard", "distance": 200, "operant": "greater", "yes": "TooFar" },
+                    { "action": "branch", "type": "switchValue", "which": "guard", "value": "stapled", "operant": "equals", "yes": "Stapled" },
+                    { "action": "spriteani", "sprite": "Guard", "animation": "warning" },
+                    { "action": "pausesprite", "sprite": "Guard" },
+                    { "action": "dialogue", "speaker": "GUARD DEMON", "text": "GURAAHH THOSE TINY ROUNDED SCISSORS WILL NOT AVAIL YOU, DISGRUNTLED EMPLOYEE!! I'MA KNOCK YOU BACK TO YOUR CUBICLE RIGHT QUICK" },
+                    { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "B-but I stabbed him right in the eye!", "portrait": "pman_sweat" },
+                    { "action": "dialogue", "speaker": "BAAL", "text": "...WHICH IS THE STRONGEST POINT ON THE GUARD DEMON'S BODY. DUH.", "portrait": "baal" },
+                    { "action": "setswitch", "which": "guard", "value": "justcarried" },
+                    { "action": "gotolevel", "level": "cubicle", "x": 230, "y": 276 },
+                    { "action": "end" },
+                    { "action": "label", "name": "TooFar" },
+                    { "action": "dialogue", "speaker": "PACHINKO MAN", "text": "He's too far away for my stubby Pachinko-arms to reach...!", "portrait": "pman_normal" },
+                    { "action": "end" },
+                    { "action": "label", "name": "Stapled" },
+                    { "action": "dialogue", "speaker": "BAAL", "text": "HASN'T HE HAD ENOUGH?! SHEESH, AND THEY CALL ME A SADIST! CORRECTLY! HEY, WE SHOULD COMPARE NOTES SOMETIME.", "portrait": "baal" },
+                    { "action": "end" }
+                ],
+								"lens": [
+										{ "action": "dialogue", "speaker": "GUARD DEMON'S THOUGHTS", "text": "WHY NO ONE SEE... GUARD DEMON NEED LOVE TOO?" }
+								],
+								"hatemail": [
+									{ "action": "branch", "type": "switchValue", "which": "mail", "value": "over", "operant": "equals", "yes": "QuestFinished" },
+									{ "action": "dialogue", "speaker": "GUARD DEMON", "text": "GURAAHH WHY YOU SHOWING GUARD DEMON THIS LETTER? I NO CAN READ!!" },
+									{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Oh! Sorry. I forgot your eye had been stapled shut.", "portrait": "pman_normal" },
+									{ "action": "dialogue", "speaker": "GUARD DEMON", "text": "...YES. THAT IS EXACTLY WHAT I MEANT. \n TOTALLY LITERATE OVER HERE. GUWARR." },
+									{ "action": "end" },
+									{ "action": "label", "name": "QuestFinished" },
+									{ "action": "useitemactions", "item": "hatemail" },
+									{ "action": "end" }
+								]
+            },
+            "movement": {
+                "type": "hover",
+                "cx": 400,
+                "cy": 150,
+                "theta": 0,
+                "speed": 2,
+                "radius": 50
+            },
+            "width": 128,
+            "height": 146,
+            "spritesheet": "demonguard",
+            "animations": {
+                "nowarning": {
+                    "frames": 2,
+                    "anispeed": 2,
+                    "sheetRow": 0
+                },
+                "warning": {
+                    "frames": 4,
+                    "anispeed": 6,
+                    "sheetRow": 1
+                },
+                "stapled": {
+                    "frames": 2,
+                    "anispeed": 2,
+                    "sheetRow": 2
+                }
+            },
+            "animation": "nowarning",
+            "frame": 0,
+            "label": "Guard Demon"
+        }
+    }
+}

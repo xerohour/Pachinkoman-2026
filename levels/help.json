@@ -1,0 +1,5 @@
+{
+    "bg": "howto",
+    "mode": "CUTSCENE",
+    "next": "mainmenu"
+}

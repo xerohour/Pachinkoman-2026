@@ -1,0 +1,272 @@
+{
+    "bg": "baalroom",
+    "mode": "NORMAL",
+    "leftWall": 140,
+    "rightWall": 300,
+		"music": {
+        "song": "showdown",
+        "loop": true
+    },
+    "preload_actions": [
+			{ "action": "playerdirection", "direction": "right" },
+			{ "action": "setswitch", "which": "baalStatus", "value":  "default" },
+			{ "action": "end"}
+    ],
+    "postload_actions": [
+			{"action": "freeze"},
+			{"action": "wait", "seconds": 1},
+			{"action": "dialogue", "speaker": "BAAL", "text": "FOOL! I'VE BEEN SUPPLYING RUNNING COMMENTARY TO EVERYTHING YOU DID. YOU THOUGHT I WASN'T WISE TO YOUR ESCAPE PLOT?" },
+			{"action": "dialogue", "speaker": "PACHINKO MAN", "text": "I- I thought you missed some key bits -", "cage": "Uhhh, that is WRONG what you did, and you're a NOSY PARKER, and uh, SHAME ON YOU.", "portrait": "pman_sweat" },
+			{"action": "dialogue", "speaker": "BAAL", "text": "THE ALL-SEING DEMON LORD BALL MISSES NOTHING! AND NEITHER DO MY FISTS. CRUSHING-WISE. HERE, I'LL DEMONSTRATE." },
+			{"action": "unfreeze"},
+			{"action": "end"}
+    ],
+    "zones": {
+			"ExitZone": {
+				"left": 40,
+				"top": 88,
+				"width": 36,
+				"height": 180,
+				"collision_actions": [
+					{ "action": "gotolevel", "level": "bad-end" }
+				]
+			},
+			"Elevator": {
+				"left": 40,
+				"top": 88,
+				"width": 90,
+				"height": 180,
+				"label": "Elevator",
+				"default_actions": [
+					{"action": "branch", "type": "switchValue", "which": "baalStatus", "value": "default", "operant": "equals", "no": "Tanaka" },
+					{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "The elevator's stopped... there's no chance of escape!", "portrait": "pman_sweat" },
+					{ "action": "end" },
+					{"action": "label", "name": "Tanaka"},
+					{ "action": "gotolevel", "level": "bad-end" },
+					{"action": "end"}
+				]
+			}
+    },
+    "sprites": {
+			"Baal": {
+				"animations": {
+					"default": {
+						"rowStartY": 0,
+						"frames": 6,
+						"anispeed": 8,
+						"sheetRow": 0,
+						"frameWidth": 312,
+						"frameHeight": 320
+					},
+					"break": {
+						"rowStartY": 320,
+						"frames": 7,
+						"anispeed": 10,
+						"sheetRow": 0,
+						"frameWidth": 312,
+						"frameHeight": 320,
+						"nextani": "tanaka"
+					},
+					"tanaka": {
+						"rowStartY": 640,
+						"frames": 1,
+						"anispeed": 8,
+						"sheetRow": 0,
+						"frameWidth": 312,
+						"frameHeight": 320
+					},
+					"tanakabreak": {
+						"rowStartY": 640,
+						"frames": 7,
+						"anispeed": 8,
+						"sheetRow": 0,
+						"frameWidth": 312,
+						"frameHeight": 320,
+						"nextani": "revealed"
+					},
+					"revealed": {
+						"rowStartY": 960,
+						"frames": 2,
+						"anispeed": 8,
+						"sheetRow": 0,
+						"frameWidth": 312,
+						"frameHeight": 320
+					}
+				},
+				"animation": "default",
+				"label": "Demon Lord Baal",
+				"spritesheet": "baal",
+				"width": 212,
+				"height": 320,
+				"x": 442,
+				"y": 160,
+				"direction": 1,
+				"default_actions": [
+					{"action": "branch", "type": "switchValue", "which": "baalStatus", "value": "default", "operant": "equals", "no": "Tanaka" },
+					
+					{"action": "dialogue", "speaker": "BAAL", "text": "BWA HA HA! I BET YOU'D NEVER HAVE GUESSED, LISTENING TO MY VOICE THROUGH THAT PA SYSTEM, THAT MY VISAGE WAS SO GRISLY AND TERRIBLE!" },
+					{"action": "dialogue", "speaker": "PACHINKO MAN", "text": "Oh, so you were speaking through PA systems? You're not omnipresent?", "portrait": "pman_normal" },
+					{"action": "dialogue", "speaker": "BAAL", "text": "I DIDN'T SAY THAT. YOU SAID THAT. SHUT UP." },
+					{"action": "end"},
+					
+					{ "action": "label", "name": "Tanaka" },
+					{ "action": "dialogue", "speaker": "TANAKA-SAN", "text": "Please proceed to the elevator and return to normal duties. I'm not paying you to stand slack-jawed in a terrifying dungeon, you know.", "portrait": "baal_tanaka" },
+					{ "action": "end"}
+				],
+				"item_actions": {
+					"lens": [
+						{"action": "dialogue", "speaker": "BAAL'S THOUGHTS", "text": "WOW, THIS THING IS WORKING LIKE A CHARM! KINDA HAVING TROUBLE SEEING OUT THE EYEHOLE, THOUGH..." },
+						{"action": "end"}
+					],
+					"crowbar": [
+						{ "action": "freeze" },
+						{"action": "branch", "type": "switchValue", "which": "baalStatus", "value": "tanaka", "operant": "equals", "yes": "TanakaMad" },
+						{"action": "branch", "type": "switchValue", "which": "baalStatus", "value": "tanaka2", "operant": "equals", "yes": "TrueBaal" },
+					
+						{ "action": "setswitch", "which": "baalStatus", "value":  "tanaka" },
+						{ "action": "spriteani", "sprite": "Baal", "animation": "break" },
+						{ "action": "music", "song": "glass", "loop": false },
+						{ "action": "attractsprite", "sprite": "Hand", "target": "Hand", "seconds": 0.1, "offsetx": 0 },
+						{ "action": "wait", "seconds": 2 },
+						{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": ". . .", "cage": ". . .", "portrait": "pman_normal" },
+						{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Baal? Why is my real boss inside of your face?", "cage": "It's you. You're the rocket man.", "portrait": "pman_sweat" },
+						{ "action": "attractsprite", "sprite": "Hand", "target": "Hand", "seconds": 14, "offsety": -800 },
+						{ "action": "dialogue", "speaker": "TANAKA-SAN", "text": "It is I, Tanaka, your employer! This cyclopean form is a paper mache contrivance. Perhaps I ought to explain.", "portrait": "baal_tanaka" },
+						{ "action": "dialogue", "speaker": "TANAKA-SAN", "text": "I recently came across a translated Western text - 'Dante's Ball Pit', I believe - and found within an exciting new management workflow!", "portrait": "baal_tanaka" },
+						{ "action": "dialogue", "speaker": "TANAKA-SAN", "text": "I used it the basis for this involuntary anti-gambling, pro-synergy company training exercise.", "portrait": "baal_tanaka" },
+						{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Ball Hell - a training exercise? That's impossible! What about the cursed pachinko parlor in the ruins of ancient Babylon -", "cage": "PACHINKO!", "portrait": "pman_sweat" },
+						{ "action": "dialogue", "speaker": "TANAKA-SAN", "text": "Pachinko in Babylon? Ludicrous! Everyone knows Pachinko was invented by the Mayans.", "portrait": "baal_tanaka" },
+						{ "action": "dialogue", "speaker": "TANAKA-SAN", "text": "In any case, I happen to have your Synergy Level readings compiled on a spreadsheet...", "portrait": "baal_tanaka" },
+						
+						{ "action": "branch", "type": "deathcount", "value": 20, "operant": "greater", "yes": "MoreThan20" },
+						{ "action": "branch", "type": "deathcount", "value": 5, "operant": "greater", "yes": "MoreThan5" },
+						{ "action": "branch", "type": "deathcount", "value": 1, "operant": "equals", "yes": "ExactlyOne" },
+						{ "action": "branch", "type": "deathcount", "value": 0, "operant": "greater", "yes": "NotZero" },
+						
+						{ "action": "dialogue", "speaker": "TANAKA-SAN", "text": "According to our records, your performance on this exercise... was entirely perfect! You somehow evaded all Synergy Deaths!", "portrait": "baal_tanaka" },
+						{ "action": "dialogue", "speaker": "TANAKA-SAN", "text": "Your performance was truly Above Below Exceeds Expectations, my good man. I think this calls for a promotion!", "portrait": "baal_tanaka" },
+						{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "R-really?", "portrait": "pman_sweat" },
+						{ "action": "dialogue", "speaker": "TANAKA-SAN", "text": "Absolutely! You're promoted to Employee of the Week. Beginning next Thursday. Continuing into the following Friday. Congratulations!", "portrait": "baal_tanaka" },
+						{ "action": "branch", "type": "always", "jumpto": "DoneJudging" },
+						
+						{ "action": "label", "name": "ExactlyOne" },
+						{ "action": "dialogue", "speaker": "TANAKA-SAN", "text": "According to our records, you experienced just 1 Synergy Death over the course of this exercise. Hmm! Mildly acceptable.", "portrait": "baal_tanaka" },
+						{ "action": "branch", "type": "always", "jumpto": "GoodResult" },
+						
+						{ "action": "label", "name": "NotZero" },
+						{ "action": "dialogue", "speaker": "TANAKA-SAN", "text": "According to our records, you experienced only [DEATHS] Synergy Deaths over the course of this exercise. Hmm! Mildly acceptable.", "portrait": "baal_tanaka" },
+						{ "action": "label", "name": "GoodResult" },
+						{ "action": "dialogue", "speaker": "TANAKA-SAN", "text": "As a reward, not only are you allowed to keep your job - you will hereby be awarded zero pay cuts! Yes, my generosity knows no limits.", "portrait": "baal_tanaka" },
+						{ "action": "branch", "type": "always", "jumpto": "DoneJudging" },
+						
+						{ "action": "label", "name": "MoreThan5" },
+						{ "action": "dialogue", "speaker": "TANAKA-SAN", "text": "According to our records, you experienced [DEATHS] Synergy Deaths during this exercise. Hmm. I was prepared to be disappointed, but this...", "portrait": "baal_tanaka" },
+						{ "action": "dialogue", "speaker": "TANAKA-SAN", "text": "Still, don't think too much of it! This was merely a training exercise.", "portrait": "baal_tanaka" },
+						{ "action": "dialogue", "speaker": "TANAKA-SAN", "text": "Any adjustments made to your pay based on these metrics will be hardly noticeable. Probably.", "portrait": "baal_tanaka" },
+						{ "action": "branch", "type": "always", "jumpto": "DoneJudging" },
+						
+						{ "action": "label", "name": "MoreThan20" },
+						{ "action": "dialogue", "speaker": "TANAKA-SAN", "text": "According to our records, you experienced... [DEATHS] Synergy Deaths! Disgraceful! How dare you lack Synergy in my presence?!", "portrait": "baal_tanaka" },
+						{ "action": "dialogue", "speaker": "TANAKA-SAN", "text": "Still, I suppose it's out of the question to fire you based on a demon-themed training exercise.", "portrait": "baal_tanaka" },
+						{ "action": "dialogue", "speaker": "TANAKA-SAN", "text": "Therefore I will simply change your job description to Collator of Garbage.", "portrait": "baal_tanaka" },
+						{ "action": "branch", "type": "always", "jumpto": "DoneJudging" },
+						
+						{ "action": "label", "name": "DoneJudging" },
+						{ "action": "dialogue", "speaker": "TANAKA-SAN", "text": "Now, proceed to the elevator and return to normal duties. I'm not paying you to stand slack-jawed in a terrifying dungeon, you know.", "portrait": "baal_tanaka" },
+						{"action": "setswitch", "which": "baalStatus", "value": "tanaka" },
+						{ "action": "spritefield", "sprite": "Baal", "field": "label", "value": "Tanaka-san" },
+						{"action": "levelbounds", "left": 4 },
+						{ "action": "unfreeze" },
+						{ "action": "end" },
+						
+						{ "action": "label", "name": "TanakaMad" },
+						{ "action": "dialogue", "text": "\n * THWAK *" },
+						{"action": "dim", "opacity": 0, "speed": 7 },
+						{ "action": "wait", "frames": 90 },
+						{ "action": "dialogue", "speaker": "TANAKA-SAN", "text": "Did you... did you just thwak me with a crowbar?", "portrait": "baal_tanaka" },
+						{ "action": "dialogue", "speaker": "TANAKA-SAN", "text": "Let me make something very clear to you, my dear salaryman. If you EVER do that again -", "portrait": "baal_tanaka" },
+						{ "action": "dialogue", "speaker": "TANAKA-SAN", "text": "If you EVER produce a crowbar in my presence, ONE MORE TIME - if you give me ANY reason to associate you with crowbars WHATSOEVER -", "portrait": "baal_tanaka" },
+						{ "action": "dialogue", "speaker": "TANAKA-SAN", "text": "You will be standing in SEVERAL DIFFERENT \n unemployment lines!!", "portrait": "baal_tanaka" },
+						{"action": "setswitch", "which": "baalStatus", "value": "tanaka2" },
+						{ "action": "unfreeze" },
+						{ "action": "end" },
+						
+						{ "action": "label", "name": "TrueBaal" },
+						{ "action": "dialogue", "text": "\n * THWAK *" },
+						{"action": "dim", "opacity": 0, "speed": 7 },
+						{ "action": "wait", "frames": 90 },
+						{ "action": "spriteani", "sprite": "Baal", "animation": "tanakabreak" },
+						{ "action": "music", "song": "glass", "loop": false },
+						{ "action": "wait", "frames": 140 },
+						{ "action": "music", "song": "demo", "loop": true },
+						{ "action": "dialogue", "speaker": "BAAL", "text": "DAMMIT! I PAID GOOD MONEY FOR THIS GETUP. YOU'D THINK IT WOULD TAKE MORE OF A THWAKKING.", "portrait": "baal_neutral" },
+						{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "Tanka-san? Why is a tiny devil inside of your head?", "cage": "Eyes, nose, skin, teeth. It's coming off.", "portrait": "pman_sweat" },
+						{ "action": "dialogue", "speaker": "BAAL", "text": "I-IDIOT! I AM THE GRAND AND POWERFUL BAAL! \n Y-YOU PROBABLY CAN'T SEE ALL MY AWE-INSPIRING MAJESTY IN THIS LIGHTING, IS ALL.", "portrait": "baal_mad" },
+						{ "action": "dialogue", "speaker": "PACHINKO MAN", "text": "So you built a giant head and an exact replica of my boss? On the off-chance that I'd make it this far? Just to mess with me?", "cage": "Uhh, you think you're Wotan...?", "portrait": "pman_normal" },
+						{ "action": "dialogue", "speaker": "BAAL", "text": "DUDE, I SANK MY WHOLE DAY INTO MESSING WITH YOU. MESSING WITH FUGITIVE SLACKERS IS THE ONLY FUN THING I GET TO DO HERE.", "portrait": "baal_neutral" },
+						{ "action": "dialogue", "speaker": "BAAL", "text": "BUT DON'T THINK THAT EXONERATES YOU OF YOUR CRIMES! I MEAN, YOU'VE STAPLED MY POOR DEMONS... AWAKENED THE ANKH SPIRIT...", "portrait": "baal_mad" },
+						{ "action": "dialogue", "speaker": "BAAL", "text": "FED MY DOG... BROUGHT THE SUPPLY THIEF TO JUSTICE... FIXED THE BATHROOM, THE VENDING MACHINE, DRACHENROE'S COMPUTER...", "portrait": "baal_neutral" },
+						{ "action": "dialogue", "speaker": "BAAL", "text": "MAN! IT KILLS ME TO SAY THIS. BUT BY SHIRKING YOUR DUTIES AND VOIDING MY IRONCLAD DISCIPLINE...", "portrait": "baal_mad" },
+						{ "action": "dialogue", "speaker": "BAAL", "text": "YOU'VE BECOME THE FIRST PRODUCTIVE EMPLOYEE I'VE EVER HAD!", "portrait": "baal_happy" },
+						{ "action": "dialogue", "speaker": "BAAL", "text": "TELL YOU WHAT, KID - I THINK YOU DESERVE A REWARD. IN FACT, I'LL GIVE YOU A CHOICE OF TWO!", "portrait": "baal_happy" },
+						{ "action": "dialogue", "speaker": "BAAL", "text": "YOU CAN GO BACK TO YOUR OLD LIFE... \n OR STAY, AND WE CAN RULE BAAL HELL TOGETHER AS PALS. PICK YOUR POISON!", "portrait": "baal_happy" },
+						{"action": "option", "text": "Leave Ball Hell"},
+						{"action": "option", "text": "Exit Ball Hell"},
+						{"action": "option", "text": "Depart Ball Hell"},
+						{"action": "option", "text": "Stay, on the condition that it is opposite day"},
+						{ "action": "dialogue", "speaker": "BAAL", "text": "WOW! OKAY! YOU COULD'VE AT LEAST TAKEN A LITTLE LONGER TO ANSWER. YOU SPHERICAL ASS.", "portrait": "baal_mad" },
+						{ "action": "dialogue", "speaker": "BAAL", "text": "FINE. I'LL SEND YOU BACK TO YOUR OLD PACHINKO PARLOR. YOUR DEBT WILL BE FORGIVEN. YOU'LL STILL HAVE YOUR JOB.", "portrait": "baal_neutral" },
+						{ "action": "stopmusic" },
+						{ "action": "dialogue", "speaker": "BAAL", "text": "THE QUESTION IS - WHERE DO YOU GO NEXT?", "portrait": "baal_happy" },
+						{ "action": "unfreeze" },
+						{ "action": "gotolevel", "level": "good-end" },
+						{ "action": "end" }
+					]
+				}
+			},
+			"Hand": {
+				"animations": {
+					"default": {
+						"rowStartY": 0,
+						"frames": 1,
+						"anispeed": 0,
+						"sheetRow": 0,
+						"frameWidth": 288,
+						"frameHeight": 436
+					}
+				},
+				"movement": {
+					"type": "walk",
+					"yspeed": 0.4
+				},
+				"animation": "default",
+				"spritesheet": "hand",
+				"width": 288,
+				"height": 206,
+				"direction": 1,
+				"x": 160,
+				"y": -90,
+				"z": 1,
+				"label": "Hand of Death",
+				"default_actions": [
+					{"action": "dialogue", "speaker": "BAAL", "text": "PLANNING TO RUN OFF TO SOME TROPICAL BEACH VACATION? WELL, THE ONLY PALMS YOU'LL BE RESTING UNDER... IS THIS ONE!" },
+					{"action": "dialogue", "speaker": "PACHINKO MAN", "text": "...huh?", "portrait": "pman_normal" },
+					{"action": "dialogue", "speaker": "BAAL", "text": "THE PALM OF MY HAND. INSTEAD OF PALM TREES. AT THE BEACH. GOD, YOU'RE DENSE." },
+					{"action": "dialogue", "speaker": "BAAL", "text": "ANYWAY. I'MA SQUISH YOU INTO A PALM SUNDAE!" },
+					{"action": "end"}
+				],
+				"item_actions": {
+					"crowbar": [
+						{"action": "dialogue", "speaker": "BAAL", "text": "NICE TRY... BUT MY FISTS OF FURY ARE IMMENSELY STRONG. AND IMMUNE TO NEARLY ANY WEAPON!" }
+					],
+					"scissors": [
+						{"action": "dialogue", "speaker": "BAAL", "text": "NICE TRY... BUT MY FISTS OF FURY ARE IMMENSELY STRONG. AND IMMUNE TO NEARLY ANY WEAPON!" }
+					]
+				},
+				"collision_actions": [
+					{ "action": "death", "sfx": "SKWOOOSH!!!", "epitaph": "DOWN LOW - TOO SLOW! TO AVOID MY HAND. 'CAUSE I SKWOOSHED YOU. YEAH, THAT WAS ME! I DID THAT." },
+					{ "action": "end" }
+				]
+			}
+    }
+}

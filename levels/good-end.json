@@ -1,0 +1,318 @@
+{
+    "bg": "goodend1",
+    "mode": "NORMAL",
+		"stopmusic": true,
+    "leftWall": 0,
+    "rightWall": 600,
+    "preload_actions": [
+			{ "action": "branch", "type": "playerField", "which": "cage", "operant": "yn", "no": "Uncaged" },
+			{ "action": "music", "song": "title", "loop": true},
+			{ "action": "background", "bg": "credits1" },
+			{ "action": "label", "name": "Uncaged" },
+			{ "action": "end" }
+		],
+		"monologue": true,
+    "postload_actions": [
+				{ "action": "branch", "type": "playerField", "which": "cage", "operant": "yn", "yes": "CageStart" },
+				
+				{ "action": "unlock", "which": "cage" },
+				{"action": "freeze"},
+				{ "action": "wait", "seconds": 2}, 
+				{ "action": "dim", "opacity": 255, "speed": 15 },
+				{ "action": "wait", "frames": 10 },
+				{ "action": "background", "bg": "goodend2" },
+				{ "action": "dim", "opacity": 0, "speed": 15 },
+				{ "action": "wait", "seconds": 3},
+				{ "action": "dim", "opacity": 255, "speed": 8 },
+				{ "action": "wait", "frames": 20 },
+				{ "action": "background", "bg": "goodend3" },
+				{ "action": "dim", "opacity": 0, "speed": 8 },
+				{ "action": "wait", "seconds": 2},
+				{"action": "music", "song": "title", "loop": true},
+				{ "action": "dim", "opacity": 255, "speed": 2 },
+				{ "action": "wait", "frames": 20 },
+				
+				{ "action": "label", "name": "CageStart" },
+				
+				{ "action": "background", "bg": "credits1" },
+				{ "action": "dim", "opacity": 0, "speed": 10 },
+				{ "action": "wait", "seconds": 3 },
+				{ "action": "dim", "opacity": 255, "speed": 10 },
+				{ "action": "wait", "frames": 20 },
+				
+				{ "action": "background", "bg": "presentation" },
+				{ "action": "spriteani", "sprite": "Origamitan", "animation": "normal" },
+				{ "action": "spriteani", "sprite": "Murmur", "animation": "normal" },
+				{ "action": "spriteani", "sprite": "Projector", "Projector": "normal" },
+				{ "action": "dim", "opacity": 0, "speed": 10 },
+				{ "action": "wait", "seconds": 1 },
+				{ "action": "dialogue", "speaker": "BEELZOTEN", "text": "Origami-tan, I know I'm just a Demon Lord, and you're an Office Manager, but... I have to tell you how I feel...!", "portrait": "beelzoten", "variant": "timed" },
+				{ "action": "dialogue", "speaker": "ORIGAMI-TAN", "text": "Uhh, I like, don't think we've met? \n Anyway, I don't date men who are on fire.", "portrait": "origamitan", "variant": "timed" },
+				{ "action": "dialogue", "speaker": "BEELZOTEN", "text": "I'm on fire...? Oh COME ON, why does nobody tell me these things!", "portrait": "beelzoten", "variant": "timed" },
+				{ "action": "dialogue", "speaker": "MURMUR", "text": "*snickers*", "portrait": "murmur_nomug", "variant": "timed" },
+				{ "action": "dim", "opacity": 255, "speed": 10 },
+				{ "action": "wait", "frames": 20 },
+				{ "action": "spriteani", "sprite": "Origamitan", "animation": "hide" },
+				{ "action": "spriteani", "sprite": "Murmur", "animation": "hide" },
+				{ "action": "spriteani", "sprite": "Projector", "animation": "hide" },
+				
+				{ "action": "background", "bg": "credits2" },
+				{ "action": "dim", "opacity": 0, "speed": 10 },
+				{ "action": "wait", "seconds": 3 },
+				{ "action": "dim", "opacity": 255, "speed": 10 },
+				{ "action": "wait", "frames": 20 },
+				
+				{ "action": "background", "bg": "cavern" },
+				{ "action": "spriteani", "sprite": "Cerballus", "animation": "normal" },
+				{ "action": "spriteani", "sprite": "Morven", "animation": "normal" },
+				{ "action": "dim", "opacity": 0, "speed": 10 },
+				{ "action": "wait", "seconds": 1 },
+				{ "action": "dialogue", "speaker": "MORVEN", "text": "My cover blown... my temple in ruins... that damnable Pachinko Man has set fire to my entire Petty Theft career!", "portrait": "morven_unmasked", "variant": "timed" },
+				{ "action": "dialogue", "speaker": "MORVEN", "text": "No matter. I'll start again. I'll rebuild! And no matter how much blood, sweat, and tears it takes, I WILL HAVE REVENGE!", "portrait": "morven_unmasked", "variant": "timed" },
+				{ "action": "dialogue", "speaker": "CERBALLUS", "text": "b l o o d  a n d  t e a r s \n s o u n d  t a s t y,\n  w a n  w a n", "portrait": "cerballus", "variant": "timed" },
+				{ "action": "dialogue", "speaker": "MORVEN", "text": "Aw, hell.", "portrait": "morven_unmasked", "variant": "timed" },
+				{ "action": "dim", "opacity": 255, "speed": 10 },
+				{ "action": "wait", "frames": 20 },
+				{ "action": "spriteani", "sprite": "Cerballus", "animation": "hide" },
+				{ "action": "spriteani", "sprite": "Morven", "animation": "hide" },
+				
+				{ "action": "background", "bg": "credits3" },
+				{ "action": "dim", "opacity": 0, "speed": 10 },
+				{ "action": "wait", "seconds": 3 },
+				{ "action": "dim", "opacity": 255, "speed": 10 },
+				{ "action": "wait", "frames": 20 },
+				
+				{ "action": "background", "bg": "baalroom" },
+				{ "action": "spriteani", "sprite": "Baal", "animation": "normal" },
+				{ "action": "spriteani", "sprite": "PinballMan", "animation": "normal" },
+				{ "action": "dim", "opacity": 0, "speed": 10 },
+				{ "action": "wait", "seconds": 1 },
+				{ "action": "dialogue", "speaker": "BAAL", "text": "YOU CAN GO BACK TO YOUR OLD LIFE... \n OR STAY, AND WE CAN RULE BAAL HELL TOGETHER AS PALS! WHAT'LL IT BE?", "portrait": "baal_happy", "variant": "timed" },
+				{ "action": "dialogue", "speaker": "PINBALL MAN", "text": "Hmm, I dunno. Corporate leadership might not jive with my lifestyle of Jamming Out.", "portrait": "pinball_chat", "variant": "timed" },
+				{ "action": "dialogue", "speaker": "BAAL", "text": "I'LL LET YOU BLAST HARD ROCK OVER THE PA SYSTEM.", "portrait": "baal_neutral", "variant": "timed" },
+				{ "action": "dialogue", "speaker": "PINBALL MAN", "text": ". . . \n COME ON, FEEL THE NOISE.", "portrait": "pinball_flag", "variant": "timed" },
+				{ "action": "dim", "opacity": 255, "speed": 10 },
+				{ "action": "wait", "frames": 20 },
+				{ "action": "spriteani", "sprite": "Baal", "animation": "hide" },
+				{ "action": "spriteani", "sprite": "PinballMan", "animation": "hide" },
+				
+				{ "action": "background", "bg": "credits4" },
+				{ "action": "dim", "opacity": 0, "speed": 10 },
+				{ "action": "wait", "seconds": 3 },
+				{ "action": "dim", "opacity": 255, "speed": 10 },
+				{ "action": "wait", "seconds": 3 },
+				
+				{ "action": "branch", "type": "playerField", "which": "cage", "operant": "yn", "yes": "IsCageCard" },
+				
+				{ "action": "background", "bg": "the_end" },
+				{ "action": "branch", "type": "always", "jumpto": "EndCardSelected" },
+				
+				{ "action": "label", "name": "IsCageCard" },
+				{ "action": "background", "bg": "cage_the_end" },
+				
+				{ "action": "label", "name": "EndCardSelected" },
+				
+				{ "action": "dim", "opacity": 0, "speed": 3 },
+				{ "action": "wait", "seconds": 4 },
+				{ "action": "dim", "opacity": 255, "speed": 3 },
+				{ "action": "wait", "seconds": 3 },
+				
+				{ "action": "background", "bg": false },
+				{"action": "stopmusic"},
+				
+				{ "action": "branch", "type": "playerField", "which": "mirror", "operant": "yn", "yes": "IsMirror" },
+				{ "action": "branch", "type": "playerField", "which": "cage", "operant": "yn", "yes": "IsCage" },
+				
+				{ "action": "dialogue", "speaker": "BAAL", "text": "SO! THAT WAS PACHINKO MAN. \n PRETTY NEAT GAME, RIGHT?", "portrait": "baal" },
+				{ "action": "dialogue", "speaker": "BAAL", "text": "I BET YOU ALL GOT A GOOD SOLID 40 HOURS OF GAMEPLAY OUT OF IT. (NOTE THAT IN YOUR REVIEWS, GAMES JOURNALISTS!)", "portrait": "baal" },
+				{ "action": "dialogue", "speaker": "BAAL", "text": "BUT YOU KNOW, THIS LIL' NUMBER'S GOT PLENTY OF SECRETS YOU MIGHT MISS YOUR FIRST TIME THROUGH.", "portrait": "baal" },
+				{ "action": "dialogue", "speaker": "BAAL", "text": "YOU SHOULD GO BACK AND - HUH? \n OH, SOMEONE HANDED ME A MEMO... SAYS HERE NOBODY REPLAYS ADVENTURE GAMES.", "portrait": "baal" },
+				{ "action": "dialogue", "speaker": "BAAL", "text": "YEAH, WELL... THAT'S WHY THE PACHINKO MAN TEAM HAS CREATED AN ENTIRELY NEW CAMPAIGN TO PLAY, AFTER YOU FINISHED THIS ONE!", "portrait": "baal" },
+				{ "action": "dialogue", "speaker": "BAAL", "text": "I LOOK FORWARD TO TORMENTING YOU AGAIN SOON... IN 'CAGE MATCH' MODE!!", "portrait": "baal" },
+				{ "action": "unlock", "which": "cage" },
+				{ "action": "unfreeze" },
+				{ "action": "gotolevel", "level": "logo", "x": 430, "y": 266 },
+				{"action":"end"},
+				
+				{ "action": "label", "name": "IsCage" },
+				{ "action": "dialogue", "speaker": "BAAL", "text": "WOW. YOU... YOU ACTUALLY HAD THE FORTITUDE TO MAKE IT THROUGH CAGE MATCH MODE, HUH?", "portrait": "baal" },
+				{ "action": "dialogue", "speaker": "BAAL", "text": "WELL DON'T GO PATTING YOURSELF ON THE BACK JUST YET, MR. COMPLETIONIST!", "portrait": "baal" },
+				{ "action": "dialogue", "speaker": "BAAL", "text": "FACT IS, I'VE BEEN KEEPING A THIRD CAMPAIGN SECRET FROM EVERYBODY. ONE THAT WILL TEST REFLEXES, WITS, AND SKILLS ALIKE!", "portrait": "baal" },
+				{ "action": "dialogue", "speaker": "BAAL", "text": "THINK YOU'RE A TRUE PACHINKO-MAN OF STEEL? THEN FACE THE CHALLENGE... OF 'MIRROR MODE'!", "portrait": "baal" },
+				{ "action": "unlock", "which": "mirror" },
+				{ "action": "unfreeze" },
+				{ "action": "gotolevel", "level": "logo", "x": 430, "y": 266 },
+				{"action":"end"},
+				
+				{ "action": "label", "name": "IsMirror" },
+				{ "action": "dialogue", "speaker": "MURMUR", "text": "...", "portrait": "murmur_nomug" },
+				{ "action": "dialogue", "speaker": "MURMUR", "text": "This isn't an ending.", "portrait": "murmur_nomug" },
+				{ "action": "dialogue", "speaker": "MURMUR", "text": "Don't expect an ending. Don't expect a hidden mode, a secret, or an achievment.", "portrait": "murmur_nomug" },
+				{ "action": "dialogue", "speaker": "MURMUR", "text": "Pursue curiousity. Don't use the item you think you're expected to use. Follow the rivulets. Forsake the river.", "portrait": "murmur_nomug" },
+				{ "action": "dialogue", "speaker": "MURMUR", "text": "Do this, and you will unlock the true secret of Pachinko Man.", "portrait": "murmur_nomug" },
+				{ "action": "dialogue", "speaker": "MURMUR", "text": "We'll be waiting here for you.", "portrait": "murmur_nomug" },
+				{ "action": "dialogue", "speaker": "BAAL", "text": "...", "portrait": "baal" },
+				{ "action": "dialogue", "speaker": "BAAL", "text": "WELL THAT WAS PRETENTIOUS.", "portrait": "baal" },
+				{ "action": "gotolevel", "level": "logo", "x": 430, "y": 266 },
+				{"action":"end"}
+				
+    ],
+    "zones": {},
+    "sprites": {
+			"Cerballus": {
+				"x": 400,
+				"y": 128,
+				"direction": 1,
+				"width": 230,
+				"height": 204,
+				"spritesheet": "cerballus",
+				"animations": {
+					"normal": {
+						"frames": 4,
+						"anispeed": 7,
+						"sheetRow": 0
+					},
+					"hide": {
+						"framewidth": 0,
+						"frameheight": 0
+					}
+				},
+				"animation": "hide"
+			},
+			"Morven": {
+				"animations": {
+					"normal": {
+						"rowStartY": 192,
+						"frames": 1,
+						"anispeed": 3,
+						"sheetRow": 0,
+						"frameWidth": 68,
+						"frameHeight": 100
+					},
+					"hide": {
+						"framewidth": 0,
+						"frameheight": 0
+					}
+				},
+				"animation": "hide",
+				"spritesheet": "morven",
+				"width": 68,
+				"height": 100,
+				"x": 230,
+				"y": 250,
+				"direction": -1
+			},
+			"PinballMan": {
+				"x": 200,
+				"y": 230,
+				"direction": 1,
+				"width": 94,
+				"height": 112,
+				"spritesheet": "pinballman",
+				"animations": {
+					"normal": {
+						"frames": 4,
+						"frameWidth": 92,
+						"frameHeight": 106,
+						"anispeed": 5,
+						"sheetRow": 0
+					},
+					"hide": {
+						"frameWidth": 0,
+						"frameHeight": 0
+					}
+				},
+				"animation": "hide",
+				"frame": 0,
+				"label": "Pinball Man"
+			},
+			"Baal": {
+				"animations": {
+					"normal": {
+						"rowStartY": 960,
+						"frames": 2,
+						"anispeed": 8,
+						"sheetRow": 0,
+						"frameWidth": 312,
+						"frameHeight": 320
+					},
+					"hide": {
+						"frameWidth": 0,
+						"frameHeight": 0
+					}
+				},
+				"animation": "hide",
+				"spritesheet": "baal",
+				"width": 212,
+				"height": 320,
+				"x": 442,
+				"y": 160,
+				"direction": 1
+			},
+			"Origamitan": {
+				"animations": {
+					"normal": {
+						"rowStartY": 0,
+						"frames": 8,
+						"anispeed": 6,
+						"sheetRow": 0,
+						"frameWidth": 68,
+						"frameHeight": 134
+					},
+					"hide": {
+						"frameWidth": 0,
+						"frameHeight": 0
+					}
+				},
+				"animation": "hide",
+				"spritesheet": "origamitan",
+				"width": 120,
+				"height": 72,
+				"x": 470,
+				"y": 205,
+				"direction": 1
+			},
+			"Murmur": {
+					"x": 288,
+					"y": 198,
+					"direction": 1,
+					"width": 170,
+					"height": 236,
+					"spritesheet": "murmur",
+					"animations": {
+						"normal": {
+							"frames": 1,
+							"sheetRow": 1
+						},
+						"hide": {
+							"frameWidth": 0,
+							"frameHeight": 0
+						}
+					},
+					"animation": "hide",
+					"frame": 0
+			},
+			"Projector": {
+            "x": 0,
+            "y": 254,
+            "width": 130,
+            "height": 100,
+						"direction": 1,
+						"spritesheet": "projector",
+						"animations": {
+							"normal": {
+								"frameWidth": 184,
+								"frameHeight": 128,
+								"sheetRow": 0
+							},
+							"hide": {
+								"frameWidth": 0,
+								"frameHeight": 0
+							} 
+						},
+						"animation": "hide",
+						"width": 184,
+						"height": 128
+        }
+	}
+}
